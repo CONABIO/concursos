@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :direcciones
   resources :categorias
   resources :usuarios
   resources :medias

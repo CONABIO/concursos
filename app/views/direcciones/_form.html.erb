@@ -1,0 +1,57 @@
+<%= form_with(model: direccion, local: true) do |form| %>
+  <% if direccion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(direccion.errors.count, "error") %> prohibited this direccion from being saved:</h2>
+
+      <ul>
+      <% direccion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :calle %>
+    <%= form.text_field :calle, id: :direccion_calle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :numero %>
+    <%= form.number_field :numero, id: :direccion_numero %>
+  </div>
+
+  <div class="field">
+    <%= form.label :interior %>
+    <%= form.text_field :interior, id: :direccion_interior %>
+  </div>
+
+  <div class="field">
+    <%= form.label :colonia %>
+    <%= form.text_field :colonia, id: :direccion_colonia %>
+  </div>
+
+  <div class="field">
+    <%= form.label :municipio %>
+    <%= form.text_field :municipio, id: :direccion_municipio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cp %>
+    <%= form.text_field :cp, id: :direccion_cp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estado %>
+    <%= form.text_field :estado, id: :direccion_estado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_usuario %>
+    <%= form.number_field :id_usuario, id: :direccion_id_usuario %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

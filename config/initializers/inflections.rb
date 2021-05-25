@@ -18,4 +18,5 @@
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'media', 'medias'
   inflect.irregular 'categoria', 'categorias'
+  inflect.irregular 'direccion', 'direcciones'
 end
