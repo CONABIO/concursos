@@ -1,0 +1,2 @@
+class UsuarioMetadato < ApplicationRecord
+end

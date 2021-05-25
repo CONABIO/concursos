@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Usuario Metadatos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id metadato</th>
+      <th>Id usuario</th>
+      <th>Valor metadato</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuario_metadatos.each do |usuario_metadato| %>
+      <tr>
+        <td><%= usuario_metadato.id_metadato %></td>
+        <td><%= usuario_metadato.id_usuario %></td>
+        <td><%= usuario_metadato.valor_metadato %></td>
+        <td><%= link_to 'Show', usuario_metadato %></td>
+        <td><%= link_to 'Edit', edit_usuario_metadato_path(usuario_metadato) %></td>
+        <td><%= link_to 'Destroy', usuario_metadato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario Metadato', new_usuario_metadato_path %>

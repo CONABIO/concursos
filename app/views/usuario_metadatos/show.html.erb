@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id metadato:</strong>
+  <%= @usuario_metadato.id_metadato %>
+</p>
+
+<p>
+  <strong>Id usuario:</strong>
+  <%= @usuario_metadato.id_usuario %>
+</p>
+
+<p>
+  <strong>Valor metadato:</strong>
+  <%= @usuario_metadato.valor_metadato %>
+</p>
+
+<%= link_to 'Edit', edit_usuario_metadato_path(@usuario_metadato) %> |
+<%= link_to 'Back', usuario_metadatos_path %>
