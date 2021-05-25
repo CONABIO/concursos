@@ -1,0 +1,27 @@
+<%= form_with(model: cat_concurso, local: true) do |form| %>
+  <% if cat_concurso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cat_concurso.errors.count, "error") %> prohibited this cat_concurso from being saved:</h2>
+
+      <ul>
+      <% cat_concurso.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre_concurso %>
+    <%= form.text_field :nombre_concurso, id: :cat_concurso_nombre_concurso %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion_concurso %>
+    <%= form.text_area :descripcion_concurso, id: :cat_concurso_descripcion_concurso %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

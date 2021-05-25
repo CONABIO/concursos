@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cat Concursos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre concurso</th>
+      <th>Descripcion concurso</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cat_concursos.each do |cat_concurso| %>
+      <tr>
+        <td><%= cat_concurso.nombre_concurso %></td>
+        <td><%= cat_concurso.descripcion_concurso %></td>
+        <td><%= link_to 'Show', cat_concurso %></td>
+        <td><%= link_to 'Edit', edit_cat_concurso_path(cat_concurso) %></td>
+        <td><%= link_to 'Destroy', cat_concurso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cat Concurso', new_cat_concurso_path %>

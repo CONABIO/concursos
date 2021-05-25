@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre concurso:</strong>
+  <%= @cat_concurso.nombre_concurso %>
+</p>
+
+<p>
+  <strong>Descripcion concurso:</strong>
+  <%= @cat_concurso.descripcion_concurso %>
+</p>
+
+<%= link_to 'Edit', edit_cat_concurso_path(@cat_concurso) %> |
+<%= link_to 'Back', cat_concursos_path %>
