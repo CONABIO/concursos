@@ -1,0 +1,47 @@
+<%= form_with(model: usuario, local: true) do |form| %>
+  <% if usuario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+
+      <ul>
+      <% usuario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :usuario_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :p_apellido %>
+    <%= form.text_field :p_apellido, id: :usuario_p_apellido %>
+  </div>
+
+  <div class="field">
+    <%= form.label :m_apellido %>
+    <%= form.text_field :m_apellido, id: :usuario_m_apellido %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fec_nac %>
+    <%= form.date_select :fec_nac, id: :usuario_fec_nac %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lugar_nac %>
+    <%= form.text_field :lugar_nac, id: :usuario_lugar_nac %>
+  </div>
+
+  <div class="field">
+    <%= form.label :curp %>
+    <%= form.text_field :curp, id: :usuario_curp %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
