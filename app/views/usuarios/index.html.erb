@@ -6,10 +6,10 @@
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>P apellido</th>
-      <th>M apellido</th>
-      <th>Fec nac</th>
-      <th>Lugar nac</th>
+      <th>Apellido paterno</th>
+      <th>Apellido materno</th>
+      <th>Fecha nacimiento nac</th>
+      <th>Lugar nacimiento</th>
       <th>Curp</th>
       <th colspan="3"></th>
     </tr>
@@ -19,10 +19,10 @@
     <% @usuarios.each do |usuario| %>
       <tr>
         <td><%= usuario.nombre %></td>
-        <td><%= usuario.p_apellido %></td>
-        <td><%= usuario.m_apellido %></td>
-        <td><%= usuario.fec_nac %></td>
-        <td><%= usuario.lugar_nac %></td>
+        <td><%= usuario.apellido_paterno %></td>
+        <td><%= usuario.apellido_materno %></td>
+        <td><%= usuario.fecha_nacimiento_nac %></td>
+        <td><%= usuario.lugar_nacimiento %></td>
         <td><%= usuario.curp %></td>
         <td><%= link_to 'Show', usuario %></td>
         <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
