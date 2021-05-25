@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :media_metadatos
   resources :usuario_metadatos
   resources :cat_metadatos
   resources :direcciones

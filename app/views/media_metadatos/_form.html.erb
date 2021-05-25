@@ -1,0 +1,32 @@
+<%= form_with(model: media_metadato, local: true) do |form| %>
+  <% if media_metadato.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(media_metadato.errors.count, "error") %> prohibited this media_metadato from being saved:</h2>
+
+      <ul>
+      <% media_metadato.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id_metadato %>
+    <%= form.number_field :id_metadato, id: :media_metadato_id_metadato %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_media %>
+    <%= form.number_field :id_media, id: :media_metadato_id_media %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valor_metadato %>
+    <%= form.text_field :valor_metadato, id: :media_metadato_valor_metadato %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

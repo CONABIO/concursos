@@ -1,0 +1,2 @@
+class MediaMetadato < ApplicationRecord
+end
