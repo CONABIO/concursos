@@ -1,0 +1,32 @@
+<%= form_with(model: cat_metadato, local: true) do |form| %>
+  <% if cat_metadato.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cat_metadato.errors.count, "error") %> prohibited this cat_metadato from being saved:</h2>
+
+      <ul>
+      <% cat_metadato.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre_metadato %>
+    <%= form.text_field :nombre_metadato, id: :cat_metadato_nombre_metadato %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion, id: :cat_metadato_descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ancestry %>
+    <%= form.text_field :ancestry, id: :cat_metadato_ancestry %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

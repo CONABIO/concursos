@@ -1,0 +1,2 @@
+class CatMetadato < ApplicationRecord
+end

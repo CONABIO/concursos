@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cat_metadatos
   resources :direcciones
   resources :categorias
   resources :usuarios

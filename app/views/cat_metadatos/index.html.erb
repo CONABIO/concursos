@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cat Metadatos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre metadato</th>
+      <th>Descripcion</th>
+      <th>Ancestry</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cat_metadatos.each do |cat_metadato| %>
+      <tr>
+        <td><%= cat_metadato.nombre_metadato %></td>
+        <td><%= cat_metadato.descripcion %></td>
+        <td><%= cat_metadato.ancestry %></td>
+        <td><%= link_to 'Show', cat_metadato %></td>
+        <td><%= link_to 'Edit', edit_cat_metadato_path(cat_metadato) %></td>
+        <td><%= link_to 'Destroy', cat_metadato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cat Metadato', new_cat_metadato_path %>

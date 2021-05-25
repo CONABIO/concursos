@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre metadato:</strong>
+  <%= @cat_metadato.nombre_metadato %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @cat_metadato.descripcion %>
+</p>
+
+<p>
+  <strong>Ancestry:</strong>
+  <%= @cat_metadato.ancestry %>
+</p>
+
+<%= link_to 'Edit', edit_cat_metadato_path(@cat_metadato) %> |
+<%= link_to 'Back', cat_metadatos_path %>
