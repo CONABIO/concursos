@@ -1,0 +1,57 @@
+<%= form_with(model: media, local: true) do |form| %>
+  <% if media.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(media.errors.count, "error") %> prohibited this media from being saved:</h2>
+
+      <ul>
+      <% media.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :original_filename %>
+    <%= form.text_field :original_filename, id: :media_original_filename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :filename %>
+    <%= form.text_field :filename, id: :media_filename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo, id: :media_titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_subida %>
+    <%= form.date_select :fecha_subida, id: :media_fecha_subida %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ruta %>
+    <%= form.text_field :ruta, id: :media_ruta %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.number_field :size, id: :media_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_usuario %>
+    <%= form.number_field :id_usuario, id: :media_id_usuario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_categoria %>
+    <%= form.number_field :id_categoria, id: :media_id_categoria %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

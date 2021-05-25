@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Original filename:</strong>
+  <%= @media.original_filename %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @media.filename %>
+</p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @media.titulo %>
+</p>
+
+<p>
+  <strong>Fecha subida:</strong>
+  <%= @media.fecha_subida %>
+</p>
+
+<p>
+  <strong>Ruta:</strong>
+  <%= @media.ruta %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @media.size %>
+</p>
+
+<p>
+  <strong>Id usuario:</strong>
+  <%= @media.id_usuario %>
+</p>
+
+<p>
+  <strong>Id categoria:</strong>
+  <%= @media.id_categoria %>
+</p>
+
+<%= link_to 'Edit', edit_media_path(@media) %> |
+<%= link_to 'Back', medias_path %>
