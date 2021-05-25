@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Email</th>
       <th>Nombre</th>
       <th>Apellido paterno</th>
       <th>Apellido materno</th>
@@ -18,6 +19,7 @@
   <tbody>
     <% @usuarios.each do |usuario| %>
       <tr>
+        <td><%= usuario.email %></td>
         <td><%= usuario.nombre %></td>
         <td><%= usuario.apellido_paterno %></td>
         <td><%= usuario.apellido_materno %></td>
