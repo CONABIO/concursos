@@ -1,0 +1,2 @@
+module EntreAzulYVerde::InicioHelper
+end
