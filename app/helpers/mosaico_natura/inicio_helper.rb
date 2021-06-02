@@ -1,0 +1,2 @@
+module MosaicoNatura::InicioHelper
+end
