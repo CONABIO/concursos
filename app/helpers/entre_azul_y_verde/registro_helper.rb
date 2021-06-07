@@ -1,0 +1,2 @@
+module EntreAzulYVerde::RegistroHelper
+end
