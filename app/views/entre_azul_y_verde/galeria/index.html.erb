@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Entre Azul Y Verde Galeria</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entre_azul_y_verde_galeria.each do |entre_azul_y_verde_galerium| %>
+      <tr>
+        <td><%= link_to 'Show', entre_azul_y_verde_galerium %></td>
+        <td><%= link_to 'Edit', edit_entre_azul_y_verde_galerium_path(entre_azul_y_verde_galerium) %></td>
+        <td><%= link_to 'Destroy', entre_azul_y_verde_galerium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Entre Azul Y Verde Galerium', new_entre_azul_y_verde_galerium_path %>

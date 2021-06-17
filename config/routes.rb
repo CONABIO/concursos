@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :medias
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  namespace :entreAzulYVerde do
+  namespace 'entre_azul_y_verde' do
 	  root 'inicio#index'
 	  resources :galeria
 	  resources :panel

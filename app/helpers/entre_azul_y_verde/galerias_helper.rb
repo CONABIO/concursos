@@ -1,0 +1,2 @@
+module EntreAzulYVerde::GaleriasHelper
+end
