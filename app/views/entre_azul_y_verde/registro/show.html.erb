@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @usuario.email %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @usuario.nombre %>
+</p>
+
+<p>
+  <strong>Apellido paterno:</strong>
+  <%= @usuario.apellido_paterno %>
+</p>
+
+<p>
+  <strong>Apellido materno:</strong>
+  <%= @usuario.apellido_materno %>
+</p>
+
+<p>
+  <strong>Fecha nacimiento nac:</strong>
+  <%= @usuario.fecha_nacimiento_nac %>
+</p>
+
+<p>
+  <strong>Lugar nacimiento:</strong>
+  <%= @usuario.lugar_nacimiento %>
+</p>
+
+<p>
+  <strong>Curp:</strong>
+  <%= @usuario.curp %>
+</p>
+
+<%= link_to 'Edit', edit_usuario_path(@usuario) %> |
+<%= link_to 'Back', usuarios_path %>

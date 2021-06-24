@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="es-MX">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Entre Azul y Verde</title>
+	<%= csrf_meta_tags %>
+	
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+<div class="container-fluid" style="background-color: aquamarine;">
+	<%= yield %>
+</div>
+
+</body>
+</html>

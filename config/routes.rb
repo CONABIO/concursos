@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   namespace 'entre_azul_y_verde' do
 	  root 'inicio#index'
-	  resources :galeria
+	  resources :galerias
 	  resources :panel
 	  resources :registro
   end
