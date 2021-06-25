@@ -1,2 +1,2 @@
-class EntreAzulYVerde::EayvMedia < ApplicationRecord
+class EntreAzulYVerde::EayvMedia < Media
 end

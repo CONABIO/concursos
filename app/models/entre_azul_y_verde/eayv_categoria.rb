@@ -1,2 +1,2 @@
-class EntreAzulYVerde::EayvCategoria < ApplicationRecord
+class EntreAzulYVerde::EayvCategoria < Categoria
 end

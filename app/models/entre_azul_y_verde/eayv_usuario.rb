@@ -1,2 +1,2 @@
-class EntreAzulYVerde::EayvUsuario < ApplicationRecord
+class EntreAzulYVerde::EayvUsuario < Usuario
 end

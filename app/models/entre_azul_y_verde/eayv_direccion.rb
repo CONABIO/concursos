@@ -1,2 +1,2 @@
-class EntreAzulYVerde::EayvDireccion < ApplicationRecord
+class EntreAzulYVerde::EayvDireccion < Direccion
 end
