@@ -54,6 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'ancestry'
 gem 'bootstrap', '~> 4.5.0'
+gem 'cocoon'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'fontello_rails_converter', git: 'https://github.com/railslove/fontello_rails_converter.git'
