@@ -1,32 +1,5 @@
-<%= form_with(model: usuario_metadato, local: true) do |form| %>
-  <% if usuario_metadato.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(usuario_metadato.errors.count, "error") %> prohibited this usuario_metadato from being saved:</h2>
-
-      <ul>
-      <% usuario_metadato.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :id_metadato %>
-    <%= form.number_field :id_metadato, id: :usuario_metadato_id_metadato %>
-  </div>
-
-  <div class="field">
-    <%= form.label :id_usuario %>
-    <%= form.number_field :id_usuario, id: :usuario_metadato_id_usuario %>
-  </div>
-
-  <div class="field">
-    <%= form.label :valor_metadato %>
-    <%= form.text_field :valor_metadato, id: :usuario_metadato_valor_metadato %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="nested-fields">
+	<%= f.input :id_metadato %>
+	<%= f.input :id_usuario %>
+	<%= f.input :valor_metadato %>
+</div>

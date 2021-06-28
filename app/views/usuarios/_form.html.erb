@@ -1,62 +1,20 @@
-<%= form_with(model: usuario, local: true) do |form| %>
-  <% if usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
-
-      <ul>
-      <% usuario.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :usuario_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre, id: :usuario_nombre %>
-  </div>
-
-  <div class="field">
-    <%= form.label :apellido_paterno %>
-    <%= form.text_field :apellido_paterno, id: :usuario_apellido_paterno %>
-  </div>
-
-  <div class="field">
-    <%= form.label :apellido_materno %>
-    <%= form.text_field :apellido_materno, id: :usuario_apellido_materno %>
-  </div>
-
-  <div class="field">
-    <%= form.label :fecha_nacimiento_nac %>
-    <%= form.date_select :fecha_nacimiento_nac, id: :usuario_fecha_nacimiento_nac %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lugar_nacimiento %>
-    <%= form.text_field :lugar_nacimiento, id: :usuario_lugar_nacimiento %>
-  </div>
-
-  <div class="field">
-    <%= form.label :curp %>
-    <%= form.text_field :curp, id: :usuario_curp %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password, id: :usuario_password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, id: :usuario_password_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= simple_form_for @usuario do |f| %>
+	<%= f.input :nombre %>
+	<%#= link_to_add_association('direccion', f, :direccion, partial: 'form_direccion', :class => 'btn btn-info btn-sm', role: 'tab', "data-toggle" => 'tab',
+                                    "aria-controls" => :direccion, 'data-association-insertion-node' => '#direccion', 'data-association-insertion-method' => 'append', href: '#direccion', style: 'display: none;') if @usuario.new_record? %>
+	<%= f.fields_for :direccion do |direccion_form| %>
+		<%= render "direcciones/form_direccion", f: direccion_form %>
+	<% end %>
+	<%= f.fields_for :media do |media_form| %>
+		<%= render "medias/form_media", f: media_form %>
+	<% end %>
+	<%= f.fields_for :categoria do |categoria_form| %>
+		<%= render "categorias/form_categorias", f: categoria_form %>
+	<% end %>
+	<%= f.fields_for :usuario_metadato do |usuario_metadato_form| %>
+		<%= render "usuario_metadatos/form_usuario_metadatos", f: usuario_metadato_form %>
+	<% end %>
+	
+	
+	<%= f.button :submit %>
 <% end %>
