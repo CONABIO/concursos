@@ -1,14 +1,12 @@
-<div class="row" id="inscripcion">
-	<div class="col-12 text-center">
+<div class="row justify-content-center pt-5" id="inscripcion">
+	<div class="col-12 my-5 text-center">
 		<img src="/assets/entre_azul_y_verde/inscripcion.png" alt="Inscripción" title="Inscripción">
 	</div>
-	<div class="col-3"></div>
-	<div class="col">
+	<div class="col-8">
 		
 		<%= render 'form', usuario: @usuario %>
 		
-		<%= link_to 'Back', usuarios_path %>
+		<%= link_to 'Inicio', entre_azul_y_verde_root_path %>
 	
 	</div>
-	<div class="col-3"></div>
 </div>
