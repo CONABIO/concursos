@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
-  before_action :set_usuario, only: %i[ show edit update destroy ]
+	layout 'entre_azul_y_verde'
+	before_action :set_usuario, only: %i[ show edit update destroy ]
 
   # GET /usuarios or /usuarios.json
   def index

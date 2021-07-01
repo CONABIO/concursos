@@ -1,6 +1,14 @@
-<h1>Hola, bienvenido al registro de participantes</h1>
-<h3>A continuación te solicitaremos la sigueinte información</h3>
-
-<%= render 'form', usuario: @usuario %>
-
-<%= link_to 'Back', usuarios_path %>
+<div class="row" id="inscripcion">
+	<div class="col-12 text-center">
+		<img src="/assets/entre_azul_y_verde/inscripcion.png" alt="Inscripción" title="Inscripción">
+	</div>
+	<div class="col-3"></div>
+	<div class="col">
+		
+		<%= render 'form', usuario: @registro %>
+		
+		<%= link_to 'Back', usuarios_path %>
+	
+	</div>
+	<div class="col-3"></div>
+</div>
