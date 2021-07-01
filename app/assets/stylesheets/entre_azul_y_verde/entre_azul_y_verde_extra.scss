@@ -1,6 +1,5 @@
-header{
+header, footer{
   background-color: #333333;
-  color: #fafafa;
 }
 header img{
   max-width: 3rem;
@@ -39,7 +38,7 @@ header img{
 #queEs{
   background-color: #39868f;
 }
-#queEs .row{
+#queEs .sub-header{
   background-color: #0c434c;
 }
 
@@ -47,7 +46,7 @@ header img{
 #categorias{
   background-color: #acbf55;
 }
-#categorias .row{
+#categorias .sub-header{
   background-color: #867c0a;
 }
 .pleca_ama {
@@ -71,7 +70,7 @@ header img{
 #bases{
   background-color: #b96800;
 }
-#bases .row{
+#bases .sub-header{
  background-color: #634118;
 }
 
@@ -79,6 +78,6 @@ header img{
 #medios{
   background-color: #1f4747;
 }
-#medios .row{
+#medios .sub-header{
   background-color: #51786a;
 }
