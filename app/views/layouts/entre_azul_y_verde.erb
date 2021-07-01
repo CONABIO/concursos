@@ -12,15 +12,9 @@
 
 
 <body>
-<header>
+<header class="fixed-top">
 	<img src="/assets/entre_azul_y_verde/azul_y_verde.png" alt="Entre Azul y Verde" title="Entre Azul y Verde" class="img-fluid">
-	<ul id="menu-header" class="m-0 p-0">
-		<li>CATEGORIAS</li>
-		<li>BASES DEL CONCURSO</li>
-		<li>MEDIOS</li>
-		<li>CONCURSOS ANTERIORES</li>
-		<!--li>GANADORES 2021</li-->
-	</ul>
+	<%= render :partial => 'entre_azul_y_verde/menu_header' %>
 </header>
 <div class="container-fluid">
 	<%= yield %>
