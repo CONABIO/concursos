@@ -1,14 +1,10 @@
-@import 'bootstrap-variable-overrides';
 @import 'bootstrap';
-//@import "font-awesome";
 
-#inscripcion{
-  background-image: url('/assets/entre_azul_y_verde/fondo.jpg');
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+header{
+  background-color: #333333;
+  color: #fafafa;
+  min-height: 70px;
+}
+header img{
+  max-width: 3rem;
 }

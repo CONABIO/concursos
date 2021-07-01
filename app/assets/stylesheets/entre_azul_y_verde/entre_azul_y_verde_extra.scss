@@ -1,0 +1,36 @@
+header{
+  background-color: #333333;
+  color: #fafafa;
+}
+header img{
+  max-width: 3rem;
+}
+#menu-header{
+  list-style-type: none;
+  overflow: hidden;
+}
+#menu-header li {
+  float: left;
+}
+
+#menu-header li a {
+  display: block;
+  //  color: white;
+  //  text-align: center;
+  //  padding: 16px;
+  text-decoration: none;
+}
+
+#menu-header li a:hover {
+  background-color: #111111;
+}
+#inscripcion, #intro{
+  background-image: url('/assets/entre_azul_y_verde/fondo.jpg');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
