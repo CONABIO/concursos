@@ -1,5 +1,7 @@
 class EntreAzulYVerde::GaleriasController < ApplicationController
-  before_action :set_entre_azul_y_verde_galeria, only: %i[ show edit update destroy ]
+	layout 'entre_azul_y_verde'
+	
+	before_action :set_entre_azul_y_verde_galeria, only: %i[ show edit update destroy ]
 
   # GET /entre_azul_y_verde/galerias or /entre_azul_y_verde/galerias.json
   def index

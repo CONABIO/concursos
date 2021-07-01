@@ -6,15 +6,27 @@
 	<title>Entre Azul y Verde</title>
 	<%= csrf_meta_tags %>
 	
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag    'entre_azul_y_verde/entre_azul_y_verde', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'entre_azul_y_verde/entre_azul_y_verde', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
 
-<div class="container-fluid" style="background-color: aquamarine;">
+<body>
+<header>
+	<img src="/assets/entre_azul_y_verde/azul_y_verde.png" alt="Entre Azul y Verde" title="Entre Azul y Verde" class="img-fluid">
+	<ul id="menu-header" class="m-0 p-0">
+		<li>CATEGORIAS</li>
+		<li>BASES DEL CONCURSO</li>
+		<li>MEDIOS</li>
+		<li>CONCURSOS ANTERIORES</li>
+		<!--li>GANADORES 2021</li-->
+	</ul>
+</header>
+<div class="container-fluid">
 	<%= yield %>
 </div>
+<footer>
 
+</footer>
 </body>
 </html>
