@@ -4,4 +4,8 @@ class EntreAzulYVerde::InicioController < ApplicationController
 	def index
 	end
 
+	def bases
+		render partial: 'bases'
+	end
+	
 end
