@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(version: 20210525152541) do
     t.string "municipio"
     t.string "cp"
     t.string "estado"
-    t.integer "id_usuario"
+    t.integer "usuario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "media_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "id_metadato"
-    t.integer "id_media"
+    t.integer "metadato_id"
+    t.integer "media_id"
     t.string "valor_metadato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,15 +62,15 @@ ActiveRecord::Schema.define(version: 20210525152541) do
     t.date "fecha_subida"
     t.string "ruta"
     t.integer "size"
-    t.integer "id_usuario"
-    t.integer "id_categoria"
+    t.integer "usuario_id"
+    t.integer "categoria_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "usuario_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "id_metadato"
-    t.integer "id_usuario"
+    t.integer "metadato_id"
+    t.integer "usuario_id"
     t.string "valor_metadato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(version: 20210525152541) do
     t.string "apellido_materno"
     t.date "fecha_nacimiento_nac"
     t.string "lugar_nacimiento"
-    t.string "curp"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

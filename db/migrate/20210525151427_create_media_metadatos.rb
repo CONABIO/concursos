@@ -1,8 +1,8 @@
 class CreateMediaMetadatos < ActiveRecord::Migration[5.1]
   def change
     create_table :media_metadatos do |t|
-      t.integer :id_metadato
-      t.integer :id_media
+      t.integer :metadato_id
+      t.integer :media_id
       t.string :valor_metadato
 
       t.timestamps
