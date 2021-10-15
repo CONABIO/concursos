@@ -1,4 +1,4 @@
-#inscripcion, #intro{
+#intro{
   background-image: url('/concursos_assets/entre_azul_y_verde/fondo.jpg');
   background-attachment: fixed;
   background-position: center center;
@@ -58,4 +58,14 @@
 }
 .icono-fa{
 	color: #b7d891;
-	}
+}
+
+/* Inscripcion */
+#inscripcion{ background-color: #621a5e;}
+#inscripcion .sub-header{ background-color: #bf5555;}
+#inscripcion .form-control, #inscripcion .form-check-inline{
+  background-color: #3d0c49;
+  border: none;
+}
+#inscripcion, #inscripcion .form-control, #inscripcion .form-check-inline{ color: #ffaa00;}
+#inscripcion ::placeholder{ color: rgba(255, 170, 0, 0.8); font-size: .8em}

@@ -12,7 +12,9 @@ class EntreAzulYVerde::RegistroController < ApplicationController
 	
 	# GET /usuarios/new
 	def new
-		@registro = EntreAzulYVerde::EayvUsuario.new
+		@registro = Usuario.new
+		@registro.build_direccion #unless @registro.direccion.any?
+		@registro.medias.build
 	end
 	
 	# GET /usuarios/1/edit
@@ -21,7 +23,7 @@ class EntreAzulYVerde::RegistroController < ApplicationController
 	
 	# POST /usuarios or /usuarios.json
 	def create
-		@registro = EntreAzulYVerde::EayvUsuario.new(registro_params)
+		@registro = Usuario.new(registro_params)
 		
 		respond_to do |format|
 			if @registro.save
@@ -59,12 +61,16 @@ class EntreAzulYVerde::RegistroController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_registro
-		@registro = EntreAzulYVerde::EayvUsuario.find(params[:id])
+		@registro = Usuario.find(params[:id])
 	end
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
-		params.require(:usuario).permit(:email, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento_nac, :lugar_nacimiento, :curp, :password, :password_confirmation)
+			params.require(:usuario).permit(:email, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento_nac, :lugar_nacimiento, :password, :password_confirmation,
+			                                direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
+			                                medias_attributes: [:id, :original_filename, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy],
+			                                usuario_metadatos_attributes: [:id, :id_metadato, :id_usuario, :valor_metadato, :_destroy]
+			)
 	end
 end
 
