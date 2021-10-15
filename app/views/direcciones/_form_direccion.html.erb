@@ -1,10 +1,10 @@
 <div class='nested-fields'>
-	<%= f.input :calle %>
-	<%= f.input :numero %>
-	<%= f.input :interior %>
-	<%= f.input :colonia %>
-	<%= f.input :municipio %>
-	<%= f.input :cp %>
-	<%= f.input :estado %>
-	<%= link_to_remove_association "Quita dirección", f, class: 'btn btn-danger btn-sm' %>
+	<%= f.input_field :calle, class: 'form-control my-2', placeholder: 'Calle' %>
+	<%= f.input_field :numero, class: 'form-control my-2', placeholder: 'Número' %>
+	<%= f.input_field :interior, class: 'form-control my-2', placeholder: 'Interior' %>
+	<%= f.input_field :colonia, class: 'form-control my-2', placeholder: 'Colonia' %>
+	<%= f.input_field :municipio, class: 'form-control my-2', placeholder: 'Municipio/Alcaldía' %>
+	<%= f.input_field :cp, class: 'form-control my-2', placeholder: 'Código postal' %>
+	<%= f.input_field :estado, class: 'form-control my-2', placeholder: 'Estado' %>
+	<%#= link_to_remove_association "Quita dirección", f, class: 'btn btn-danger btn-sm' %>
 </div>

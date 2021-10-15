@@ -1,14 +1,14 @@
-<div class="row" id="inscripcion">
-	<div class="col-12 text-center">
-		<img src="/concursos_assets/entre_azul_y_verde/inscripcion.png" alt="Inscripción" title="Inscripción">
+<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/entre_azul_y_verde/inscripcion.png" alt="Inscripción" title="Inscripción" class="img-fluid">
 	</div>
-	<div class="col-3"></div>
-	<div class="col">
+	
+	<div class="col-12 col-xl-8 py-4 text-center">
 		
 		<%= render 'form', usuario: @registro %>
 		
-		<%= link_to 'Back', usuarios_path %>
+		<%= link_to 'Regresar',  entre_azul_y_verde_root_path %>
 	
 	</div>
-	<div class="col-3"></div>
+
 </div>
