@@ -1,20 +1,40 @@
 <%= simple_form_for @usuario do |f| %>
 	<%= f.input :nombre %>
-	<%#= link_to_add_association('direccion', f, :direccion, partial: 'form_direccion', :class => 'btn btn-info btn-sm', role: 'tab', "data-toggle" => 'tab',
-                                    "aria-controls" => :direccion, 'data-association-insertion-node' => '#direccion', 'data-association-insertion-method' => 'append', href: '#direccion', style: 'display: none;') if @usuario.new_record? %>
-	<%= f.fields_for :direccion do |direccion_form| %>
-		<%= render "direcciones/form_direccion", f: direccion_form %>
-	<% end %>
-	<%= f.fields_for :media do |media_form| %>
-		<%= render "medias/form_media", f: media_form %>
-	<% end %>
-	<%= f.fields_for :categoria do |categoria_form| %>
-		<%= render "categorias/form_categorias", f: categoria_form %>
-	<% end %>
-	<%= f.fields_for :usuario_metadato do |usuario_metadato_form| %>
-		<%= render "usuario_metadatos/form_usuario_metadatos", f: usuario_metadato_form %>
-	<% end %>
+	<%= f.input :apellido_paterno %>
+	<%= f.input :apellido_materno %>
+	<%= f.input :email %>
+	<%= f.input :fecha_nacimiento_nac %>
+	<%= f.input :lugar_nacimiento %>
+	<%#= f.input :curp %>
+	<h3> Dirección </h3>
+	<div class="direccion">
+		<%= f.simple_fields_for :direccion do |direccion_form| %>
+			<%= render "direcciones/form_direccion", f: direccion_form %>
+		<% end %>
+	</div>
+	<div class="links">
+		<%= link_to_add_association('Añade dirección', f, :direccion, partial: 'direcciones/form_direccion', class: 'btn btn-info btn-sm' )  %>
+	</div>
+	
+	<h3> Dibujos </h3>
+	<div class="medias">
+		<%= f.simple_fields_for :medias do |media_form| %>
+			<%= render "medias/form_media", f: media_form %>
+		<% end %>
+	</div>
+		<div class="links">
+		<%= link_to_add_association('Añade tu dibujo', f, :medias, partial: 'medias/form_media', class: 'btn btn-info btn-sm' )  %>
+	</div>
 	
 	
-	<%= f.button :submit %>
+	
+	<%#= f.fields_for :categoria do |categoria_form| %>
+	<%#= render "categorias/form_categorias", f: categoria_form %>
+	<%# end %>
+	<%#= f.fields_for :usuario_metadato do |usuario_metadato_form| %>
+	<%#= render "usuario_metadatos/form_usuario_metadatos", f: usuario_metadato_form %>
+	<%# end %>
+	
+	
+	<%= f.button :submit, class: 'btn btn-success btn-sm'  %>
 <% end %>
