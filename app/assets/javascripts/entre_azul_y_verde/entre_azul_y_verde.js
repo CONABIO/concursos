@@ -11,8 +11,9 @@
 // about supported directives.
 //
 //= require jquery3
+//= require rails-ujs
+//= require cocoon
 //= require popper
 //= require bootstrap-sprockets
-// require rails-ujs
 //= require turbolinks
 //= require entre_azul_y_verde/entre_azul_y_verde_extra
