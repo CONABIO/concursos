@@ -5,7 +5,7 @@ class CreateUsuarios < ActiveRecord::Migration[5.1]
       t.string :nombre
       t.string :apellido_paterno
       t.string :apellido_materno
-      t.date :fecha_nacimiento_nac
+      t.date :fecha_nacimiento
       t.string :lugar_nacimiento
       t.string :password_digest
 

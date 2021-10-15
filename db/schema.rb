@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20210525152541) do
     t.string "nombre"
     t.string "apellido_paterno"
     t.string "apellido_materno"
-    t.date "fecha_nacimiento_nac"
+    t.date "fecha_nacimiento"
     t.string "lugar_nacimiento"
     t.string "password_digest"
     t.datetime "created_at", null: false
