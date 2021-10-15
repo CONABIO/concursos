@@ -8,7 +8,7 @@ class CreateDirecciones < ActiveRecord::Migration[5.1]
       t.string :municipio
       t.string :cp
       t.string :estado
-      t.integer :id_usuario
+      t.integer :usuario_id
 
       t.timestamps
     end

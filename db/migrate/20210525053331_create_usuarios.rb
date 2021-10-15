@@ -7,7 +7,6 @@ class CreateUsuarios < ActiveRecord::Migration[5.1]
       t.string :apellido_materno
       t.date :fecha_nacimiento_nac
       t.string :lugar_nacimiento
-      t.string :curp
       t.string :password_digest
 
       t.timestamps

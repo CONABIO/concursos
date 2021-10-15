@@ -7,8 +7,8 @@ class CreateMedias < ActiveRecord::Migration[5.1]
       t.date :fecha_subida
       t.string :ruta
       t.integer :size
-      t.integer :id_usuario
-      t.integer :id_categoria
+      t.integer :usuario_id
+      t.integer :categoria_id
 
       t.timestamps
     end
