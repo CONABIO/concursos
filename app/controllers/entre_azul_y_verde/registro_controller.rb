@@ -27,7 +27,7 @@ class EntreAzulYVerde::RegistroController < ApplicationController
 		
 		respond_to do |format|
 			if @registro.save
-				format.html { redirect_to @registro, notice: "Usuario was successfully created." }
+				format.html { render :show, notice: "Usuario was successfully created.1" }
 				format.json { render :show, status: :created, location: @registro }
 			else
 				format.html { render :new, status: :unprocessable_entity }
