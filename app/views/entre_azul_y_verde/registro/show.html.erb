@@ -22,7 +22,7 @@
 
 <p>
   <strong>Fecha nacimiento nac:</strong>
-  <%= @usuario.fecha_nacimiento_nac %>
+  <%= @usuario.fecha_nacimiento %>
 </p>
 
 <p>
@@ -30,10 +30,6 @@
   <%= @usuario.lugar_nacimiento %>
 </p>
 
-<p>
-  <strong>Curp:</strong>
-  <%= @usuario.curp %>
-</p>
 
 <%= link_to 'Edit', edit_usuario_path(@usuario) %> |
 <%= link_to 'Back', usuarios_path %>
