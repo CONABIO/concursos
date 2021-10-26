@@ -5,7 +5,7 @@ class EntreAzulYVerde::GaleriasController < ApplicationController
 
   # GET /entre_azul_y_verde/galerias or /entre_azul_y_verde/galerias.json
   def index
-    @entre_azul_y_verde_galerias = EntreAzulYVerde::Galeria.all
+    @entre_azul_y_verde_galerias = EntreAzulYVerde::Galeria.todos
   end
 
   # GET /entre_azul_y_verde/galerias/1 or /entre_azul_y_verde/galerias/1.json
