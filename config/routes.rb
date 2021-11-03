@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :cat_concursos
   resources :media_metadatos
   resources :usuario_metadatos
