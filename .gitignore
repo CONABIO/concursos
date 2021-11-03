@@ -41,3 +41,5 @@ nohup.out
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
+
+.DS_STORE
