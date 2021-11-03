@@ -62,10 +62,19 @@
 
 /* Inscripcion */
 #inscripcion{ background-color: #621a5e;}
-#inscripcion .sub-header{ background-color: #bf5555;}
+#inscripcion .sub-header{ background-color: #bf5555; font-family: 'CHICKEN Pie Height'; color: white;}
+#inscripcion .sub-header img{ height: 9rem;}
 #inscripcion .form-control, #inscripcion .form-check-inline{
   background-color: #3d0c49;
   border: none;
 }
 #inscripcion, #inscripcion .form-control, #inscripcion .form-check-inline{ color: #ffaa00;}
 #inscripcion ::placeholder{ color: rgba(255, 170, 0, 0.8); font-size: .8em}
+
+@font-face {
+  font-family: 'CHICKEN Pie Height';    
+  src: url('/concursos_assets/chicken-pie/chicken-pie-height.otf'),
+  url('/concursos_assets/chicken-pie/chicken-pie-height.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

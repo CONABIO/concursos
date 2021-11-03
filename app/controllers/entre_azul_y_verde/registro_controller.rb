@@ -1,6 +1,7 @@
 class EntreAzulYVerde::RegistroController < ApplicationController
 	layout 'entre_azul_y_verde'
 	before_action :set_registro, only: %i[ show edit update destroy ]
+	before_action :authenticate_user!
 	
 	# GET /usuarios or /usuarios.json
 	def index
@@ -66,7 +67,7 @@ class EntreAzulYVerde::RegistroController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
-			params.require(:usuario).permit(:email, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :password, :password_confirmation,
+			params.require(:usuario).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento,
 			                                direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
 			                                medias_attributes: [:id, :original_filename, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy],
 			                                usuario_metadatos_attributes: [:id, :id_metadato, :id_usuario, :valor_metadato, :_destroy]
