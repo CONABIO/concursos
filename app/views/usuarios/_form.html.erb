@@ -2,10 +2,9 @@
 	<%= f.input :nombre %>
 	<%= f.input :apellido_paterno %>
 	<%= f.input :apellido_materno %>
-	<%= f.input :email %>
 	<%= f.input :fecha_nacimiento %>
 	<%= f.input :lugar_nacimiento %>
-	<%#= f.input :curp %>
+
 	<h3> Dirección </h3>
 	<div class="direccion">
 		<%= f.simple_fields_for :direccion do |direccion_form| %>
