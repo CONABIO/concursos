@@ -1,6 +1,6 @@
 class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeController
 	before_action :set_registro, only: %i[ show edit update destroy ]
-	before_action :authenticate_user!
+	before_action :authenticate_user_ayv!
 	
 	# GET /usuarios or /usuarios.json
 	def index
