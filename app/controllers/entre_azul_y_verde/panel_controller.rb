@@ -1,4 +1,4 @@
-class EntreAzulYVerde::PanelController < ApplicationController
-	layout 'entre_azul_y_verde'
+class EntreAzulYVerde::PanelController < EntreAzulYVerde::EntreAzulYVerdeController
+	
 
 end

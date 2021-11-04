@@ -1,5 +1,5 @@
 <div class="nested-fields">
-	<%= f.input :id_metadato %>
-	<%= f.input :id_usuario %>
+	<%= f.input :metadato_id, input_html: { value: 1 } %>
+	<%= f.input :usuario_id, input_html: { value: current_user.id } %>
 	<%= f.input :valor_metadato %>
 </div>

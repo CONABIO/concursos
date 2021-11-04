@@ -9,6 +9,7 @@
 				<label class="date optional" for="usuario_fecha_nacimiento_1i">Fecha nacimiento</label>
 				<%= f.input_field :fecha_nacimiento, as: :date, class: 'form-check-inline my-2' %>
 				<%= f.input_field :lugar_nacimiento, class: 'form-control my-2', placeholder: 'Lugar de nacimiento' %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
 			</div>
 		</div>
 		
@@ -37,6 +38,17 @@
 		</div>
 	</div>
 	
+	<div class="col-12 col-md-6 my-2">
+		<h3> Propiedades usuario </h3>
+		<div class="mediasz">
+			<%= f.simple_fields_for :usuario_metadatos do |meta_form| %>
+				<%= render "usuario_metadatos/form_usuario_metadatos", f: meta_form %>
+			<% end %>
+		</div>
+		<div class="links">
+			<%= link_to_add_association('+ propiedad', f, :usuario_metadatos, partial: "usuario_metadatos/form_usuario_metadatos", class: 'btn btn-info btn-sm' )  %>
+		</div>
+	</div>	
 
 	<%#= f.fields_for :categoria do |categoria_form| %>
 	<%#= render "categorias/form_categorias", f: categoria_form %>
