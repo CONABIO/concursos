@@ -9,7 +9,7 @@
 				<label class="date optional" for="usuario_fecha_nacimiento_1i">Fecha nacimiento</label>
 				<%= f.input_field :fecha_nacimiento, as: :date, class: 'form-check-inline my-2' %>
 				<%= f.input_field :lugar_nacimiento, class: 'form-control my-2', placeholder: 'Lugar de nacimiento' %>
-				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.hidden_field :user_id, value: current_user_ayv.id %>
 			</div>
 		</div>
 		
