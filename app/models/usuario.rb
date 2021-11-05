@@ -1,6 +1,6 @@
 class Usuario < ApplicationRecord
  
-	belongs_to :usuario
+	belongs_to :user
 	has_one :direccion, inverse_of: :usuario
 	accepts_nested_attributes_for :direccion, allow_destroy: true
 	
@@ -9,5 +9,6 @@ class Usuario < ApplicationRecord
 	
 	has_many :usuario_metadatos , inverse_of: :usuario
 	accepts_nested_attributes_for :usuario_metadatos, allow_destroy: true
+	has_many :metadatos, :through => :usuario_metadatos, :source => :cat_metadato
 	
 end
