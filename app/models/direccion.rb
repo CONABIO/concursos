@@ -1,5 +1,5 @@
 class Direccion < ApplicationRecord
 
-	belongs_to :usuario, foreign_key: :usuario_id
+	belongs_to :usuario
 
 end

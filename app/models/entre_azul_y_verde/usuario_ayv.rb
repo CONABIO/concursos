@@ -1,0 +1,2 @@
+class UsuarioAyv < Usuario
+end

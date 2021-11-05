@@ -4,7 +4,7 @@ class EntreAzulYVerde::Devise::SessionsController < ::Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-		@registro = Usuario.where(user_id: resource.id).first
+		@registro = UsuarioAyv.where(user_id: resource.id).first
 
 		if @registro.present?
 			edit_entre_azul_y_verde_registro_path(@registro)
