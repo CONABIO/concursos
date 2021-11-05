@@ -1,6 +1,7 @@
 class Usuario < ApplicationRecord
  
 	belongs_to :user
+
 	has_one :direccion, inverse_of: :usuario
 	accepts_nested_attributes_for :direccion, allow_destroy: true
 	
