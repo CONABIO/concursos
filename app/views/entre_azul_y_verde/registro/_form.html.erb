@@ -1,4 +1,4 @@
-<%= simple_form_for @registro do |f| %>
+<%= simple_form_for @registro, **@form_params do |f| %>
 	<div class="row">
 		<div class="col-12 my-2">
 			<h3> Datos del concursante</h3>
@@ -42,21 +42,11 @@
 		<h3> Propiedades usuario </h3>
 		<div class="mediasz">
 			<%= f.simple_fields_for :usuario_metadatos do |meta_form| %>
-				<%= render "usuario_metadatos/form_usuario_metadatos", f: meta_form %>
+				<%= render "entre_azul_y_verde/registro/form_usuario_metadatos", f: meta_form %>
 			<% end %>
 		</div>
-		<div class="links">
-			<%= link_to_add_association('+ propiedad', f, :usuario_metadatos, partial: "usuario_metadatos/form_usuario_metadatos", class: 'btn btn-info btn-sm' )  %>
-		</div>
+		
 	</div>	
 
-	<%#= f.fields_for :categoria do |categoria_form| %>
-	<%#= render "categorias/form_categorias", f: categoria_form %>
-	<%# end %>
-	<%#= f.fields_for :usuario_metadato do |usuario_metadato_form| %>
-	<%#= render "usuario_metadatos/form_usuario_metadatos", f: usuario_metadato_form %>
-	<%# end %>
-	
-	
-	<%= f.button :submit,'Guardar registro', class: 'btn btn-success btn-sm'  %>
+	<%= f.button :submit, @registro.new_record? ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-sm mb-4' %>
 <% end %>

@@ -5,18 +5,33 @@
 	</button>
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav">
-			<li class="nav-item">
-				<button class="nav-link btn btn-link" onclick="document.getElementById('queEs').scrollIntoView();">¿QUÉ ES?</button>
-			</li>
-			<li class="nav-item">
-				<button class="nav-link btn btn-link" onclick="document.getElementById('categorias').scrollIntoView();">CATEGORÍAS</button>
-			</li>
-			<li class="nav-item">
-				<button class="nav-link btn btn-link" data-toggle="modal" data-target="#modalConcurso" data-seccion="bases" data-title="¿Cómo puedo participar?">BASES</button>
-			</li>
-			<li class="nav-item">
-				<button class="nav-link btn btn-link" onclick="document.getElementById('medios').scrollIntoView();">MEDIOS</button>
-			</li>
+			<% if params[:controller] == "entre_azul_y_verde/inicio" %>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('queEs').scrollIntoView();">¿QUÉ ES?</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('categorias').scrollIntoView();">CATEGORÍAS</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" data-toggle="modal" data-target="#modalConcurso" data-seccion="bases" data-title="¿Cómo puedo participar?">BASES</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('medios').scrollIntoView();">MEDIOS</button>
+				</li>
+			<% else %>
+				<li class="nav-item">
+					<%= link_to "¿QUÉ ES?", root_path.to_s + '#queEs', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "CATEGORÍAS", root_path.to_s + '#categorias', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "BASES", root_path.to_s + '#bases', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "MEDIOS", root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>			
+			<% end %>
 
 			<% if user_ayv_signed_in? %>
 				<li class="nav-item">

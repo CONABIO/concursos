@@ -3,12 +3,14 @@ class EntreAzulYVerde::Devise::SessionsController < ::Devise::SessionsController
 
   private
 
-  # def after_sign_in_path_for(resource)
-  #   "/metamares/proyectos"
-  # end
+  def after_sign_in_path_for(resource)
+		@registro = Usuario.where(user_id: resource.id).first
 
-  # def after_sign_out_path_for(resource)
-  #   "/metamares/proyectos"
-  # end
+		if @registro.present?
+			edit_entre_azul_y_verde_registro_path(@registro)
+		else  # Es nuevo usuario
+      new_entre_azul_y_verde_registro_path
+		end
+  end
 
 end

@@ -1,6 +1,14 @@
-<h1>Editing Usuario</h1>
+<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
+    <p id="notice" class="bg-success text-white"><%= notice %></p>
 
-<%= render 'form', usuario: @usuario %>
+	<%= render partial: "entre_azul_y_verde/shared/sub-header", locals: { title: "EDITA LOS DATOS DEL REGISTRO" } %>
+	
+	<div class="col-12 col-xl-8 py-4 text-center">
+		
+		<%= render 'form', usuario: @registro %>
+		
+		<%= link_to 'Regresar', entre_azul_y_verde_root_path, class: "mt-4" %>
+	
+	</div>
 
-<%= link_to 'Show', @usuario %> |
-<%= link_to 'Back', usuarios_path %>
+</div>
