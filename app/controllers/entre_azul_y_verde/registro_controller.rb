@@ -11,9 +11,11 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 		else  # Es nuevo usuario
 			@form_params = { url: '/entre_azul_y_verde/registro', method: 'post' }
 			@registro = UsuarioAyv.new
+			@registro.build_direccion
+			@registro.build_tutor
 			#@registro.build_direccion #unless @registro.direccion.any?
 			#@registro.medias.build
-			@registro.usuario_metadatos.build
+			#@registro.usuario_metadatos.build
 		end
 	end
 	
@@ -25,15 +27,18 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 	# POST /registro or /registro.json
 	def create
 		@registro = UsuarioAyv.new(registro_params)
+
+		# Asigna le concurso
+		concurso = CatConcurso.where(nombre_concurso: UsuarioAyv::CONCURSO).first
+		@registro.concurso_id = concurso.id
 		
 		respond_to do |format|
 			if @registro.save
 				format.html { redirect_to edit_entre_azul_y_verde_registro_path(@registro), notice: "Tu registro fue creado exitosamente." }
 				format.json { render :show, status: :created, location: @registro }
 			else
-				Rails.logger.info @registro.errors.inspect
 				@form_params = { url: '/entre_azul_y_verde/registro', method: 'post' }
-				format.html { render :new, status: :unprocessable_entity }
+				format.html { render :new, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
@@ -47,7 +52,9 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 				format.html { redirect_to edit_entre_azul_y_verde_registro_path(@registro), notice: "Tu registro fue actualizado exitosamente." }
 				format.json { render :show, status: :ok, location: @registro }
 			else
-				format.html { render :edit, status: :unprocessable_entity }
+				Rails.logger.info @registro.errors.inspect
+				@form_params = { url: entre_azul_y_verde_registro_path(@registro), method: 'put' }
+				format.html { render :edit, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
@@ -62,11 +69,10 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
-			params.require(:usuario_ayv).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :user_id,
+			params.require(:usuario_ayv).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
+											tutor_attributes: [:id, :nombre, :apellido_paterno, :apellido_materno, :telefono_contacto, :usuario_id, :_destroy],
 			                                direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
 			                                medias_attributes: [:id, :original_filename, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy],
-			                                usuario_metadatos_attributes: [:id, :metadato_id, :usuario_id, :valor_metadato, :_destroy],
-
 			)
 	end
 end
