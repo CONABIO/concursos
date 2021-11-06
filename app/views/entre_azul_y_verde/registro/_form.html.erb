@@ -1,4 +1,4 @@
-<%= simple_form_for @registro, **@form_params do |f| %>
+<%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row">
 		<div class="col-12 my-2">
 			<h3> Datos del concursante</h3>
@@ -35,8 +35,8 @@
 		<div class="col-12 col-md-6 my-2">
 			<h3> Dibujos </h3>
 			<div class="medias">
-				<%= f.simple_fields_for :medias do |media_form| %>
-					<%= render "medias/form_media", f: media_form %>
+				<%= f.simple_fields_for :media do |media_form| %>
+					<%= render "entre_azul_y_verde/registro/form_media", f: media_form %>
 				<% end %>
 			</div>
 		</div>
