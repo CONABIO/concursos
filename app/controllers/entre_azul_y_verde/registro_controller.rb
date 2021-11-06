@@ -1,75 +1,76 @@
-class EntreAzulYVerde::RegistroController < ApplicationController
-	layout 'entre_azul_y_verde'
+class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeController
 	before_action :set_registro, only: %i[ show edit update destroy ]
+	before_action :authenticate_user_ayv!
 	
-	# GET /usuarios or /usuarios.json
-	def index
-	end
-	
-	# GET /usuarios/1 or /usuarios/1.json
-	def show
-	end
-	
-	# GET /usuarios/new
+	# GET /registro/new
 	def new
-		@registro = Usuario.new
-		@registro.build_direccion #unless @registro.direccion.any?
-		@registro.medias.build
+		@registro = UsuarioAyv.where(user_id: current_user_ayv.id).first
+
+		if @registro.present?
+			redirect_to edit_entre_azul_y_verde_registro_path(@registro)
+		else  # Es nuevo usuario
+			@form_params = { url: '/entre_azul_y_verde/registro', method: 'post' }
+			@registro = UsuarioAyv.new
+			@registro.build_direccion
+			@registro.build_tutor
+			@registro.media.build(posicion: 1)
+			@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
+		end
 	end
 	
-	# GET /usuarios/1/edit
+	# GET /registro/1/edit
 	def edit
+		@form_params = { url: entre_azul_y_verde_registro_path(@registro), method: 'put' }
 	end
 	
-	# POST /usuarios or /usuarios.json
+	# POST /registro or /registro.json
 	def create
-		@registro = Usuario.new(registro_params)
+		@registro = UsuarioAyv.new(registro_params)
+
+		# Asigna le concurso
+		concurso = CatConcurso.where(nombre_concurso: UsuarioAyv::CONCURSO).first
+		@registro.concurso_id = concurso.id
 		
 		respond_to do |format|
 			if @registro.save
-				format.html { render :show, notice: "Usuario was successfully created.1" }
+				format.html { redirect_to edit_entre_azul_y_verde_registro_path(@registro), notice: "Tu registro fue creado exitosamente." }
 				format.json { render :show, status: :created, location: @registro }
 			else
-				format.html { render :new, status: :unprocessable_entity }
+				@form_params = { url: '/entre_azul_y_verde/registro', method: 'post' }
+				format.html { render :new, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
 	end
 	
-	# PATCH/PUT /usuarios/1 or /usuarios/1.json
+	# PATCH/PUT /registro/1 or /registro/1.json
 	def update
 		respond_to do |format|
-			if @registro.update(usuario_params)
-				format.html { redirect_to @registro, notice: "Usuario was successfully updated." }
+			if @registro.update(registro_params)
+				@form_params = { url: entre_azul_y_verde_registro_path(@registro), method: 'put' }
+				format.html { redirect_to edit_entre_azul_y_verde_registro_path(@registro), notice: "Tu registro fue actualizado exitosamente." }
 				format.json { render :show, status: :ok, location: @registro }
 			else
-				format.html { render :edit, status: :unprocessable_entity }
+				@form_params = { url: entre_azul_y_verde_registro_path(@registro), method: 'put' }
+				format.html { render :edit, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
 	end
-	
-	# DELETE /usuarios/1 or /usuarios/1.json
-	def destroy
-		@registro.destroy
-		respond_to do |format|
-			format.html { redirect_to usuarios_url, notice: "Usuario was successfully destroyed." }
-			format.json { head :no_content }
-		end
-	end
+
 	
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_registro
-		@registro = Usuario.find(params[:id])
+		@registro = UsuarioAyv.find(params[:id])
 	end
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
-			params.require(:usuario).permit(:email, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :password, :password_confirmation,
+			params.require(:usuario_ayv).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
+											tutor_attributes: [:id, :nombre, :apellido_paterno, :apellido_materno, :telefono_contacto, :usuario_id, :_destroy],
 			                                direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
-			                                medias_attributes: [:id, :original_filename, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy],
-			                                usuario_metadatos_attributes: [:id, :id_metadato, :id_usuario, :valor_metadato, :_destroy]
+			                                media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :_destroy, media_metadato_attributes: [:id, :titulo, :descripcion, :tecnica, :compromiso, :media_id, :destroy]],
 			)
 	end
 end

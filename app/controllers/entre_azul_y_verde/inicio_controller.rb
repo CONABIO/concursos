@@ -1,5 +1,4 @@
-class EntreAzulYVerde::InicioController < ApplicationController
-	layout 'entre_azul_y_verde'
+class EntreAzulYVerde::InicioController < EntreAzulYVerde::EntreAzulYVerdeController
 
 	def index
 	end

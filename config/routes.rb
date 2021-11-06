@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :user_ayv, :controllers => {:confirmations => "entre_azul_y_verde/devise/confirmations", :passwords => "entre_azul_y_verde/devise/passwords", :registrations => "entre_azul_y_verde/devise/registrations", :unlocks => "entre_azul_y_verde/devise/unlocks", :sessions => "entre_azul_y_verde/devise/sessions"}
+
   resources :cat_concursos
   resources :media_metadatos
   resources :usuario_metadatos

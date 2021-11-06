@@ -1,0 +1,21 @@
+# Load the Rails application.
+require_relative 'application'
+
+# Initialize the Rails application.
+Rails.application.configure do
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+end
+
+Rails.application.initialize!
+
+
+ActionMailer::Base.smtp_settings = {
+    :domain => "",
+    :address => "",
+    :user_name => "",
+    :password => "",
+    #:port => "",
+    :authentication => :plain,
+    :enable_starttls_auto => true
+}
