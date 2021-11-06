@@ -1,0 +1,24 @@
+<div class='nested-fields mb-5'>
+	
+	<% if f.object.posicion == 1 %>
+		<label class="optional" for="usuario_ayv_media_attributes_0_original_filename">Primera foto: Al iniciar con los primeros trazos</label>
+	<% else %>
+		<label class="optional" for="usuario_ayv_media_attributes_1_original_filename">Segunda foto: Al finalizar tu obra de arte</label>
+	<% end %>
+	
+	<% if !@registro.new_record? %>
+		<img src="<%= f.object.original_filename.url %>" class="img-responsive img-fluid mb-3 w-50" />
+	<% end %>
+
+	<%= f.file_field :original_filename, accept: 'image/png,image/jpeg', class: 'form-check-inline' %>
+	<%= f.hidden_field :posicion %>
+
+</div>
+
+<div class="col-12 my-2">
+	<div class="medias">
+		<%= f.simple_fields_for :media_metadato do |media_metadato_form| %>
+			<%= render "entre_azul_y_verde/registro/form_media_metadato", f: media_metadato_form %>
+		<% end %>
+	</div>
+</div>

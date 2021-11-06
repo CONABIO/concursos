@@ -1,51 +1,45 @@
-<%= simple_form_for @registro do |f| %>
+<%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row">
-		<div class="col-12 my-2">
+		<div class="col-xs-12 col-sm-12 col-md-6 my-2">
 			<h3> Datos del concursante</h3>
-			<div class="usuario text-left">
-				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre'%>
+			<div class="usuario text-left mb-4">
+				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)'%>
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
-				<%= f.input_field :email, as: :email, class: 'form-control my-2', placeholder: 'email' %>
-				<label class="date optional" for="usuario_fecha_nacimiento_1i">Fecha nacimiento</label>
-				<%= f.input_field :fecha_nacimiento, as: :date, class: 'form-check-inline my-2' %>
+				<label class="date optional" for="usuario_ayv_fecha_nacimiento_1i">Fecha de nacimiento (mm/dd/aaaa)</label>
+				<%= f.date_field :fecha_nacimiento, min: UsuarioAyv::FECHA_NAC_MIN, max: UsuarioAyv::FECHA_NAC_MAX, class: 'form-check-inline my-2' %>
 				<%= f.input_field :lugar_nacimiento, class: 'form-control my-2', placeholder: 'Lugar de nacimiento' %>
+				<label class="date optional" for="usuario_ayv_medio">¿Por cuál medio te enteraste del concurso?</label>
+				<%= f.select :medio, options_for_select(UsuarioAyv::MEDIO, f.object.medio), { prompt: "--- Selecciona ---" }, { class: 'form-check-inline my-2' } %>
+				<%= f.input_field :otro_medio, class: 'form-control my-2', placeholder: 'Otro medio (opcional)' %>
+				<%= f.hidden_field :user_id, value: current_user_ayv.id %>
 			</div>
-		</div>
-		
-		<div class="col-12 col-md-6 my-2">
+
+			<h3> Datos del tutor </h3>
+			<div class="direccion mb-4">
+				<%= f.fields_for :tutor do |tutor_form| %>
+					<%= render "entre_azul_y_verde/registro/form_tutor", f: tutor_form %>
+				<% end %>
+			</div>
+
 			<h3> Dirección </h3>
 			<div class="direccion">
 				<%= f.fields_for :direccion do |direccion_form| %>
-					<%= render "direcciones/form_direccion", f: direccion_form %>
+					<%= render "entre_azul_y_verde/registro/form_direccion", f: direccion_form %>
 				<% end %>
-			</div>
-			<div class="links">
-				<%#= link_to_add_association('Añade dirección', f, :direccion, partial: 'direcciones/form_direccion', class: 'btn btn-info btn-sm' )  %>
-			</div>
+			</div>			
 		</div>
 		
-		<div class="col-12 col-md-6 my-2">
+		<div class="col-xs-12 col-sm-12 col-md-6">
 			<h3> Dibujos </h3>
 			<div class="medias">
-				<%= f.simple_fields_for :medias do |media_form| %>
-					<%= render "medias/form_media", f: media_form %>
+				<%= f.simple_fields_for :media do |media_form| %>
+					<%= render "entre_azul_y_verde/registro/form_media", f: media_form %>
 				<% end %>
 			</div>
-			<div class="links">
-				<%= link_to_add_association('+ foto de dibujo', f, :medias, partial: 'medias/form_media', class: 'btn btn-info btn-sm' )  %>
-			</div>
 		</div>
-	</div>
-	
 
-	<%#= f.fields_for :categoria do |categoria_form| %>
-	<%#= render "categorias/form_categorias", f: categoria_form %>
-	<%# end %>
-	<%#= f.fields_for :usuario_metadato do |usuario_metadato_form| %>
-	<%#= render "usuario_metadatos/form_usuario_metadatos", f: usuario_metadato_form %>
-	<%# end %>
-	
-	
-	<%= f.button :submit,'Guardar registro', class: 'btn btn-success btn-sm'  %>
+	</div>
+
+	<%= f.button :submit, @registro.new_record? ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-sm mb-4' %>
 <% end %>
