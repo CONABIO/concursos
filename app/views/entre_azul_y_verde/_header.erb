@@ -9,6 +9,9 @@
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('queEs').scrollIntoView();">¿QUÉ ES?</button>
 				</li>
+				<%# <li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('jurado').scrollIntoView();">JURADO</button>
+				</li>				 %>
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('categorias').scrollIntoView();">CATEGORÍAS</button>
 				</li>
@@ -22,6 +25,9 @@
 				<li class="nav-item">
 					<%= link_to "¿QUÉ ES?", root_path.to_s + '#queEs', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
+				<%# <li class="nav-item">
+					<%= link_to "JURADO", root_path.to_s + '#jurado', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>				 %>
 				<li class="nav-item">
 					<%= link_to "CATEGORÍAS", root_path.to_s + '#categorias', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
