@@ -14,7 +14,7 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 			@registro.build_direccion
 			@registro.build_tutor
 			@registro.media.build(posicion: 1)
-			@registro.media.build(posicion: 2)
+			@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
 		end
 	end
 	
@@ -36,7 +36,6 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 				format.html { redirect_to edit_entre_azul_y_verde_registro_path(@registro), notice: "Tu registro fue creado exitosamente." }
 				format.json { render :show, status: :created, location: @registro }
 			else
-				Rails.logger.info @registro.errors.inspect
 				@form_params = { url: '/entre_azul_y_verde/registro', method: 'post' }
 				format.html { render :new, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
@@ -71,7 +70,7 @@ class EntreAzulYVerde::RegistroController < EntreAzulYVerde::EntreAzulYVerdeCont
 			params.require(:usuario_ayv).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
 											tutor_attributes: [:id, :nombre, :apellido_paterno, :apellido_materno, :telefono_contacto, :usuario_id, :_destroy],
 			                                direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
-			                                media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy],
+			                                media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :_destroy, media_metadato_attributes: [:id, :titulo, :descripcion, :tecnica, :compromiso, :media_id, :destroy]],
 			)
 	end
 end

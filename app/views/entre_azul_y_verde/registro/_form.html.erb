@@ -1,8 +1,8 @@
 <%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row">
-		<div class="col-12 my-2">
+		<div class="col-xs-12 col-sm-12 col-md-6 my-2">
 			<h3> Datos del concursante</h3>
-			<div class="usuario text-left">
+			<div class="usuario text-left mb-4">
 				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)'%>
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
@@ -14,9 +14,7 @@
 				<%= f.input_field :otro_medio, class: 'form-control my-2', placeholder: 'Otro medio (opcional)' %>
 				<%= f.hidden_field :user_id, value: current_user_ayv.id %>
 			</div>
-		</div>
-		
-		<div class="col-12 col-md-6 my-2">
+
 			<h3> Datos del tutor </h3>
 			<div class="direccion mb-4">
 				<%= f.fields_for :tutor do |tutor_form| %>
@@ -29,10 +27,10 @@
 				<%= f.fields_for :direccion do |direccion_form| %>
 					<%= render "entre_azul_y_verde/registro/form_direccion", f: direccion_form %>
 				<% end %>
-			</div>
+			</div>			
 		</div>
 		
-		<div class="col-12 col-md-6 my-2">
+		<div class="col-xs-12 col-sm-12 col-md-6">
 			<h3> Dibujos </h3>
 			<div class="medias">
 				<%= f.simple_fields_for :media do |media_form| %>
