@@ -28,12 +28,17 @@ capybara-*.html
 /vendor/bundle
 
 config/config.yml*
+config/initializers/smtp_settings.rb
 config/database.yml*
 dump.rdb*
+
+config/environment.rb
+config/initializers/devise.rb
 
 public/fontello-demo.html
 public/javascripts
 public/assets/
+public/media
 
 log
 nohup.out
@@ -44,3 +49,5 @@ config/secrets.yml.key
 
 .DS_STORE
 public/uploads
+
+
