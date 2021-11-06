@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211105193451) do
+ActiveRecord::Schema.define(version: 20211106002955) do
 
   create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre_concurso"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20211105193451) do
 
   create_table "direcciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "calle"
-    t.integer "numero"
+    t.string "numero"
     t.string "interior"
     t.string "colonia"
     t.string "municipio"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20211105193451) do
     t.integer "user_id", null: false
     t.string "medio"
     t.integer "concurso_id", null: false
+    t.string "otro_medio"
   end
 
 end
