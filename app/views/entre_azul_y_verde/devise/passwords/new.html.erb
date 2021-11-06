@@ -1,5 +1,7 @@
 <div id="inscripcion" class="row justify-content-center mt-5 pt-4">
   <%= render partial: "entre_azul_y_verde/shared/sub-header", locals: { title: "RECUPERAR CONTRASEÑA" } %>
+
+  <p id="notice" class="bg-success text-white"><%= notice %></p>
 	
 	<div class="col-12 col-xl-8 py-4 text-center">
 		
@@ -19,7 +21,7 @@
       </div>
     <% end %>
 
-    <%= render "devise/shared/links" %>
+    <%= render "entre_azul_y_verde/devise/shared/links" %>
 	
 	</div>
 
