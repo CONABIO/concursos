@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211106031347) do
+ActiveRecord::Schema.define(version: 20211106041332) do
 
   create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre_concurso"
@@ -48,11 +48,13 @@ ActiveRecord::Schema.define(version: 20211106031347) do
   end
 
   create_table "media_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "metadato_id"
-    t.integer "media_id"
-    t.string "valor_metadato"
+    t.integer "media_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "titulo"
+    t.text "descripcion"
+    t.text "tecnica"
+    t.text "compromiso"
   end
 
   create_table "medias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
