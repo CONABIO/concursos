@@ -1,5 +1,4 @@
-class EntreAzulYVerde::GaleriasController < ApplicationController
-	layout 'entre_azul_y_verde'
+class EntreAzulYVerde::GaleriasController < EntreAzulYVerde::EntreAzulYVerdeController
 	
 	before_action :set_entre_azul_y_verde_galeria, only: %i[ show edit update destroy ]
 
