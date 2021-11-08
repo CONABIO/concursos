@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210525152541) do
+ActiveRecord::Schema.define(version: 20211106041332) do
 
   create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre_concurso"
@@ -36,23 +36,25 @@ ActiveRecord::Schema.define(version: 20210525152541) do
 
   create_table "direcciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "calle"
-    t.integer "numero"
+    t.string "numero"
     t.string "interior"
     t.string "colonia"
     t.string "municipio"
     t.string "cp"
     t.string "estado"
-    t.integer "usuario_id"
+    t.integer "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "media_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "metadato_id"
-    t.integer "media_id"
-    t.string "valor_metadato"
+    t.integer "media_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "titulo"
+    t.text "descripcion"
+    t.text "tecnica"
+    t.text "compromiso"
   end
 
   create_table "medias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,6 +68,30 @@ ActiveRecord::Schema.define(version: 20210525152541) do
     t.integer "categoria_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "posicion"
+  end
+
+  create_table "tutores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "nombre"
+    t.string "apellido_paterno"
+    t.string "apellido_materno"
+    t.string "telefono_contacto"
+    t.string "correo"
+    t.integer "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "usuario_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -77,15 +103,17 @@ ActiveRecord::Schema.define(version: 20210525152541) do
   end
 
   create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "email"
     t.string "nombre"
     t.string "apellido_paterno"
     t.string "apellido_materno"
     t.date "fecha_nacimiento"
     t.string "lugar_nacimiento"
-    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.string "medio"
+    t.integer "concurso_id", null: false
+    t.string "otro_medio"
   end
 
 end

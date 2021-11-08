@@ -1,0 +1,36 @@
+<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
+  <%= render partial: "entre_azul_y_verde/shared/sub-header", locals: { title: "CAMBIA TU CONTRASEÑA" } %>
+
+  <p id="notice" class="bg-success text-white"><%= notice %></p>
+	
+	<div class="col-12 col-xl-8 py-4 text-center">
+		
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+
+      <div class="form-inputs">
+        <%= f.input :password,
+                    label: "Nueva contraseña",
+                    required: true,
+                    autofocus: true,
+                    hint: ("#{@minimum_password_length} caracteres minimo" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    label: "Confirma la nueva contraseña",
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Cambiar mi contraseña", class: "btn btn-success mb-4" %>
+      </div>
+    <% end %>
+
+    <%= render "entre_azul_y_verde/devise/shared/links" %>
+	
+	</div>
+
+</div>

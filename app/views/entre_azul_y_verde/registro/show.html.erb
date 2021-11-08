@@ -1,35 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @usuario.email %>
-</p>
-
-<p>
   <strong>Nombre:</strong>
-  <%= @usuario.nombre %>
+  <%= @registro.nombre %>
 </p>
 
 <p>
   <strong>Apellido paterno:</strong>
-  <%= @usuario.apellido_paterno %>
+  <%= @registro.apellido_paterno %>
 </p>
 
 <p>
   <strong>Apellido materno:</strong>
-  <%= @usuario.apellido_materno %>
+  <%= @registro.apellido_materno %>
 </p>
 
 <p>
   <strong>Fecha nacimiento nac:</strong>
-  <%= @usuario.fecha_nacimiento %>
+  <%= @registro.fecha_nacimiento %>
 </p>
 
 <p>
   <strong>Lugar nacimiento:</strong>
-  <%= @usuario.lugar_nacimiento %>
+  <%= @registro.lugar_nacimiento %>
 </p>
 
-
-<%= link_to 'Edit', edit_usuario_path(@usuario) %> |
-<%= link_to 'Back', usuarios_path %>
+<%= link_to 'Edit', edit_entre_azul_y_verde_registro_path(@registro) %> |
