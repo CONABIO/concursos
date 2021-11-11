@@ -12,6 +12,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*~
+._*
 
 /node_modules
 /yarn-error.log
@@ -46,6 +48,7 @@ nohup.out
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
+config/secrets.yml
 
 .DS_STORE
 public/uploads

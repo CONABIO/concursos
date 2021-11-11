@@ -13,9 +13,9 @@
 			</ol>
 			<div class="carousel-inner">
 				
-				<% @entre_azul_y_verde_galerias.each do |entre_azul_y_verde_galeria| %>
-					<div class="carousel-item">
-						<img src="..." class="d-block w-100" alt="...">
+				<% @entre_azul_y_verde_galerias.each_with_index do |x, i| %>
+					<div class="carousel-item <%= 'active' if i==0 %>">
+						<img src="<%= x %>" class="d-block w-100" alt="...">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Second slide label</h5>
 							<p>Some representative placeholder content for the second slide.</p>
