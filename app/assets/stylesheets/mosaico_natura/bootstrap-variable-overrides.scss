@@ -1,0 +1,36 @@
+// Options
+// Quickly modify global styling by enabling or disabling optional features.
+$enable-gradients:                            true !default;
+
+/* Font para biomex más las default de Bootstrap */
+$font-size-base:              1rem !default;
+/*$font-family-sans-serif:      'McLaren', cursive, opensans, -apple-system, BlinkMacSystemFont !default;;*/
+
+/*$h1-font-size:                $font-size-base * 2 !default;*/
+/*$h2-font-size:                $font-size-base * 1.75 !default;*/
+/*$h3-font-size:                $font-size-base * 1.5 !default;*/
+/*$h4-font-size:                $font-size-base * 1.25 !default;*/
+/*$h5-font-size:                $font-size-base * 1 !default;*/
+/*$h6-font-size:                $font-size-base * 0.9 !default;*/
+
+/* Breadcrumbs overrides! */
+/*$breadcrumb-padding-y:              .5rem !default;*/
+
+/*$breadcrumb-item-padding:           .25rem !default;*/
+/*$breadcrumb-margin-bottom:          1rem !default;*/
+/*$breadcrumb-bg:                     #d0d0d0 !default;*/
+
+$breadcrumb-border-radius:          0 !default;
+
+$enable-responsive-font-sizes:      true !default;
+
+//$primary: #bd0016;
+//$primary: #fc6042;
+//$success: #A0C11F;
+//$info: #ffaa00;
+//$warning: #ea9028;
+//$danger: #C77878;
+
+//$link-color: #eabd0d !default;
+
+$embed-responsive-aspect-ratios: ((21 9), (23 9), (16 9), (11 4), (4 3), (1 1)) !default;
