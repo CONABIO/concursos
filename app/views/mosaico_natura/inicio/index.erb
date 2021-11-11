@@ -1,0 +1,52 @@
+<p id="notice" class="bg-success text-white"><%= notice %></p>
+
+<div id="intro" class="row justify-content-center">
+	<div class="col-12 col-md-8 col-lg-6 pt-5 my-5">
+		<img src="/concursos_assets/mosaico_natura/intro.png" alt="Mosaico Natura" title="Mosaico Natura" class="img-fluid">
+		<img src="/concursos_assets/mosaico_natura/intro-logos.png" alt="Mosaico Natura" title="Mosaico Natura" class="img-fluid">
+	</div>
+</div>
+
+<div id="queEs" class="row justify-content-center">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/mosaico_natura/queEs.png" alt="¿Qué es?" title="¿Qué es?" class="img-fluid">
+	</div>
+	<%= render :partial => 'queEs' %>
+</div>
+
+<div id="jurado" class="row justify-content-center">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/mosaico_natura/jurado.png" alt="Jurado" title="Jurado" class="img-fluid">
+	</div>
+	<%= render :partial => 'jurado' %>
+</div> 
+
+<div id="categorias" class="row justify-content-center">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/mosaico_natura/categorias.png" alt="Categorías del concurso" title="Categorías del concurso" class="img-fluid">
+	</div>
+	<%= render :partial => 'categorias' %>
+</div>
+
+<div id="bases" class="row justify-content-center">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/mosaico_natura/bases.png" alt="Bases del concurso" title="Bases del concurso" class="img-fluid">
+	</div>
+	<div class="col-12 col-md-8 py-4">
+		<p class="text-center">
+			<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConcurso" data-seccion="bases" data-title="¿Cómo puedo participar?">
+				<img src="/concursos_assets/mosaico_natura/faq-01.png">
+			</button>
+		</p>
+	</div>
+</div>
+
+<div id="medios" class="row justify-content-center">
+	<div class="col-12 text-center sub-header">
+		<img src="/concursos_assets/mosaico_natura/medios.png" alt="Información para medios" title="Información para medios" class="img-fluid">
+	</div>
+	<%= render :partial => 'medios' %>
+</div>
+
+
+<%= render :partial => 'mosaico_natura/shared/modal' %>
