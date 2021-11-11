@@ -1,9 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esta aplicación es la base para los concursos de dibujo y de fotografía que realiza anualmente la CONABIO 
 
-Things you may want to cover:
+TODO:
 
 * Ruby version
 
