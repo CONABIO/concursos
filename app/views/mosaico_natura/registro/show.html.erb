@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @registro.nombre %>
+</p>
+
+<p>
+  <strong>Apellido paterno:</strong>
+  <%= @registro.apellido_paterno %>
+</p>
+
+<p>
+  <strong>Apellido materno:</strong>
+  <%= @registro.apellido_materno %>
+</p>
+
+<p>
+  <strong>Fecha nacimiento nac:</strong>
+  <%= @registro.fecha_nacimiento %>
+</p>
+
+<p>
+  <strong>Lugar nacimiento:</strong>
+  <%= @registro.lugar_nacimiento %>
+</p>
+
+<%= link_to 'Edit', edit_mosaico_natura_registro_path(@registro) %> |
