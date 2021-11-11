@@ -1,0 +1,10 @@
+<div class='nested-fields'>
+	<%= f.input_field :calle, class: 'form-control my-2', placeholder: 'Calle' %>
+	<%= f.input_field :numero, class: 'form-control my-2', placeholder: 'Número' %>
+	<%#= f.input_field :interior, class: 'form-control my-2', placeholder: 'Interior' %>
+	<%= f.input_field :colonia, class: 'form-control my-2', placeholder: 'Colonia' %>
+	<%= f.input_field :municipio, class: 'form-control my-2', placeholder: 'Municipio/Alcaldía' %>
+	<%= f.input_field :cp, class: 'form-control my-2', placeholder: 'Código postal' %>
+	<label class="optional" for="usuario_mn_direccion_attributes_estado">Estado</label>
+	<%= f.select :estado, options_for_select(Direccion::ESTADOS, f.object.estado), { prompt: "--- Selecciona ---" }, { class: 'form-check-inline my-2' } %>
+</div>
