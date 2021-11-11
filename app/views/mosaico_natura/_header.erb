@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+	<%= link_to (image_tag '/concursos_assets/mosaico_natura/azul_y_verde.png', alt: 'Mosaico Natura', title: 'Mosaico Natura', class: 'img-fluid'), '/', class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+		<ul class="navbar-nav">
+			<% if params[:controller] == "mosaico_natura/inicio" %>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('queEs').scrollIntoView();">¿QUÉ ES?</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('jurado').scrollIntoView();">JURADO</button>
+				</li>				
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('categorias').scrollIntoView();">CATEGORÍAS</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" data-toggle="modal" data-target="#modalConcurso" data-seccion="bases" data-title="¿Cómo puedo participar?">BASES</button>
+				</li>
+				<li class="nav-item">
+					<button class="nav-link btn btn-link" onclick="document.getElementById('medios').scrollIntoView();">MEDIOS</button>
+				</li>
+			<% else %>
+				<li class="nav-item">
+					<%= link_to "¿QUÉ ES?", root_path.to_s + '#queEs', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "JURADO", root_path.to_s + '#jurado', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
+				</li>				
+				<li class="nav-item">
+					<%= link_to "CATEGORÍAS", root_path.to_s + '#categorias', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "BASES", root_path.to_s + '#bases', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "MEDIOS", root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+				</li>			
+			<% end %>
+
+			<% if user_mn_signed_in? %>
+				<li class="nav-item">
+					<div class="dropdown">
+						<button class="nav-link btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							CUENTA
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="<%= new_mosaico_natura_registro_path %>">DATOS DEL REGISTRO</a>
+							<a class="dropdown-item" href="<%= edit_user_mn_registration_path %>">CORREO/CONTRASEÑA</a>
+							<%= link_to "CERRAR SESIÓN", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
+						</div>
+					</div>	
+				</li>					
+			<% else %>
+				<li class="nav-item">
+					<a class="nav-link" href="<%= new_user_mn_registration_path %>">REGISTRO</a>
+				</li>			
+			<% end %>
+
+			<li class="nav-item">
+				<a class="nav-link disabled" href="galerias">CONCURSOS ANTERIORES</a>
+			</li>
+		</ul>
+	</div>
+</nav>
