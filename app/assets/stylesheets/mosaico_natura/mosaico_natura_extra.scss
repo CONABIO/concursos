@@ -19,24 +19,70 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /* ¿Quiénes somos?*/
-#quienesSomos{}
-#quienesSomos .sub-header{}
+#quienesSomos{
+}
+#quienesSomos .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-quienesSomos.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
 
-/* Jurado */
+/* Concurso */
 #concurso{}
-#concurso .sub-header{}
+#concurso .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-concurso.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
 
 /* Categorías */
 #categorias{}
-#categorias .sub-header{}
+#categorias .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-categorias.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
 
 /* Bases */
-#exposiciones, .bases{}
-#exposiciones .sub-header{}
+#exposiciones{}
+#exposiciones .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-exposiciones.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
 
 /* Medios */
 #medios{}
-#medios .sub-header{}
+#medios .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-medios.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
 
 /* Inscripcion */
 #inscripcion{}
