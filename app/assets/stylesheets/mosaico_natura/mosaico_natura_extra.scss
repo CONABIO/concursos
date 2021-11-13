@@ -1,3 +1,12 @@
+body{
+	font-family:"myriad-pro-condensed", 'Barlow Condensed', Arial, sans-serif;
+	
+}
+h1,h2,h3,h4,h5,h6{
+	font-family:"myriad-pro-condensed", 'Barlow Condensed', Arial, sans-serif;
+	font-weight:bold;
+}
+
 #intro{
   /*background-image: url();*/
   background-attachment: fixed;
@@ -9,21 +18,21 @@
   -o-background-size: cover;
 }
 
-/* ¿Que es?*/
-#queEs{}
-#queEs .sub-header{}
+/* ¿Quiénes somos?*/
+#quienesSomos{}
+#quienesSomos .sub-header{}
 
 /* Jurado */
-#jurado{}
-#jurado .sub-header{}
+#concurso{}
+#concurso .sub-header{}
 
 /* Categorías */
 #categorias{}
 #categorias .sub-header{}
 
 /* Bases */
-#bases, .bases{}
-#bases .sub-header{}
+#exposiciones, .bases{}
+#exposiciones .sub-header{}
 
 /* Medios */
 #medios{}
@@ -32,3 +41,18 @@
 /* Inscripcion */
 #inscripcion{}
 #inscripcion .sub-header{}
+
+#copyright{
+	padding:10px 0;
+	margin:0;
+}
+
+#copyright p{
+	font-size:18px;
+	line-height:1;
+	margin:0;
+}
+
+#imgmosaicosomos {
+vertical-align: baseline;
+	}
