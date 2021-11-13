@@ -1,44 +1,37 @@
 <p id="notice" class="bg-success text-white"><%= notice %></p>
 
 <div id="intro" class="row justify-content-center">
-	<div class="col-12 col-md-8 col-lg-6 pt-5 my-5">
-		<img src="/concursos_assets/mosaico_natura/intro.png" alt="Mosaico Natura" title="Mosaico Natura" class="img-fluid">
-		<img src="/concursos_assets/mosaico_natura/intro-logos.png" alt="Mosaico Natura" title="Mosaico Natura" class="img-fluid">
+	<div class="col-12 col-md-12 col-lg-9 pt-5 my-5">
+		<img src="/concursos_assets/mosaico_natura/PortadaWeb6to.jpg" alt="Mosaico Natura" title="Mosaico Natura" class="img-fluid">
 	</div>
 </div>
 
-<div id="queEs" class="row justify-content-center">
+<div id="quienesSomos" class="row justify-content-center">
 	<div class="col-12 text-center sub-header">
-		<img src="/concursos_assets/mosaico_natura/queEs.png" alt="¿Qué es?" title="¿Qué es?" class="img-fluid">
+		<img src="/concursos_assets/mosaico_natura/bg-quienesSomos.jpg" alt="¿Quiénes somos?" title="¿Quiénes somos?" class="img-fluid">
 	</div>
-	<%= render :partial => 'queEs' %>
+	<%= render :partial => 'quienesSomos' %>
 </div>
 
-<div id="jurado" class="row justify-content-center">
+<div id="concurso" class="row justify-content-center">
 	<div class="col-12 text-center sub-header">
-		<img src="/concursos_assets/mosaico_natura/jurado.png" alt="Jurado" title="Jurado" class="img-fluid">
+		<img src="/concursos_assets/mosaico_natura/bg-concurso.jpg" alt="Concurso" title="Concurso" class="img-fluid">
 	</div>
-	<%= render :partial => 'jurado' %>
+	<%= render :partial => 'concurso' %>
 </div> 
 
-<div id="categorias" class="row justify-content-center">
+<div id="exposiciones" class="row justify-content-center">
 	<div class="col-12 text-center sub-header">
-		<img src="/concursos_assets/mosaico_natura/categorias.png" alt="Categorías del concurso" title="Categorías del concurso" class="img-fluid">
+		<img src="/concursos_assets/mosaico_natura/exposiciones.png" alt="Exposiciones del concurso" title="Exposiciones del concurso" class="img-fluid">
 	</div>
-	<%= render :partial => 'categorias' %>
+	<%= render :partial => 'exposiciones' %>
 </div>
 
-<div id="bases" class="row justify-content-center">
+<div id="ganadores" class="row justify-content-center">
 	<div class="col-12 text-center sub-header">
-		<img src="/concursos_assets/mosaico_natura/bases.png" alt="Bases del concurso" title="Bases del concurso" class="img-fluid">
+		<img src="/concursos_assets/mosaico_natura/ganadores.png" alt="Ganadores del concurso" title="Ganadores del concurso" class="img-fluid">
 	</div>
-	<div class="col-12 col-md-8 py-4">
-		<p class="text-center">
-			<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConcurso" data-seccion="bases" data-title="¿Cómo puedo participar?">
-				<img src="/concursos_assets/mosaico_natura/faq-01.png">
-			</button>
-		</p>
-	</div>
+	<%= render :partial => 'ganadores' %>
 </div>
 
 <div id="medios" class="row justify-content-center">
