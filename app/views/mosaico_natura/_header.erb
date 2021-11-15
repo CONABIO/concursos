@@ -5,13 +5,13 @@
 	</button>
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav">
-			<% if params[:controller] == "mosaico_natura/inicio" && params[:action_name] == "index" %>
+			<% if params[:controller] == "mosaico_natura/inicio" && params[:action] == "index" %>
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('quienesSomos').scrollIntoView();">¿QUIÉNES SOMOS?</button>
 				</li>
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('concurso').scrollIntoView();">CONCURSO</button>
-				</li>				
+				</li>
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('exposiciones').scrollIntoView();">EXPOSICIONES</button>
 				</li>
@@ -27,18 +27,18 @@
 				</li>
 				<li class="nav-item">
 					<%= link_to "CONCURSO", mosaico_natura_root_path.to_s + '#concurso', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
-				</li>				
+				</li>
 				<li class="nav-item">
 					<%= link_to "EXPOSICIONES", mosaico_natura_root_path.to_s + '#exposiciones', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "GANADORES", mosaico_natura_root_path.to_s + '#ganadores', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "GANADORES", mosaico_natura_root_path.to_s + '#ganadores', class: "nav-link btn btn-link disabled", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
 					<%= link_to "MEDIOS", mosaico_natura_root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li>			
+				</li>
 			<% end %>
-
+			
 			<% if user_mn_signed_in? %>
 				<li class="nav-item">
 					<div class="dropdown">
@@ -50,12 +50,12 @@
 							<a class="dropdown-item" href="<%= edit_user_mn_registration_path %>">CORREO/CONTRASEÑA</a>
 							<%= link_to "CERRAR SESIÓN", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
 						</div>
-					</div>	
-				</li>					
+					</div>
+				</li>
 			<% else %>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="<%= new_user_mn_registration_path %>">REGISTRO</a>
-				</li>			
+				</li>
 			<% end %>
 		</ul>
 	</div>
