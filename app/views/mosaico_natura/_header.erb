@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-	<%= link_to (image_tag '/concursos_assets/mosaico_natura/logo-mosaiconatura.png', alt: 'Mosaico Natura', title: 'Mosaico Natura', class: 'img-fluid'), '/', class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
+	<%= link_to (image_tag '/concursos_assets/mosaico_natura/logo-mosaiconatura.png', alt: 'Mosaico Natura', title: 'Mosaico Natura', class: 'img-fluid'), mosaico_natura_root_path.to_s, class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 		<ul class="navbar-nav">
-			<% if params[:controller] == "mosaico_natura/inicio" %>
+			<% if params[:controller] == "mosaico_natura/inicio" && params[:action_name] == "index" %>
 				<li class="nav-item">
 					<button class="nav-link btn btn-link" onclick="document.getElementById('quienesSomos').scrollIntoView();">¿QUIÉNES SOMOS?</button>
 				</li>
@@ -23,19 +23,19 @@
 				</li>
 			<% else %>
 				<li class="nav-item">
-					<%= link_to "¿QUIÉNES SOMOS?", root_path.to_s + '#quienesSomos', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "¿QUIÉNES SOMOS?", mosaico_natura_root_path.to_s + '#quienesSomos', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "CONCURSO", root_path.to_s + '#concurso', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
+					<%= link_to "CONCURSO", mosaico_natura_root_path.to_s + '#concurso', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
 				</li>				
 				<li class="nav-item">
-					<%= link_to "EXPOSICIONES", root_path.to_s + '#exposiciones', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "EXPOSICIONES", mosaico_natura_root_path.to_s + '#exposiciones', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "GANADORES", root_path.to_s + '#ganadores', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "GANADORES", mosaico_natura_root_path.to_s + '#ganadores', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "MEDIOS", root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "MEDIOS", mosaico_natura_root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>			
 			<% end %>
 
