@@ -13,29 +13,63 @@ Rails.application.routes.draw do
   resources :medias
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  root 'entre_azul_y_verde/inicio#index'
-
-  namespace 'entre_azul_y_verde' do
-	  root 'inicio#index'
-	  get 'quees' => 'inicio#index'
-	  get 'categorias' => 'inicio#index'
-	  get 'medios' => 'inicio#index'
+  
+  if Rails.env.development?
+	  namespace 'entre_azul_y_verde' do
+		  root 'inicio#index'
+		  get 'quees' => 'inicio#index'
+		  get 'categorias' => 'inicio#index'
+		  get 'medios' => 'inicio#index'
+		
+		  get 'bases' => 'inicio#bases'
+		  resources :galerias
+		  resources :panel
+		  resources :registro
+	  end
+	
+	  namespace 'mosaico_natura' do
+		  root 'inicio#index'
+		  get 'quees' => 'inicio#index'
+		  get 'categorias' => 'inicio#index'
+		  get 'medios' => 'inicio#index'
+		  get 'bases' => 'inicio#bases'
+		  get 'terminos_condiciones' => 'inicio#terminos_condiciones'
+		  resources :galerias
+		  resources :panel
+		  resources :registro
+	  end
+  else
+	  constraints host: 'entreazulyverde.mx' do
+		  root 'entre_azul_y_verde/inicio#index'
+		  namespace 'entre_azul_y_verde' do
+			  root 'inicio#index'
+			  get 'quees' => 'inicio#index'
+			  get 'categorias' => 'inicio#index'
+			  get 'medios' => 'inicio#index'
+			
+			  get 'bases' => 'inicio#bases'
+			  resources :galerias
+			  resources :panel
+			  resources :registro
+		  end
+	  end
 	  
-	  get 'bases' => 'inicio#bases'
-	  resources :galerias
-	  resources :panel
-	  resources :registro
+	  constraints host: 'mosaiconatura.net' do
+		  root 'mosaico_natura/inicio#index'
+		  namespace 'mosaico_natura' do
+			  root 'inicio#index'
+			  get 'quees' => 'inicio#index'
+			  get 'categorias' => 'inicio#index'
+			  get 'medios' => 'inicio#index'
+			  get 'bases' => 'inicio#bases'
+			  get 'terminos_condiciones' => 'inicio#terminos_condiciones'
+			  resources :galerias
+			  resources :panel
+			  resources :registro
+		  end
+	  end
   end
   
-  namespace 'mosaico_natura' do
-	  root 'inicio#index'
-	  get 'quees' => 'inicio#index'
-	  get 'categorias' => 'inicio#index'
-	  get 'medios' => 'inicio#index'
-	  get 'bases' => 'inicio#bases'
-	  get 'terminos_condiciones' => 'inicio#terminos_condiciones'
-	  resources :galerias
-	  resources :panel
-	  resources :registro
-  end
+  
+  
 end
