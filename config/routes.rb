@@ -21,7 +21,6 @@ Rails.application.routes.draw do
 	  get 'categorias' => 'inicio#index'
 	  get 'medios' => 'inicio#index'
 	  
-	  
 	  get 'bases' => 'inicio#bases'
 	  resources :galerias
 	  resources :panel
@@ -33,9 +32,8 @@ Rails.application.routes.draw do
 	  get 'quees' => 'inicio#index'
 	  get 'categorias' => 'inicio#index'
 	  get 'medios' => 'inicio#index'
-	  
-	  
 	  get 'bases' => 'inicio#bases'
+	  get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 	  resources :galerias
 	  resources :panel
 	  resources :registro
