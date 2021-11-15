@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 		  resources :registro
 	  end
   else
-	  constraints host: 'entreazulyverde.mx' do
+	  constraints(lambda { |request| ['entreazulyverde.mx','www.entreazulyverde.mx'].include?(request.host) }) do
 		  root 'entre_azul_y_verde/inicio#index'
 		  namespace 'entre_azul_y_verde' do
 			  root 'inicio#index'
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 		  end
 	  end
 	  
-	  constraints host: 'mosaiconatura.net' do
+	  constraints(lambda { |request| ['mosaiconatura.net','www.mosaiconatura.net'].include?(request.host) }) do
 		  root 'mosaico_natura/inicio#index'
 		  namespace 'mosaico_natura' do
 			  root 'inicio#index'
