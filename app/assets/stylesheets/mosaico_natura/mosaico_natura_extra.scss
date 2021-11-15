@@ -79,6 +79,21 @@ h1,h2,h3,h4,h5,h6{
 	margin:0;
 }
 
+/* Términos y conidciones */
+#terminos-condiciones{}
+#terminos-condiciones .sub-header{
+	background-image: url('/concursos_assets/mosaico_natura/bg-legales.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 300px;
+	padding: 60px 0;
+	margin:0;
+	text-shadow: 2px 2px 5px #000;
+}
+terminos-condiciones
+
+
 /* Inscripcion */
 #inscripcion{}
 #inscripcion .sub-header{}
