@@ -1,0 +1,28 @@
+<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
+  <%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "RECUPERAR CONTRASEÑA" } %>
+
+  <p id="notice" class="bg-success text-white"><%= notice %></p>
+	
+	<div class="col-12 col-xl-8 py-4 text-center">
+		
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    label: "Correo",
+                    input_html: { autocomplete: "email" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Enviarme instruciones", class: "btn btn-success mb-4" %>
+      </div>
+    <% end %>
+
+    <%= render "mosaico_natura/devise/shared/links" %>
+	
+	</div>
+
+</div>
