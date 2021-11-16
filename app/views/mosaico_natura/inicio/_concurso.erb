@@ -15,7 +15,7 @@
 				<div class="media">
 					<%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
 					<div class="media-body">
-						<h5 class="mt-0"><%= k.to_s.camelize %></h5>
+						<h5 class="mt-0"><%= k.to_s.humanize %></h5>
 						<p><%= v %></p>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 				<div class="media">
 					<%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
 					<div class="media-body">
-						<h5 class="mt-0"><%= k.to_s.camelize %></h5>
+						<h5 class="mt-0"><%= k.to_s.humanize %></h5>
 						<p><%= v %></p>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 		<div class="media">
 			<%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
 			<div class="media-body">
-				<h5 class="mt-0"><%= k.to_s.camelize %></h5>
+				<h5 class="mt-0"><%= k.to_s.humanize %></h5>
 				<p><%= v %></p>
 			</div>
 		</div>
