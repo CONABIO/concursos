@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-	<%= link_to (image_tag '/concursos_assets/entre_azul_y_verde/azul_y_verde.png', alt: 'Entre Azul y Verde', title: 'Entre Azul y Verde', class: 'img-fluid'), '/', class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
+	<%= link_to (image_tag '/concursos_assets/entre_azul_y_verde/azul_y_verde.png', alt: 'Entre Azul y Verde', title: 'Entre Azul y Verde', class: 'img-fluid'), entre_azul_y_verde_root_path, class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -23,19 +23,19 @@
 				</li>
 			<% else %>
 				<li class="nav-item">
-					<%= link_to "¿QUÉ ES?", root_path.to_s + '#queEs', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "¿QUÉ ES?", entre_azul_y_verde_root_path.to_s + '#queEs', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "JURADO", root_path.to_s + '#jurado', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
+					<%= link_to "JURADO", entre_azul_y_verde_root_path.to_s + '#jurado', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
 				</li>				
 				<li class="nav-item">
-					<%= link_to "CATEGORÍAS", root_path.to_s + '#categorias', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "CATEGORÍAS", entre_azul_y_verde_root_path.to_s + '#categorias', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "BASES", root_path.to_s + '#bases', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "BASES", entre_azul_y_verde_root_path.to_s + '#bases', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>
 				<li class="nav-item">
-					<%= link_to "MEDIOS", root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
+					<%= link_to "MEDIOS", entre_azul_y_verde_root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
 				</li>			
 			<% end %>
 
