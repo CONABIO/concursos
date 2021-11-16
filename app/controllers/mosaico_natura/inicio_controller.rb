@@ -1,6 +1,7 @@
 class MosaicoNatura::InicioController < MosaicoNatura::MosaicoNaturaController
 	
 	def index
+		@categorias = Categoria::CategoriasMN
 	end
 	
 	def bases
