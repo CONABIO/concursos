@@ -12,10 +12,9 @@ class MosaicoNatura::MediaMn < Media
 	accepts_nested_attributes_for :media_metadato, allow_destroy: true
 
 	has_many :calificaciones, inverse_of: :media, foreign_key: :media_id, class_name: "CalificacionMn"
+	mount_uploader :original_filename, MediaAwsUploader
 	
 	validates_presence_of :original_filename, :categoria_id
-
-	mount_uploader :original_filename, MediaAwsUploader
 	
 	scope :mosaico, -> { where(categoria: (1..9))}
 	scope :where_fotos, -> { where('posicion IS NULL').where('usuarios.concurso_id' => 2) }
