@@ -7,6 +7,6 @@ class MediaMn < Media
 
 	validates_presence_of :original_filename
 
-	mount_uploader :original_filename, MediaUploader
+	mount_uploader :original_filename, MediaAwsUploader
 	
 end
