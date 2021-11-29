@@ -15,13 +15,6 @@
 				<%= f.hidden_field :user_id, value: current_user_mn.id %>
 			</div>
 
-			<h3> Datos del tutor </h3>
-			<div class="direccion mb-4">
-				<%= f.fields_for :tutor do |tutor_form| %>
-					<%= render "mosaico_natura/registro/form_tutor", f: tutor_form %>
-				<% end %>
-			</div>
-
 			<h3> Dirección </h3>
 			<div class="direccion">
 				<%= f.fields_for :direccion do |direccion_form| %>
