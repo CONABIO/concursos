@@ -1,10 +1,10 @@
 class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	before_action :set_registro, only: %i[ show edit update destroy ]
-	before_action :authenticate_user_ayv!
+	before_action :authenticate_user_mn!
 	
 	# GET /registro/new
 	def new
-		@registro = UsuarioMn.where(user_id: current_user_ayv.id).first
+		@registro = UsuarioMn.where(user_id: current_user_mn.id).first
 
 		if @registro.present?
 			redirect_to edit_mosaico_natura_registro_path(@registro)
@@ -12,7 +12,6 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			@form_params = { url: '/mosaico_natura/registro', method: 'post' }
 			@registro = UsuarioMn.new
 			@registro.build_direccion
-			@registro.build_tutor
 			@registro.media.build(posicion: 1)
 			@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
 		end
@@ -67,7 +66,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
-			params.require(:usuario_ayv).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
+			params.require(:usuario_mn).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
 			                                    direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
 			                                    media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :_destroy,
 			                                                       media_metadato_attributes: [:id, :titulo, :descripcion, :tecnica, :compromiso, :media_id, :destroy]],
