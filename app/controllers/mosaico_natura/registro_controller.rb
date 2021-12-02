@@ -12,8 +12,8 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			@form_params = { url: '/mosaico_natura/registro', method: 'post' }
 			@registro = UsuarioMn.new
 			@registro.build_direccion
-			@registro.media.build(posicion: 1)
-			@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
+			@registro.media.build
+			#@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
 		end
 	end
 	
@@ -68,7 +68,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	def registro_params
 			params.require(:usuario_mn).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
 			                                    direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
-			                                    media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :_destroy,
+			                                    media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy,
 			                                                       media_metadato_attributes: [:id, :titulo, :descripcion, :tecnica, :compromiso, :media_id, :destroy]],
 			)
 	end
