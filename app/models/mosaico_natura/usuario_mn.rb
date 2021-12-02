@@ -11,7 +11,7 @@ class UsuarioMn < Usuario
     has_one :direccion, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "DireccionMn", dependent: :destroy
     accepts_nested_attributes_for :direccion, allow_destroy: true
 
-    has_many :media, -> { order("posicion ASC") }, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "MediaMn", dependent: :destroy
+    has_many :media, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "MediaMn", dependent: :destroy
     accepts_nested_attributes_for :media, allow_destroy: true 
        
 end
