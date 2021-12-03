@@ -33,18 +33,9 @@
 					<%= render "mosaico_natura/registro/form_media", f: media_form %>
 				<% end %>
 				<div class="links">
-					<%= link_to_add_association 'añade foto', f, :media, partial: "mosaico_natura/registro/form_media" %>
-				</div>
-			</div>
-		</div>
-		<div class="col-12 my-4">
-			<h4> Fotografías ed otra catego</h4>
-			<div class="medias">
-				<%= f.simple_fields_for :media do |media_form| %>
-					<%= render "mosaico_natura/registro/form_media", f: media_form %>
-				<% end %>
-				<div class="links">
-					<%= link_to_add_association 'añade foto de otra catego', f, :media, partial: "mosaico_natura/registro/form_media" %>
+					<% @categorias.each do |c| %>
+						<%= link_to_add_association "Añade fotos en la categoría #{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }%>
+					<% end %>
 				</div>
 			</div>
 		</div>
