@@ -5,6 +5,6 @@
 	<%= f.input_field :colonia, class: 'form-control my-2', placeholder: 'Colonia' %>
 	<%= f.input_field :municipio, class: 'form-control my-2', placeholder: 'Municipio/Alcaldía' %>
 	<%= f.input_field :cp, class: 'form-control my-2', placeholder: 'Código postal' %>
-	<label class="optional" for="usuario_mn_direccion_attributes_estado">Estado</label>
-	<%= f.select :estado, options_for_select(Direccion::ESTADOS, f.object.estado), { prompt: "--- Selecciona ---" }, { class: 'form-control my-2' } %>
+	<label class="my-2 font-weight-bolder optional" for="usuario_mn_direccion_attributes_estado">Estado de residencia</label>
+	<%= f.select :estado, options_for_select(Direccion::ESTADOS, f.object.estado), { prompt: "--- Selecciona ---" }, { class: 'form-control' } %>
 </div>
