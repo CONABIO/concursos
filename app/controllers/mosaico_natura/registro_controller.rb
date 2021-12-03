@@ -12,7 +12,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			@form_params = { url: '/mosaico_natura/registro', method: 'post' }
 			@registro = UsuarioMn.new
 			@registro.build_direccion
-			@registro.media.build
+			#@registro.media.build
 			#@registro.media.build(posicion: 2).build_media_metadato  # Solo la foto final tiene asociado los metadatos
 		end
 	end
