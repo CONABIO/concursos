@@ -10,6 +10,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			redirect_to edit_mosaico_natura_registro_path(@registro)
 		else  # Es nuevo usuario
 			@form_params = { url: '/mosaico_natura/registro', method: 'post' }
+			@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["cineminuto","tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
 			@registro = UsuarioMn.new
 			@registro.build_direccion
 			#@registro.media.build
@@ -19,6 +20,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	
 	# GET /registro/1/edit
 	def edit
+		@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["cineminuto","tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
 		@form_params = { url: mosaico_natura_registro_path(@registro), method: 'put' }
 	end
 	
