@@ -1,14 +1,20 @@
 <div class='nested-fields mb-5'>
-	<%= f.select :categoria_id, options_for_select(Categoria.where(cat_concurso_id: 2).map{|c|[c.nombre_categoria, c.id]}, nil), { prompt: "--- Selecciona ---" }, { class: 'form-control my-2' } %>
-	
+	<%= nombre_categoria %>
+	<%= f.input :categoria_id, :as => :hidden, :input_html => { :value => id_categoria } %>
+	<%#= f.select :categoria_id, options_for_select(Categoria.where(cat_concurso_id: 2).where(nombre_categoria: ["cineminuto","tema_libre"]).map{|c|[c.nombre_categoria.humanize, c.id]}, nil), { prompt: "--- Selecciona ---" }, { class: 'form-control my-2' } %>
+
 	<label class="optional" for="usuario_mn_media_attributes_1_original_filename">Foto:</label>
 	
 	<% if !@registro.new_record? %>
 		<img src="<%= f.object.original_filename.url %>" class="img-responsive img-fluid mb-3 w-50" />
 	<% end %>
 	
-	<%= f.file_field :original_filename, accept: 'image/png,image/jpeg', class: 'form-check-inline' %>
-
+	<div class="custom-file">
+		<%= f.file_field :original_filename, accept: 'image/png,image/jpeg', class: 'custom-file-input', 'aria-describedby' => 'original_filename_label'%>
+		<label class="custom-file-label" for="original_filename_label">Escoge tu archivo</label>
+	</div>
+	
+	<%= link_to_remove_association "quitar foto", f %>
 </div>
 
 <div class="col-12 my-2">
