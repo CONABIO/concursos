@@ -10,5 +10,8 @@ $(document).ready(function(){
 				});
 		});
 		$('.toast').toast('show');
+		$('#inscripcion').on('click', '.links a', function(){
+				$(this).hide();
+		});
 });
 

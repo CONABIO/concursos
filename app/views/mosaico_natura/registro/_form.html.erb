@@ -29,23 +29,20 @@
 		
 		<% unless @registro.new_record? %>
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
-				<h4> Añade tus fotografías </h4>
+				<h4 class="my-3">¿En que categoría deseas participar?</h4>
 				<div class="medias row">
 					<%= f.simple_fields_for :media do |media_form| %>
 						<%= render "mosaico_natura/registro/form_media", f: media_form %>
 					<% end %>
-					<div class="links">
-						<h6>Categorías:</h6>
-						<div class="d-flex justify-content-between">
-							<% @categorias.each do |c| %>
-								<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-success btn-sm mx-2', render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }, count: (c[0] == 'cineminuto' ? 1 : 2) %>
-							<% end %>
-						</div>
+					<div class="links col-12 d-flex justify-content-around align-items-center">
+						<% @categorias.each do |c| %>
+							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }, count: (c[0] == 'cineminuto' ? 1 : 2) %>
+						<% end %>
 					</div>
 				</div>
 			</div>
 		<% end %>
 	</div>
 	
-	<%= f.button :submit, @registro.new_record? ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-sm mb-4' %>
+	<%= f.button :submit, @registro.new_record? ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block mb-4' %>
 <% end %>
