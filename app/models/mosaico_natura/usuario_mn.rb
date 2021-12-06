@@ -2,7 +2,8 @@ class UsuarioMn < Usuario
 
     CONCURSO = "mn".freeze
     MEDIO = [["Redes sociales", "redes-sociales"], ["Radio", "radio"], ["Televisión", "television"], ["En la escuela", "escuela"], ["Otro", "otro"]]
-    FECHA_NAC_MIN = "2004-16-01"
+    FECHA_NAC_MIN = "2022-16-01"
+    FECHA_NAC_MIN_ADULTOS = Date.new(2004, 01, 16)
     FECHA_NAC_MAX = "1904-16-01"
 
     validates_presence_of :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio
