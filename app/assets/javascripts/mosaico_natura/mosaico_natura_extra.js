@@ -9,6 +9,7 @@ $(document).ready(function(){
 				
 				});
 		});
+		$('[data-toggle="tooltip"]').tooltip();
 		$('.toast').toast('show');
 		$('#inscripcion').on('click', '.links a', function(){
 				$(this).hide();

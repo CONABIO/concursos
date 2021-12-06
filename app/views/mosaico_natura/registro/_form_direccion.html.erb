@@ -1,4 +1,4 @@
-<div class='nested-fields'>
+<div class='nested-fields' <%= 'disabled' unless @registro.new_record? %>>
 	<%= f.input_field :calle, class: 'form-control my-2', placeholder: 'Calle' %>
 	<%= f.input_field :numero, class: 'form-control my-2', placeholder: 'Número' %>
 	<%#= f.input_field :interior, class: 'form-control my-2', placeholder: 'Interior' %>
