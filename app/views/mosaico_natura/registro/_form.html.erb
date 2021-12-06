@@ -11,7 +11,7 @@
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
 				<label class="my-2 font-weight-bolder date" for="usuario_mn_fecha_nacimiento_1i">Fecha de nacimiento (dd/mm/aaaa)</label>
-				<%= f.date_field :fecha_nacimiento, min: UsuarioMn::FECHA_NAC_MIN, max: UsuarioMn::FECHA_NAC_MAX, class: 'form-control' %>
+				<%= f.date_field :fecha_nacimiento, min: UsuarioMn::FECHA_NAC_MIN, max: UsuarioMn::FECHA_NAC_MAX, class: 'form-control', "data-toggle"=>"tooltip", "data-placement"=>"bottom", title: "Recuerda que tu edad determina la categoria en la que concursas" %>
 				<label class="my-2 font-weight-bolder" for="usuario_mn_lugar_nacimiento">Lugar de nacimiento</label>
 				<%= f.select :lugar_nacimiento, options_for_select(Direccion::ESTADOS, nil), { prompt: "--- Seleccionar estado de nacimiento  ---" }, { class: 'form-control' } %>
 				<label class="my-2 font-weight-bolder date" for="usuario_mn_medio">¿Por cuál medio te enteraste del concurso?</label>
@@ -36,14 +36,14 @@
 		
 		<% unless nuevo %>
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
-				<h4 class="my-3">¿En que categoría deseas participar?</h4>
+				<h4 class="my-3">¿Con que tema deseas participar?</h4>
 				<div class="medias row">
 					<%= f.simple_fields_for :media do |media_form| %>
 						<%= render "mosaico_natura/registro/form_media", f: media_form %>
 					<% end %>
 					<div class="links col-12 d-flex justify-content-around align-items-center">
 						<% @categorias.each do |c| %>
-							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }, count: (c[0] == 'cineminuto' ? 1 : 2) %>
+							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }, count: (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end) %>
 						<% end %>
 					</div>
 				</div>
