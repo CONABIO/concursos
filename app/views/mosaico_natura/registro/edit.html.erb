@@ -1,8 +1,5 @@
-<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
-    <p id="notice" class="bg-success text-white"><%= notice %></p>
-
-	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "EDITA LOS DATOS DEL REGISTRO" } %>
-	
+<div id="inscripcion" class="row justify-content-center bg-dark mt-5">
+	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Edición de los datos de tu registro" } %>
 	<div class="col-12 col-xl-8 py-4 text-center">
 		<%= render 'form', usuario: @registro %>
 		<%= link_to 'Regresar', mosaico_natura_root_path, class: "mt-4" %>
