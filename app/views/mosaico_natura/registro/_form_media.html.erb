@@ -1,22 +1,21 @@
 <div class='nested-fields mb-5 col-6'>
-	<%= nombre_categoria.humanize %>
-	<%= f.input :categoria_id, :as => :hidden, :input_html => { :value => id_categoria } %>
-	
-	<!--label class="optional" for="usuario_mn_media_attributes_1_original_filename">Foto:</label-->
+	<p class="font-weight-bolder h6 text-info">
+		<%= nombre_categoria.humanize %>
+	</p>
 	<img src="<%= f.object.original_filename.url %>" class="img-responsive img-fluid mb-3 w-50" />
 	
-	<div class="custom-file">
-		<%= f.file_field :original_filename, accept: 'image/png,image/jpeg', class: 'custom-file-input', 'aria-describedby' => 'original_filename_label'%>
-		<label class="custom-file-label" for="original_filename_label">Escoge tu archivo</label>
-	</div>
-	<%= link_to_remove_association "Remover foto", f %>
+	<%= f.file_field :original_filename, accept: 'image/png,image/jpeg' %>
+
+	<%= f.input :categoria_id, :as => :hidden, :input_html => { :value => id_categoria } %>
+	
+	<%#= link_to_remove_association "Remover foto", f, class: 'btn btn-sm btn-danger' %>
 
 	<div class="media_metadatos row">
 		<%= f.simple_fields_for :media_metadato do |media_metadato_form| %>
 			<%= render "mosaico_natura/registro/form_media_metadato", f: media_metadato_form %>
 		<% end %>
-		<div class="links">
-			<%= link_to_add_association "metadatos", f, :media_metadato, partial: "mosaico_natura/registro/form_media_metadato", class: 'btn btn-success btn-sm', render_options: {locals: {}} %>
+		<div class="col-12 links">
+			<%= link_to_add_association "Añadir metadatos", f, :media_metadato, partial: "mosaico_natura/registro/form_media_metadato", class: 'btn btn-success btn-sm', render_options: {locals: {}} %>
 		</div>
 	</div>
 
