@@ -1,5 +1,6 @@
 class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	before_action :set_registro, only: %i[ show edit update destroy ]
+	before_action :set_categorias, only: %i[ edit update ]
 	before_action :authenticate_user_mn!
 	
 	# GET /registro/new
@@ -10,7 +11,6 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			redirect_to edit_mosaico_natura_registro_path(@registro)
 		else  # Es nuevo usuario
 			@form_params = { url: '/mosaico_natura/registro', method: 'post' }
-			@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["cineminuto","tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
 			@registro = UsuarioMn.new
 			@registro.build_direccion
 			#@registro.media.build
@@ -20,7 +20,6 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	
 	# GET /registro/1/edit
 	def edit
-		@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["cineminuto","tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
 		@form_params = { url: mosaico_natura_registro_path(@registro), method: 'put' }
 	end
 	
@@ -64,6 +63,14 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	# Use callbacks to share common setup or constraints between actions.
 	def set_registro
 		@registro = UsuarioMn.find(params[:id])
+	end
+	
+	def set_categorias
+		if UsuarioMn.find(params[:id]).fecha_nacimiento < UsuarioMn::FECHA_NAC_MIN_ADULTOS
+			@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
+		else
+			@categorias = Categoria.where(cat_concurso_id: 2).where(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
+		end
 	end
 	
 	# Only allow a list of trusted parameters through.
