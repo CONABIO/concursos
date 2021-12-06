@@ -1,9 +1,13 @@
+<% nuevo = @registro.new_record? %>
 <%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row mt-4">
 		<div class="bg-gradient-light col-12 col-lg my-4 px-5 py-3">
+			<% unless nuevo %>
+				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('fieldset.usuario').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar los datos de usuario"></button>
+			<% end %>
 			<h4> Datos del concursante</h4>
-			<div class="usuario text-left mb-4">
-				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)'%>
+			<fieldset class="usuario text-left mb-4" <%= 'disabled' unless nuevo %>>
+				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)' %>
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
 				<label class="my-2 font-weight-bolder date" for="usuario_mn_fecha_nacimiento_1i">Fecha de nacimiento (dd/mm/aaaa)</label>
@@ -14,20 +18,23 @@
 				<%= f.select :medio, options_for_select(UsuarioMn::MEDIO, f.object.medio), { prompt: "--- Selecciona ---" }, { class: 'form-control' } %>
 				<%= f.input_field :otro_medio, class: 'form-control my-2', placeholder: 'Otro medio (opcional)' %>
 				<%= f.hidden_field :user_id, value: current_user_mn.id %>
-			</div>
+			</fieldset>
 		
 		</div>
 		<div class="col-lg-1"></div>
 		<div class="bg-gradient-light col-12 col-lg my-4 px-5 py-3">
+			<% unless nuevo %>
+				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('fieldset.direccion').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar la dirección"></button>
+			<% end %>
 			<h4> Dirección </h4>
-			<div class="direccion">
+			<fieldset class="direccion" <%= 'disabled' unless nuevo %>>
 				<%= f.fields_for :direccion do |direccion_form| %>
 					<%= render "mosaico_natura/registro/form_direccion", f: direccion_form %>
 				<% end %>
-			</div>
+			</fieldset>
 		</div>
 		
-		<% unless @registro.new_record? %>
+		<% unless nuevo %>
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
 				<h4 class="my-3">¿En que categoría deseas participar?</h4>
 				<div class="medias row">
@@ -44,5 +51,5 @@
 		<% end %>
 	</div>
 	
-	<%= f.button :submit, @registro.new_record? ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block mb-4' %>
+	<%= f.button :submit, nuevo ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block mb-4' %>
 <% end %>
