@@ -1,3 +1,4 @@
+<% puts 'entre _form' %>
 <% nuevo = @registro.new_record? %>
 <%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row mt-4">
@@ -34,7 +35,6 @@
 			</fieldset>
 		</div>
 		
-		<% unless nuevo %>
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
 				<h4 class="my-3">¿Con que tema deseas participar?</h4>
 				<div class="medias row">
@@ -43,12 +43,11 @@
 					<% end %>
 					<div class="links col-12 d-flex justify-content-around align-items-center">
 						<% @categorias.each do |c| %>
-							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], id_categoria: c[1] } }, count: (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end) %>
+							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], categoria_id: c[1] } }, "data-maximos" => (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end) %>
 						<% end %>
 					</div>
 				</div>
 			</div>
-		<% end %>
 	</div>
 	
 	<%= f.button :submit, nuevo ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block mb-4' %>
