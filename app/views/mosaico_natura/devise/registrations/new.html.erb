@@ -1,37 +1,28 @@
-<div id="inscripcion" class="row justify-content-center mt-5 pt-4">
-  <%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "CREAR CUENTA" } %>
-
-  <p id="notice" class="bg-success text-white"><%= notice %></p>
-	
+<div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
+	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Crear cuenta" } %>
 	<div class="col-12 col-xl-8 py-4 text-center">
-		
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= f.error_notification %>
-
-      <div class="form-inputs">
-        <%= f.input :email,
-                    required: true,
-                    autofocus: true,
-                    label: "Correo",
-                    input_html: { autocomplete: "email" }%>
-        <%= f.input :password,
-                    required: true,
-                    label: "Contraseña",
-                    hint: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length),
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :password_confirmation,
-                    required: true,
-                    label: "Confirma la contraseña",
-                    input_html: { autocomplete: "new-password" } %>
-      </div>
-
-      <div class="form-actions">
-        <%= f.button :submit, "Crear cuenta", class: "btn btn-success mb-4" %>
-      </div>
-    <% end %>
-
-    <%= render "mosaico_natura/devise/shared/links" %>
-	
+		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+			<%= f.error_notification %>
+			<div class="form-inputs">
+				<%= f.input :email,
+				            required: true,
+				            autofocus: true,
+				            label: "Correo",
+				            input_html: { autocomplete: "email" }%>
+				<%= f.input :password,
+				            required: true,
+				            label: "Contraseña",
+				            hint: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length),
+				            input_html: { autocomplete: "new-password" } %>
+				<%= f.input :password_confirmation,
+				            required: true,
+				            label: "Confirma la contraseña",
+				            input_html: { autocomplete: "new-password" } %>
+			</div>
+			<div class="form-actions">
+				<%= f.button :submit, "Crear cuenta", class: "btn btn-block btn-success mb-4" %>
+			</div>
+		<% end %>
+		<%= render "mosaico_natura/devise/shared/links" %>
 	</div>
-
 </div>
