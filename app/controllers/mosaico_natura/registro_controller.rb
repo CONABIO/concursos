@@ -37,7 +37,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 				format.json { render :show, status: :created, location: @registro }
 			else
 				@form_params = { url: '/mosaico_natura/registro', method: 'post' }
-				format.html { render :new, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
+				format.html { render :new, locals: { notice: "Hubo un problema al guardar tus datos. Verifica que todos los campos esten completos"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
@@ -52,7 +52,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 				format.json { render :show, status: :ok, location: @registro }
 			else
 				@form_params = { url: mosaico_natura_registro_path(@registro), method: 'put' }
-				format.html { render :edit, locals: { notice: "Hubo un problema al guardar tus datos. Por favor verifica los campos en rojo"} }
+				format.html { render :edit, locals: { notice: "Hubo un problema al guardar tus datos. Verifica haber llenado todos los campos"} }
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end
