@@ -96,6 +96,18 @@ terminos-condiciones
 /* Inscripcion */
 #inscripcion{}
 #inscripcion .sub-header{}
+#medias a.add_fields:after {
+  content: attr(data-after);
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  border-radius: 1em;
+  padding: 3px 7px;
+  font-size: .8em;
+  background: #19a3b8;
+  box-shadow: 1px 1px 1px 1px #c3c3c3;
+  color: white;
+}
 
 footer #copyright p{
 	font-size:12px;
