@@ -66,10 +66,12 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	end
 	
 	def set_categorias
-		if UsuarioMn.find(params[:id]).fecha_nacimiento < UsuarioMn::FECHA_NAC_MIN_ADULTOS
-			@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
-		else
-			@categorias = Categoria.where(cat_concurso_id: 2).where(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
+		if @registro.present?
+			if @registro.fecha_nacimiento < UsuarioMn::FECHA_NAC_MIN_ADULTOS
+				@categorias = Categoria.where(cat_concurso_id: 2).where.not(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
+			else
+				@categorias = Categoria.where(cat_concurso_id: 2).where(nombre_categoria: ["tema_libre"]).map{|c|[c.nombre_categoria, c.id]}
+			end
 		end
 	end
 	
