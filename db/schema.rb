@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211106041332) do
+ActiveRecord::Schema.define(version: 20211208150155) do
 
   create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre_concurso"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 20211106041332) do
     t.text "descripcion"
     t.text "tecnica"
     t.text "compromiso"
+    t.string "marca"
+    t.string "localidad"
+    t.string "otra_marca"
   end
 
   create_table "medias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

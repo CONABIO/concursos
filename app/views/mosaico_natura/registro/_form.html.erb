@@ -1,4 +1,3 @@
-<% puts 'entre _form' %>
 <% nuevo = @registro.new_record? %>
 <%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
 	<div class="row mt-4">
