@@ -7,7 +7,7 @@
 				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('fieldset.usuario').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar los datos de usuario"></button>
 			<% end %>
 			<h4> Datos del concursante</h4>
-			<fieldset class="usuario text-left mb-4" <%= 'disabled' unless nuevo %>>
+			<fieldset id="usuario" class="text-left mb-4" <%= 'disabled' unless nuevo %>>
 				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)' %>
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
@@ -28,7 +28,7 @@
 				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('fieldset.direccion').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar la dirección"></button>
 			<% end %>
 			<h4> Dirección </h4>
-			<fieldset class="direccion" <%= 'disabled' unless nuevo %>>
+			<fieldset id="direccion" <%= 'disabled' unless nuevo %>>
 				<%= f.fields_for :direccion do |direccion_form| %>
 					<%= render "mosaico_natura/registro/form_direccion", f: direccion_form %>
 				<% end %>
@@ -37,15 +37,16 @@
 		
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
 				<h4 class="my-3">¿Con que tema deseas participar?</h4>
-				<div class="medias row">
+				<div id="medias" class="row">
+					<div class="links col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 mt-2 mb-5">
+						<% @categorias.each do |c| %>
+							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm position-relative flex-column justify-content-center font-weight-bolder mx-1', render_options: {locals: { nombre_categoria: c[0], categoria_id: c[1] } }, "data-maximos" => (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end), "data-categoria" => c[0] %>
+						<% end %>
+					</div>
 					<%= f.simple_fields_for :media do |media_form| %>
 						<%= render "mosaico_natura/registro/form_media", f: media_form %>
 					<% end %>
-					<div class="links col-12 d-flex justify-content-around align-items-center">
-						<% @categorias.each do |c| %>
-							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm mx-1', render_options: {locals: { nombre_categoria: c[0], categoria_id: c[1] } }, "data-maximos" => (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end) %>
-						<% end %>
-					</div>
+
 				</div>
 			</div>
 	</div>
