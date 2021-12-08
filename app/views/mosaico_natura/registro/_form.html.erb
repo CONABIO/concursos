@@ -33,7 +33,7 @@
 				<% end %>
 			</fieldset>
 		</div>
-		
+		<% unless nuevo %>
 			<div class="bg-gradient-light col-12 my-4 px-5 py-3">
 				<h4 class="my-3">¿Con que tema deseas participar?</h4>
 				<div id="medias" class="row">
@@ -45,9 +45,9 @@
 					<%= f.simple_fields_for :media do |media_form| %>
 						<%= render "mosaico_natura/registro/form_media", f: media_form %>
 					<% end %>
-
 				</div>
 			</div>
+		<% end %>
 	</div>
 	
 	<%= f.button :submit, nuevo ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block mb-4' %>
