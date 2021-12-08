@@ -78,7 +78,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			params.require(:usuario_mn).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
 			                                    direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
 			                                    media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy,
-			                                                       media_metadato_attributes: [:id, :titulo, :descripcion, :tecnica, :compromiso, :media_id, :destroy]],
+			                                                       media_metadato_attributes: [:id, :titulo, :descripcion, :marca, :otra_marca, :localidad, :media_id, :destroy]],
 			)
 	end
 end
