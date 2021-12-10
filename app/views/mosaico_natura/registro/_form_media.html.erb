@@ -1,5 +1,5 @@
 <% categoria =  f.object.new_record? ? nombre_categoria : f.object.categoria.nombre_categoria %>
-<div class='nested-fields nested-fields-for-<%= categoria %> mb-5 col-6'>
+<div class='col-12 col-lg-6 mb-5 px-3 py-4 nested-fields  nested-fields-for-<%= categoria %> rounded shadow'>
 	<h5 class="font-weight-bolder text-info"><%= categoria.humanize %></h5>
 	<% if categoria == 'cineminuto' %>
 			<%= video_tag f.object.original_filename.url, controls: true, class: "img-responsive img-fluid mb-3 w-50" unless f.object.new_record? %>
@@ -13,9 +13,8 @@
 		<%= f.simple_fields_for :media_metadato do |media_metadato_form| %>
 			<%= render "mosaico_natura/registro/form_media_metadato", f: media_metadato_form %>
 		<% end %>
-		<div class="col-12 links">
-			<%#= link_to_add_association "Añadir metadatos", f, :media_metadato, partial: "mosaico_natura/registro/form_media_metadato", class: 'btn btn-success btn-sm', render_options: {locals: {}} %>
-			<%= link_to_remove_association "Eliminar foto", f, class: 'btn btn-sm btn-danger btn-block' %>
+		<div class="col-12 mt-4 links">
+			<%= link_to_remove_association "<i class='fa fa-trash'></i> Eliminar foto".html_safe, f, class: 'btn btn-sm btn-danger btn-block' %>
 		</div>
 	</div>
 </div>

@@ -1,10 +1,4 @@
-body{
-  font-family:"myriad-pro-condensed", 'Barlow Condensed', Arial, sans-serif;
-}
-h1,h2,h3,h4,h5,h6{
-	font-family:"myriad-pro-condensed", 'Barlow Condensed', Arial, sans-serif;
-	font-weight:bold;
-}
+body{}
 .dropdown-menu{right: 0; left: unset!important;}
 
 #intro{
@@ -90,25 +84,17 @@ h1,h2,h3,h4,h5,h6{
 	margin:0;
 	text-shadow: 2px 2px 5px #000;
 }
-terminos-condiciones
-
 
 /* Inscripcion */
-#inscripcion{}
-#inscripcion .sub-header{}
-#medias a.add_fields:after {
-  content: attr(data-after);
-  position: absolute;
-  top: -8px;
-  right: -6px;
-  border-radius: 1em;
-  padding: 3px 7px;
-  font-size: .8em;
-  background: #19a3b8;
-  box-shadow: 1px 1px 1px 1px #c3c3c3;
-  color: white;
+#inscripcion{
+  font-family: 'Montserrat Alternates';
 }
-
+#inscripcion div[class*="nested-fields-for-"]{
+  min-height: 600px;
+}
+#inscripcion .bg-gradient-light{
+  box-shadow: 0 1rem 3rem rgb(0, 0, 0,)!important;
+}
 footer #copyright p{
 	font-size:12px;
 	line-height:1;

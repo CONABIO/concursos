@@ -33,9 +33,9 @@ $(document).ready(function(){
 						nestedClass = $('.nested-fields-for-'+link.data('categoria')+':visible');
 						link.attr('data-after',link.data('maximos') - nestedClass.length);
 						if (nestedClass.length == link.data('maximos')) {
-								link.removeClass('d-inline-flex').addClass('d-none');
+								link.removeClass('d-inline-flex').addClass('disabled');
 						} else {
-								link.addClass('d-inline-flex').removeClass('d-none');
+								link.addClass('d-inline-flex').removeClass('disabled');
 						}
 				});
 		}
