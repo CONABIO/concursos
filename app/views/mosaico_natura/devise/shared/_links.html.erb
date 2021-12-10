@@ -1,6 +1,6 @@
 <div class="links col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 mt-2 mb-5">
 	<%- if controller_name != 'sessions' %>
-		<%= link_to "¿Ya tienes cuenta? Inicia sesión", new_session_path(resource_name), class: 'btn btn-outline-info flex-column justify-content-center font-weight-bolder mx-1' %>
+		<%= link_to "¿Ya tienes cuenta en este concurso? Inicia sesión", new_session_path(resource_name), class: 'btn btn-outline-info flex-column justify-content-center font-weight-bolder mx-1' %>
 	<% end %>
 	
 	<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
