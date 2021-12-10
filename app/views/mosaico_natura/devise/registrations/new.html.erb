@@ -1,6 +1,7 @@
 <div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
 	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Crear cuenta" } %>
 	<div class="col-12 col-xl-8 py-4 text-center">
+		<h4 class="text-info">Recuerda, todo concursante debera crear una cuenta nueva sin importar si ha participado en algún otro concurso anterior.</h4>
 		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= f.error_notification %>
 			<div class="form-inputs">
