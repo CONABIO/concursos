@@ -1,6 +1,6 @@
 class Categoria < ApplicationRecord
 	
-	belongs_to :media
+	#belongs_to :media
 	
 	#Momentaneamente las pondre aquí ya luego las paso  a la base con el crud listo
 	
