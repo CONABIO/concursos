@@ -1,24 +1,20 @@
-<div class='nested-fields mb-5'>
-	
-	<% if f.object.posicion == 1 %>
-		<label class="optional" for="usuario_mn_media_attributes_0_original_filename">Primera foto: Al iniciar con los primeros trazos</label>
+<% categoria =  f.object.new_record? ? nombre_categoria : f.object.categoria.nombre_categoria %>
+<div class='col-12 col-lg-6 mb-5 px-3 py-4 nested-fields  nested-fields-for-<%= categoria %> rounded shadow'>
+	<h5 class="font-weight-bolder text-info"><%= categoria.humanize %></h5>
+	<% if categoria == 'cineminuto' %>
+			<%= video_tag f.object.original_filename.url, controls: true, class: "img-responsive img-fluid mb-3 w-50" unless f.object.new_record? %>
 	<% else %>
-		<label class="optional" for="usuario_mn_media_attributes_1_original_filename">Segunda foto: Al finalizar tu obra de arte</label>
+		<%= image_tag f.object.original_filename.url,  class: "img-responsive img-fluid mb-3 w-50" unless f.object.new_record? %>
 	<% end %>
-	
-	<% if !@registro.new_record? %>
-		<img src="<%= f.object.original_filename.url %>" class="img-responsive img-fluid mb-3 w-50" />
-	<% end %>
-
-	<%= f.file_field :original_filename, accept: 'image/png,image/jpeg', class: 'form-check-inline' %>
-	<%= f.hidden_field :posicion %>
-
-</div>
-
-<div class="col-12 my-2">
-	<div class="medias">
+	<%= f.file_field :original_filename, accept: categoria == 'cineminuto' ? 'video/mp4': 'image/png,image/jpeg', class: 'file-to-upload' %>
+	<%= f.hidden_field :categoria_id, :value => (f.object.new_record? ? categoria_id : f.object.categoria_id ) %>
+	<div id="media_metadatos" class="row">
+		<% f.object.build_media_metadato if f.object.new_record? %>
 		<%= f.simple_fields_for :media_metadato do |media_metadato_form| %>
 			<%= render "mosaico_natura/registro/form_media_metadato", f: media_metadato_form %>
 		<% end %>
+		<div class="col-12 mt-4 links">
+			<%= link_to_remove_association "<i class='fa fa-trash'></i> Eliminar foto".html_safe, f, class: 'btn btn-sm btn-danger btn-block' %>
+		</div>
 	</div>
 </div>

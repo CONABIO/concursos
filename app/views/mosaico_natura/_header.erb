@@ -46,15 +46,15 @@
 							CUENTA
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="<%= new_mosaico_natura_registro_path %>">DATOS DEL REGISTRO</a>
-							<a class="dropdown-item" href="<%= edit_user_mn_registration_path %>">CORREO/CONTRASEÑA</a>
+							<a class="dropdown-item" href="<%= new_mosaico_natura_registro_path %>" data-turbolinks="false">DATOS DEL REGISTRO</a>
+							<a class="dropdown-item" href="<%= edit_user_mn_registration_path %>" data-turbolinks="false">CORREO/CONTRASEÑA</a>
 							<%= link_to "CERRAR SESIÓN", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
 						</div>
 					</div>
 				</li>
 			<% else %>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="<%= new_user_mn_registration_path %>">REGISTRO</a>
+					<a class="nav-link" href="<%= new_user_mn_registration_path %>" data-turbolinks="false">REGISTRO</a>
 				</li>
 			<% end %>
 		</ul>

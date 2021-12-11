@@ -36,6 +36,7 @@ dump.rdb*
 
 config/environment.rb
 config/initializers/devise.rb
+config/initializers/carrierwave-aws.rb
 
 public/fontello-demo.html
 public/javascripts
