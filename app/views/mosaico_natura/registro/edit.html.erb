@@ -1,0 +1,7 @@
+<div id="inscripcion" class="bg-dark border-bottom border-light text-info justify-content-center mt-5 pb-5 row">
+	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Edición de los datos de tu registro" } %>
+	<div class="col-12 col-xl-8 py-4 text-center">
+		<%= render 'form', usuario: @registro %>
+		<%= link_to '« Regresar', mosaico_natura_root_path, class: "btn btn-danger btn-sm mt-4" %>
+	</div>
+</div>

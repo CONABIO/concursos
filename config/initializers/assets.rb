@@ -13,5 +13,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 Rails.application.config.assets.precompile += %w(
 entre_azul_y_verde/entre_azul_y_verde.scss
-entre_azul_y_verde/entre_azul_y_verde.js )
+entre_azul_y_verde/entre_azul_y_verde.js
+mosaico_natura/mosaico_natura.scss
+mosaico_natura/mosaico_natura.js
+)
 Rails.application.config.assets.prefix = '/concursos_assets'
