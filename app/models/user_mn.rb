@@ -1,0 +1,2 @@
+class UserMn < User
+end
