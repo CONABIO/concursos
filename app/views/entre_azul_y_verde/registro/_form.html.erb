@@ -6,7 +6,7 @@
 				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)'%>
 				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
 				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
-				<label class="date optional" for="usuario_ayv_fecha_nacimiento_1i">Fecha de nacimiento (mm/dd/aaaa)</label>
+				<label class="date optional" for="usuario_ayv_fecha_nacimiento_1i">Fecha de nacimiento (dd/mm/aaaa)</label>
 				<%= f.date_field :fecha_nacimiento, min: UsuarioAyv::FECHA_NAC_MIN, max: UsuarioAyv::FECHA_NAC_MAX, class: 'form-check-inline my-2' %>
 				<%= f.input_field :lugar_nacimiento, class: 'form-control my-2', placeholder: 'Lugar de nacimiento' %>
 				<label class="date optional" for="usuario_ayv_medio">¿Por cuál medio te enteraste del concurso?</label>

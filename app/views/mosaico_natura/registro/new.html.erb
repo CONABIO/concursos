@@ -1,0 +1,6 @@
+<div id="inscripcion" class="bg-dark border-bottom border-light justify-content-center mt-5 pb-5 row">
+	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Completa los siguientes datos para completar tu registro:" } %>
+	<div class="col-12 col-xl-8 py-4 text-center">
+		<%= render 'form', usuario: @registro %>
+	</div>
+</div>
