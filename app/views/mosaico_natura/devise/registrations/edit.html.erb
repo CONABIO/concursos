@@ -1,0 +1,35 @@
+<div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
+<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Modificar cuenta" } %>
+	<div class="col-12 col-xl-8 py-4 text-center">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :email, required: true, autofocus: true, label: "Correo" %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+        <%= f.input :password,
+                    hint: "Dejar vacío si no se desea cambiar la contraseña",
+                    required: false,
+                    label: "Nueva contraseña",
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    hint: "Dejar vacío si no se desea cambiar la contraseña",
+                    required: false,
+                    label: "Confrima la nueva contraseña",
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :current_password,
+                    hint: "Es necesaria tu contraseña actual para confirmar los cambios",
+                    required: true,
+                    label: "Contraseña actual",
+                    input_html: { autocomplete: "current-password" } %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "Actualizar", class: "btn btn-block btn-success mb-4" %>
+      </div>
+    <% end %>
+		<div class="col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 my-5">
+			<b>¿No estás a gusto?</b> <%= link_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "Una vez que se cancele la cuenta se borrarán tus datos personales, así como las fotos que hayas subido. Este proceso no se puede revertir, ¿estás seguro?" }, method: :delete, class: 'btn btn-sm btn-outline-danger my-0 mx-2' %>
+		</div>
+	</div>
+</div>
