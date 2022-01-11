@@ -13,7 +13,7 @@
 				<label class="my-2 font-weight-bolder date" for="usuario_mn_fecha_nacimiento_1i">Fecha de nacimiento (dd/mm/aaaa)</label>
 				<%= f.date_field :fecha_nacimiento, min: UsuarioMn::FECHA_NAC_MIN, max: UsuarioMn::FECHA_NAC_MAX, class: 'form-control', "data-toggle"=>"tooltip", "data-placement"=>"bottom", title: "Recuerda que tu edad determina la categoria en la que concursas" %>
 				<label class="my-2 font-weight-bolder" for="usuario_mn_lugar_nacimiento">Lugar de nacimiento</label>
-				<%= f.select :lugar_nacimiento, options_for_select(Direccion::ESTADOS, nil), { prompt: "--- Seleccionar estado de nacimiento  ---" }, { class: 'form-control' } %>
+				<%= f.select :lugar_nacimiento, options_for_select(Direccion::ESTADOS, f.object.lugar_nacimiento), { prompt: "--- Seleccionar estado de nacimiento  ---" }, { class: 'form-control' } %>
 				<label class="my-2 font-weight-bolder date" for="usuario_mn_medio">¿Por cuál medio te enteraste del concurso?</label>
 				<%= f.select :medio, options_for_select(UsuarioMn::MEDIO, f.object.medio), { prompt: "--- Selecciona ---" }, { class: 'form-control' } %>
 				<%= f.input_field :otro_medio, class: 'form-control my-2', placeholder: 'Otro medio (opcional)' %>
