@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  devise_for :user_ayv, :controllers => {:confirmations => "entre_azul_y_verde/devise/confirmations", :passwords => "entre_azul_y_verde/devise/passwords", :registrations => "entre_azul_y_verde/devise/registrations", :unlocks => "entre_azul_y_verde/devise/unlocks", :sessions => "entre_azul_y_verde/devise/sessions"}
+  #devise_for :user_ayv, :controllers => {:confirmations => "entre_azul_y_verde/devise/confirmations", :passwords => "entre_azul_y_verde/devise/passwords", :registrations => "entre_azul_y_verde/devise/registrations", :unlocks => "entre_azul_y_verde/devise/unlocks", :sessions => "entre_azul_y_verde/devise/sessions"}
   devise_for :user_mn, :controllers => {:confirmations => "mosaico_natura/devise/confirmations", :passwords => "mosaico_natura/devise/passwords", :registrations => "mosaico_natura/devise/registrations", :unlocks => "mosaico_natura/devise/unlocks", :sessions => "mosaico_natura/devise/sessions"}
 
   resources :cat_concursos
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 		  get 'bases' => 'inicio#bases'
 		  resources :galerias
 		  resources :panel
-		  resources :registro
+			#resources :registro
 	  end
 	
 	  namespace 'mosaico_natura' do
@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 			  get 'bases' => 'inicio#bases'
 			  resources :galerias
 			  resources :panel
-			  resources :registro
+				#resources :registro
 		  end
 	  end
 	  
