@@ -8,5 +8,7 @@ class MediaAyv < Media
 	validates_presence_of :original_filename
 
 	mount_uploader :original_filename, MediaUploader
-	
+
+	scope :where_basico, -> { where('categoria_id is null') }
+	scope :por_posicion, ->(posicion) { where(posicion: posicion) }
 end
