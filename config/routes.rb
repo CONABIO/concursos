@@ -55,7 +55,12 @@ Rails.application.routes.draw do
 			
 			  get 'bases' => 'inicio#bases'
 			  resources :galerias
-			  resources :panel
+			  resources :panel do
+				  collection do
+					  get :precalificacion
+					  get :calificacion
+				  end
+			  end
 				#resources :registro
 		  end
 	  end
