@@ -18,11 +18,17 @@
 			<% dibujos.each do |d| %>
 				<tr>
 					<th scope="row"><small><%= d.id %></small></th>
-					<td><%= link_to "proceso", "/media/ayv/#{d.id}/#{d.proceso}" %></td>
-					<td><%= link_to "terminado", "/media/ayv/#{d.id}/#{d.terminado}" %></td>
+					<td>
+						<a tabindex="0" class="btn btn-outline-info dibujos_popover" role="button" data-toggle="popover" title="Dibujo en proceso" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.proceso}" %>'>" href='<%= "/media/ayv/#{d.id}/#{d.proceso}" %>' target="_blank">Proceso</a>
+					</td>
+					<td>
+						<a tabindex="0" class="btn btn-outline-success dibujos_popover" role="button" data-toggle="popover" title="Dibujo terminado" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>'>" href='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>' target="_blank">Terminado</a>
+					</td>
 				</tr>
 			<% end %>
 			</tbody>
 		</table>
 	</div>
 <% end %>
+
+

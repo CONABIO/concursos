@@ -1,4 +1,30 @@
-<div class="row justify-content-center mt-5 pt-4">
+<% content_for(:delayedjs) do %>
+	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
+			$('.dibujos_popover').popover(
+					{
+							html: true,
+							//container: 'body',
+							boundary: 'window',
+							trigger: 'hover'
+					}
+			);
+	</script>
+<% end %>
+
+<% content_for(:delayedcss) do %>
+	<style type="text/css" data-turbolinks-track="true">
+	
+	</style>
+<% end %>
+
+<div class="row mt-5 pt-4">
+	<div class="col-12 mb-3">
+		<ul class="list-group text-dark">
+			<li class="active list-group-item list-group-item-info font-weight-bolder h">Instrucciones:</li>
+			<li class="list-group-item">Pasar el mouse encima del botón para un preview de la foto.</li>
+			<li class="list-group-item">Dar click sobre el botón si se desea ver en grande en otra ventana.</li>
+		</ul>
+	</div>
 	<%= render partial: "entre_azul_y_verde/panel/tabla_categoria" %>
 </div>
 
