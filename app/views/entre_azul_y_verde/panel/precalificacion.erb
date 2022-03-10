@@ -1,19 +1,38 @@
 <% content_for(:delayedjs) do %>
 	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
-			$('.dibujos_popover').popover(
-					{
-							html: true,
-							//container: 'body',
-							boundary: 'window',
-							trigger: 'hover'
-					}
-			);
+		$(document).ready(function(){
+				$('.dibujos_popover').popover(
+						{
+								html: true,
+								//container: 'body',
+								boundary: 'window',
+								trigger: 'hover'
+						}
+				);
+				$('#modalConcurso').on('show.bs.modal', function (event) {
+						var button = $(event.relatedTarget) // Button that triggered the modal
+						var foto = button.data('foto') // Extract info from data-* attributes
+						var title = button.data('original-title') // Extract info from data-* attributes
+						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+						var modal = $(this)
+						modal.find('.modal-title').text(title);
+						modal.find('.modal-body').html("<img class='img-fluid' src="+foto+">");
+						modal.find('.modal-footer-text').html("<a class='btn btn-link' href="+foto+" target='_blank'>Ver foto en nueva ventana</a>")
+				})
+		});
+		
 	</script>
 <% end %>
 
 <% content_for(:delayedcss) do %>
 	<style type="text/css" data-turbolinks-track="true">
-	
+		.popover.show{
+			background-color: #666666!important;
+		}
+		.popover-header{
+			background-color: #333333!important;
+		}
 	</style>
 <% end %>
 
