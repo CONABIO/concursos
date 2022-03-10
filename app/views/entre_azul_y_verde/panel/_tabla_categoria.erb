@@ -1,0 +1,28 @@
+<% @dibujos.each do |categorias, dibujos| %>
+	<div class="col-4 table-responsive">
+		<table class="table table-dark table-striped table-bordered table-hover table-sm">
+			<thead>
+			<tr>
+				<th colspan="3">
+					<%= categorias.to_s.humanize %>
+				</th>
+			</tr>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Primeros trazos</th>
+				<th scope="col">Dibujo finalizado</th>
+			</tr>
+			
+			</thead>
+			<tbody>
+			<% dibujos.each do |d| %>
+				<tr>
+					<th scope="row"><small><%= d.id %></small></th>
+					<td><%= link_to "proceso", "/media/ayv/#{d.id}/#{d.proceso}" %></td>
+					<td><%= link_to "terminado", "/media/ayv/#{d.id}/#{d.terminado}" %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+<% end %>

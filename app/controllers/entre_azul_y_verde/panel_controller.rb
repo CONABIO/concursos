@@ -1,14 +1,13 @@
 class EntreAzulYVerde::PanelController < EntreAzulYVerde::EntreAzulYVerdeController
 
 	def precalificacion
-		
-		@dibujos_menores = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"")
-		@dibujos_6_8 = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2016,3,1)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,3,1)}\"")
-		@dibujos_9_11 = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,3,1)}\"")
-		@dibujos_12_14 = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,3,1)}\"")
-		@dibujos_15_17 = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"")
-		@dibujos_mayores = UsuarioAyv.dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2004,3,1)}\"")
-
+		@dibujos = {}
+		@dibujos[:de_6_a_8] = UsuarioAyv.de_6_a_8
+		@dibujos[:de_9_a_11] = UsuarioAyv.de_9_a_11
+		@dibujos[:de_12_a_14] = UsuarioAyv.de_12_a_14
+		@dibujos[:de_15_a_17] = UsuarioAyv.de_15_a_17
+		@dibujos[:menores] = UsuarioAyv.menores_a_6
+		@dibujos[:mayores] = UsuarioAyv.mayores_a_17
 	end
 
 	def calificacion
