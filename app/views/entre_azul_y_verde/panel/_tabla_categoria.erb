@@ -11,6 +11,7 @@
 				<th scope="col">ID</th>
 				<th scope="col">Primeros trazos</th>
 				<th scope="col">Dibujo finalizado</th>
+				<th scope="col">¿Pasa a finalista?</th>
 			</tr>
 			
 			</thead>
@@ -23,6 +24,12 @@
 					</td>
 					<td>
 						<button class="btn btn-outline-success dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo terminado" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.terminado}" %>" data-target="#modalConcurso">Terminado</button>
+					</td>
+					<td>
+						<div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" disabled id="customSwitch<%= d.id %>">
+							<label class="custom-control-label" for="customSwitch1"></label>
+						</div>
 					</td>
 				</tr>
 			<% end %>
