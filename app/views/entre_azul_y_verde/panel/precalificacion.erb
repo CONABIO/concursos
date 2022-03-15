@@ -18,8 +18,39 @@
 						modal.find('.modal-body').html("<img class='img-fluid' src="+foto+">");
 						modal.find('.modal-footer-text').html("<a class='btn btn-link' href="+foto+" target='_blank'>Ver foto en nueva ventana</a>")
 				});
+				
+				$('.custom-control-input').on('change', function(){
+						this_input = $(this)
+						is_checked = this_input.prop('checked');
+						nameId = this_input.attr('name');
+						if(is_checked){
+								$.ajax({
+										type:"POST",
+										url:"/calificaciones", //url guarda la ruta hacia donde se hace la peticion
+										data:{
+												calificacion: {
+														usuario_id: nameId.replace('calificacion-',''),
+														calificacion: 1
+												}
+										},
+										success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+												console.log(datos)
+										},
+										dataType: 'json' // El tipo de datos esperados del servidor. Valor predeterminado: Intelligent Guess (xml, json, script, text, html).
+								})
+						}else{
+								$.ajax({
+										type:"DELETE",
+										url:"/calificaciones/"+nameId.replace('calificacion-',''), //url guarda la ruta hacia donde se hace la peticion
+										success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+												console.log(datos)
+										},
+										dataType: 'json' // El tipo de datos esperados del servidor. Valor predeterminado: Intelligent Guess (xml, json, script, text, html).
+								})
+						}
+				});
 		});
-		
+	
 	</script>
 <% end %>
 
