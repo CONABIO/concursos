@@ -10,16 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211208150155) do
+ActiveRecord::Schema.define(version: 20220315082444) do
 
-  create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "calificaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "medias_id"
+    t.integer "calificacion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cat_concursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "nombre_concurso"
     t.text "descripcion_concurso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cat_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "cat_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "nombre_metadato"
     t.string "descripcion"
     t.string "ancestry"
@@ -27,14 +34,14 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "nombre_categoria"
     t.integer "cat_concurso_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "direcciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "direcciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "calle"
     t.string "numero"
     t.string "interior"
@@ -47,7 +54,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "media_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "media_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.integer "media_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,7 +67,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.string "otra_marca"
   end
 
-  create_table "medias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "medias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "original_filename"
     t.string "filename"
     t.string "titulo"
@@ -74,7 +81,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.integer "posicion"
   end
 
-  create_table "tutores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tutores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "nombre"
     t.string "apellido_paterno"
     t.string "apellido_materno"
@@ -85,7 +92,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -97,7 +104,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "usuario_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "usuario_metadatos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.integer "metadato_id"
     t.integer "usuario_id"
     t.string "valor_metadato"
@@ -105,7 +112,7 @@ ActiveRecord::Schema.define(version: 20211208150155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "nombre"
     t.string "apellido_paterno"
     t.string "apellido_materno"
