@@ -23,7 +23,7 @@
 						<button class="btn btn-outline-success btn-block dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo terminado" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.terminado}" %>" data-target="#modalConcurso">Dibujo terminado</button>
 					</div>
 					<div class="w-25 p-5 shadow-sm custom-control custom-switch text-center">
-						<input type="checkbox" class="custom-control-input" name="customSwitch-<%= d.id %>" id="customSwitchId-<%= d.id %>">
+						<input type="checkbox" class="custom-control-input" name="calificacion-<%= d.id %>" id="customSwitchId-<%= d.id %>" <%= "checked='checked'" unless d.es_finalista.nil? %>>
 						<label class="custom-control-label" role="button" for="customSwitchId-<%= d.id %>"></label>
 					</div>
 				</div>

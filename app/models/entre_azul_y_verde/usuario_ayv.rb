@@ -20,9 +20,11 @@ class UsuarioAyv < Usuario
 	
 	has_many :media_bis, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "MediaAyv"
 	
+	has_many :calificacion, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "CalificacionAyv"
+	
 	scope :where_basico, -> { where(concurso_id: 1) }
 	
-	scope :dibujos, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as id1, medias.original_filename as proceso, media_bis_usuarios.id as id2, media_bis_usuarios.original_filename as terminado").left_joins(:media).where('medias.posicion = 1').left_joins(:media_bis).where('media_bis_usuarios.posicion = 2').where_basico }
+	scope :dibujos, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as id1, medias.original_filename as proceso, media_bis_usuarios.id as id2, media_bis_usuarios.original_filename as terminado, calificaciones.calificacion as es_finalista").left_joins(:media).where('medias.posicion = 1').left_joins(:media_bis).where('media_bis_usuarios.posicion = 2').left_joins(:calificacion).where_basico }
 	
 	scope :menores_a_6, -> { dibujos.where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	
@@ -35,6 +37,7 @@ class UsuarioAyv < Usuario
 	scope :de_15_a_17, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
 	
 	scope :mayores_a_17, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2004,3,1)}\"") }
+	
 	
 	def age_in_completed_years (bd)
 		# Difference in years, less one if you have not had a birthday this year.
