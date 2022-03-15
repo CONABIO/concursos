@@ -1,4 +1,5 @@
 class EntreAzulYVerde::PanelController < EntreAzulYVerde::EntreAzulYVerdeController
+  before_action :authenticate, only: %i[ precalificacion calificacion ]
 
 	def precalificacion
 		@dibujos = {}

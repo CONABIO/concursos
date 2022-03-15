@@ -1,5 +1,6 @@
 class CalificacionesController < ApplicationController
   before_action :set_calificacion, only: %i[ destroy ]
+  before_action :authenticate, only: %i[ create destroy ]
 
   # POST /calificaciones or /calificaciones.json
   def create
