@@ -7,27 +7,25 @@
 			</button>
 		</div>
 		
-		<div id="collapse-<%= categorias.to_s %>" class="collapse bg-gradient-dark" aria-labelledby="heading-<%= categorias.to_s %>" data-parent="#acordeon-categorias">
-			<div class="d-flex flex-row border-bottom border-light shadow p-3 text-center font-weight-bolder">
+		<div id="collapse-<%= categorias.to_s %>" class="collapse shadow bg-gradient-dark" aria-labelledby="heading-<%= categorias.to_s %>" data-parent="#acordeon-categorias">
+			<div class="d-flex flex-row shadow-sm p-3 text-center font-weight-bolder">
 				<div class="w-25">ID</div>
-				<div class="flex-fill">Primeros trazos</div>
-				<div class="flex-fill">Dibujo finalizado</div>
+				<div class="flex-fill">Primeros trazos / Dibujo finalizado</div>
 				<div class="w-25">¿Pasa a finalista?</div>
 			</div>
 			<% dibujos.each do |d| %>
-				<div class="d-flex flex-row shadow p-3">
-					<div class="w-25 text-center">
+				<div class="d-flex flex-row">
+					<div class="w-25 text-center p-5 shadow-sm">
 						<small><%= d.id %></small>
 					</div>
-					<div class="flex-fill p-2">
-						<button class="btn btn-outline-info btn-block dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo en proceso" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.proceso}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.proceso}" %>" data-target="#modalConcurso">Proceso</button>
+					<div class="flex-fill p-3 shadow-sm">
+						<button class="btn btn-outline-info btn-block dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo en proceso" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.proceso}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.proceso}" %>" data-target="#modalConcurso">Dibujo en proceso</button>
+
+						<button class="btn btn-outline-success btn-block dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo terminado" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.terminado}" %>" data-target="#modalConcurso">Dibujo terminado</button>
 					</div>
-					<div class="flex-fill p-2">
-						<button class="btn btn-outline-success btn-block dibujos_popover" type="button" data-toggle="modal" title="<%= d.id %> - Dibujo terminado" data-content="<img class='img-fluid' src='<%= "/media/ayv/#{d.id}/#{d.terminado}" %>'>" data-foto="<%= "/media/ayv/#{d.id}/#{d.terminado}" %>" data-target="#modalConcurso">Terminado</button>
-					</div>
-					<div class="w-25 custom-control custom-switch text-center">
-						<input type="checkbox" class="custom-control-input" id="customSwitch<%= d.id %>">
-						<label class="custom-control-label" for="customSwitch1"></label>
+					<div class="w-25 p-5 shadow-sm custom-control custom-switch text-center">
+						<input type="checkbox" class="custom-control-input" id="customSwitch-<%= d.id %>">
+						<label class="custom-control-label" role="button" for="customSwitch-<%= d.id %>"></label>
 					</div>
 				</div>
 			<% end %>
