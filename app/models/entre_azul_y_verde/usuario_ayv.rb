@@ -28,15 +28,15 @@ class UsuarioAyv < Usuario
 	
 	scope :menores_a_6, -> { dibujos.where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	
-	scope :de_6_a_8, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2016,3,1)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,3,1)}\"") }
+	scope :de_6_a_8, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
 	
-	scope :de_9_a_11, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,3,1)}\"") }
+	scope :de_9_a_11, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,2,28)}\"") }
 	
-	scope :de_12_a_14, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,3,1)}\"") }
+	scope :de_12_a_14, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,2,28)}\"") }
 	
-	scope :de_15_a_17, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
+	scope :de_15_a_17, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
 	
-	scope :mayores_a_17, -> { dibujos.where("usuarios.fecha_nacimiento < \"#{Date.new(2004,3,1)}\"") }
+	scope :mayores_a_17, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") }
 	
 	
 	def age_in_completed_years (bd)
