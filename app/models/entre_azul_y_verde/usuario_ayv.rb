@@ -22,15 +22,15 @@ class UsuarioAyv < Usuario
 	
 	has_many :media_metadato, through: :media_bis, source: :media_metadato
 
-	has_many :calificacion, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "CalificacionAyv"
+	has_many :calificaciones, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "CalificacionAyv"
 	
 	scope :where_basico, -> { where(concurso_id: 1) }
 	
 	scope :select_dibujo, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
-	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificacion) }
+	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
 	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where_basico }
 	
-	scope :dibujos, -> { select_dibujo.joins_dibujos.where_dibujos }
+	scope :dibujos, -> { select_dibujo.joins_dibujos.where_dibujos.order('usuarios.id ASC') }
 	
 	scope :menores_a_6, -> { dibujos.where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	

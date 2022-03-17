@@ -2,7 +2,7 @@
 	<% @dibujos.each do |categorias, dibujos| %>
 		<div class="border-0 rounded p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias.to_s %>">
 			<button class="btn btn-outline-info btn-block py-3 text-center" type="button" data-toggle="collapse" data-target="#collapse-<%= categorias.to_s %>" aria-expanded="true" aria-controls="collapse-<%= categorias.to_s %>">
-				<%= categorias.to_s.humanize %> <i class="fa fa-sort pull-right"></i>
+				<%= categorias.to_s.humanize %>  <i class="fa fa-sort pull-right"></i>
 			</button>
 		</div>
 		
@@ -19,18 +19,17 @@
 						<small><%= d.id %></small>
 					</div>
 					<div class="col-2 p-2 shadow-sm">
-						<button class="btn btn-outline-info btn-block dibujos_popover" type="button"
-						        title="<%=d.id %> : <small>Dibujo en proceso</small><br><%=d.titulo %>"
+						<button class="btn btn-outline-info btn-lg btn-block dibujos_popover" type="button"
 						        data-toggle="modal" data-target="#modalConcurso"
-						        data-tecnica="<%= d.tecnica %>" data-foto-url="/media/ayv/<%= d.id %>/<%= d.proceso %>">
-							Dibujo en proceso</button>
-						<button class="btn btn-outline-success btn-block dibujos_popover" type="button"
-						        title="<%=d.id %> : <small>Dibujo en proceso</small><br><%=d.titulo %>"
+						        data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>" data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
+						        data-foto="proceso"> <small>Dibujo en proceso</small></button>
+						<button class="btn btn-outline-success btn-lg btn-block dibujos_popover" type="button"
 						        data-toggle="modal" data-target="#modalConcurso"
-						        data-tecnica="<%= d.tecnica %>" data-foto-url="/media/ayv/<%= d.id %>/<%= d.terminado %>">
-							Dibujo terminado</button>
+						        data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>" data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
+						        data-foto="terminado"><small>Dibujo terminado</small></button>
 					</div>
 					<div class="col-7 p-2 shadow-sm">
+						<h5><%=d.titulo %></h5>
 						<p class="h6 font-weight-bolder">Descripción: <small class="font-weight-lighter"><%= d.descripcion %></small></p>
 						<p class="h6 font-weight-bolder">Compromiso: <small class="font-weight-lighter"><%= d.compromiso %></small></p>
 					</div>
