@@ -29,7 +29,7 @@
 			<p class="h6 font-weight-bolder">Compromiso: <small class="font-weight-lighter">NO MANDÓ</small></p>
 		</div>
 		<div class="col shadow-sm custom-control custom-switch text-right">
-			<input type="checkbox" class="custom-control-input" name="calificacion-99999" id="customSwitchId-99999">
+			<input type="checkbox" class="custom-control-input" name="calificacion-99999" id="customSwitchId-99999" <%= "checked='checked'" if CalificacionAyv.find_by_usuario_id(99999).present? %>>
 			<label class="custom-control-label" role="button" for="customSwitchId-99999"></label>
 		</div>
 	</div>
@@ -47,7 +47,7 @@
 			<p class="h6 font-weight-bolder">Compromiso: <small class="font-weight-lighter">NO MANDÓ</small></p>
 		</div>
 		<div class="col shadow-sm custom-control custom-switch text-right">
-			<input type="checkbox" class="custom-control-input" name="calificacion-99998" id="customSwitchId-99998">
+			<input type="checkbox" class="custom-control-input" name="calificacion-99998" id="customSwitchId-99998" <%= "checked='checked'" if  CalificacionAyv.find_by_usuario_id(99998).present? %>>
 			<label class="custom-control-label" role="button" for="customSwitchId-99998"></label>
 		</div>
 	</div>
