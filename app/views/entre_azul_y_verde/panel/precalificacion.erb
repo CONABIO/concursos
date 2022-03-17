@@ -5,23 +5,27 @@
 						html: true,
 						boundary: 'window',
 						trigger: 'hover',
+						placement: 'bottom',
+						title: function(){
+								var button = $(this);
+								return button.data('id')+": "+button.html();
+						},
 						content: function(){
-								var foto = $(this).data('foto-url');
+								var button = $(this);
+								var foto = "/media/ayv/"+button.data('id')+"/"+button.data(button.data('foto'));
 								return "<img class='img-fluid' src='"+foto+"'>"
 						}
 				});
 				
 				$('#modalConcurso').on('show.bs.modal', function (event) {
 						var button = $(event.relatedTarget) // Button that triggered the modal
-						var foto = button.data('foto-url')
-						var title = button.data('original-title') // El popover cambia el attr title a este atributo
-						var tecnica = button.data('tecnica')
-						// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-						// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+						var foto1 = "/media/ayv/"+button.data('id')+"/"+button.data('proceso');
+						var foto2 = "/media/ayv/"+button.data('id')+"/"+button.data('terminado');
+						var title = button.data('id')+": "+button.data('titulo')+"<br><small>Técnica: "+button.data('tecnica')+"</small>";
+						
 						var modal = $(this)
-						modal.find('.modal-title').html(title+"<br><small>Técnica: "+tecnica+"</small>");
-						modal.find('.modal-body').html("<img class='img-fluid' src='"+foto+"'>");
-						modal.find('.modal-footer-text').html("<a class='btn btn-link' href='"+foto+"' target='_blank'>Ver foto en nueva ventana</a>");
+						modal.find('.modal-title').html(title);
+						modal.find('.modal-body').html("<a class='btn btn-link' href='"+foto1+"' target='_blank'><img class='img-fluid' src='"+foto1+"'></a><a class='btn btn-link' href='"+foto2+"' target='_blank'><img class='img-fluid' src='"+foto2+"'></a>");
 				});
 				
 				$('.custom-control-input').on('change', function(){
@@ -31,7 +35,7 @@
 						if(is_checked){
 								$.ajax({
 										type:"POST",
-										url:"/calificaciones", //url guarda la ruta hacia donde se hace la peticion
+										url:"/calificaciones",
 										data:{
 												calificacion: {
 														usuario_id: nameId.replace('calificacion-',''),
@@ -46,7 +50,7 @@
 						}else{
 								$.ajax({
 										type:"DELETE",
-										url:"/calificaciones/"+nameId.replace('calificacion-',''), //url guarda la ruta hacia donde se hace la peticion
+										url:"/calificaciones/"+nameId.replace('calificacion-',''),
 										success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
 												console.log(datos)
 										},
@@ -67,22 +71,25 @@
 		.popover-header{
 			background-color: #333333!important;
 		}
-			.modal-body img{
-				max-height: 100%;
-				max-width: 100%;
-			}
+		#acordeon-categorias .row:hover{
+			background-color: #666666!important;
+		}
+		.modal-body a{
+			max-height: 100%;
+			max-width: 50%;
+		}
 	</style>
 <% end %>
 
 <div class="row mt-5 pt-4">
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
-			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones:</li>
+			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones: <small>(Actualizadas al 16-03-2022)</small></li>
 			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los dibujos concursantes.</li>
 			<li class="list-group-item small">Pasar el mouse encima (hover) de los botones (Proceso/Terminado) para ver un preview de la foto del dibujo.</li>
-			<li class="list-group-item small">Dar click sobre el botón deseado para ver la imagen en grande en un modal.</li>
-			<li class="list-group-item small">Si se desea ver la imagen en otra ventana, dentro del modal esta la liga para ello.</li>
-			<li class="list-group-item small">Una vez vista la imagen, SÓLO si se desea que dicho dibujo pase a ser finalista (i.e. ser calificado por jueces) se debe activar el switch de la cuarta columna.</li>
+			<li class="list-group-item small">Dar click sobre cualquier botón para ver AMBAS imagenes en grande en un modal.</li>
+			<li class="list-group-item small">Si se desea ver cualquier imagen en otra ventana, dar click sobre la imagen dentro del modal abrira dicha imagen en una nueva ventana.</li>
+			<li class="list-group-item small">Una vez inspeccionada las imagenes, SÓLO si se desea que dicho dibujo NO pase a ser finalista (i.e. ser calificado por jueces) se debe desactivar el switch de la cuarta columna.</li>
 			<li class="list-group-item small">No es necesario guardar los cambios, al momento de interactuar con cada switch se guarda el estado del mismo.</li>
 			<li class="list-group-item small">Es todo.</li>
 		</ul>
