@@ -28,23 +28,27 @@ class UsuarioAyv < Usuario
 	
 	scope :select_dibujo, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
 	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
+	
 	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where_basico }
 	
 	scope :dibujos, -> { select_dibujo.joins_dibujos.where_dibujos.order('usuarios.id ASC') }
+	scope :dibujos_finalistas, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).where_dibujos.order('usuarios.id ASC') }
 	
-	scope :menores_a_6, -> { dibujos.where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
+	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
+	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
+	#Para fusionar ambas categorias
+	scope :menores_a_9, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
+
+	scope :de_9_a_11, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,2,28)}\"") }
 	
-	scope :de_6_a_8, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
+	scope :de_12_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,2,28)}\"") }
 	
-	scope :de_9_a_11, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,2,28)}\"") }
-	
-	scope :de_12_a_14, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,2,28)}\"") }
-	
-	scope :de_15_a_17, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
-	
-	scope :mayores_a_17, -> { dibujos.where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") }
-	
-	
+	scope :de_15_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
+	scope :mayores_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") }
+	#Para fusionar ambas categorias
+	scope :mayores_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\"") }
+
+
 	def age_in_completed_years (bd)
 		# Difference in years, less one if you have not had a birthday this year.
 		a = FECHA_TERMINO.year - bd.year
