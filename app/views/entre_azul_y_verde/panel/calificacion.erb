@@ -35,10 +35,12 @@
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
 
-							modal.find('#modalConcursoFooter').html("<div class='form-group w-75 h5'>" +
+							modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
                   "<label for='customRange-"+ id +"'>Calificación: </label>" +
                   "<input type='range' role='button' class='w-50 mx-3' min='1' max='10' id='range-"+ id +"' value='"+ calificacion +"'>" +
-                  "<span id='calificacion-"+ id +"' class='badge badge-info badge-pill'>"+ calificacion +"</span>" +
+                  "<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ calificacion +"</span>" +
+                  "<button type='button' class='btn btn-lg btn-success btn-calificar'>Confirmar" +
+                  "</button>" +
                   "</div>");
 					};
            simulaClick = function(id){
