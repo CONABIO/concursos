@@ -16,14 +16,16 @@
 							
 							var modal = $('#modalConcurso');
 
-							modal.find('#modalConcursoTitle').html("<p>" +
-                  "<button class='btn btn-link fa fa-arrow-left pull-left' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
-                  "<b class='text-warning'>(" + id +") </b>" + titulo +
-                  "<button class='btn btn-link fa fa-arrow-right pull-right' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
-                  "</p>").addClass('text-center');
+							modal.find('#modalConcursoTitle').html("<span class='badge badge-pill badge-secondary mt-1 mr-3 pull-left px-3 py-2'>" + id +"</span>" +
+                  "<p class='text-warning text-wrap text-center'>" +
+                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
+                  titulo +
+                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
+                  "</p>");
 
 							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left'>" +
-									"<p class='small text-left'><b class='text-warning'>Dibujo en proceso:</b><br />" +
+									"<p class='small text-left'>" +
+                  "<b class='text-warning'>Dibujo en proceso:</b><br />" +
 									"<a class='btn btn-link' href='"+ foto1 +"' target='_blank'><img class='img-fluid ' src='"+ foto1 +"'></a><br /><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
 									"<p class='small text-left'><b class='text-warning'>Técnica:</b><br />"+ tecnica +"</p>" +
 									"<p class='small text-left'><b class='text-warning'>Compromiso:</b><br />"+ compromiso +"</p>" +
@@ -33,9 +35,11 @@
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
 
-							modal.find('#modalConcursoFooter').html("<label for='customRange-"+ id +"'>Calificación: </label>" +
-									"<input type='range' class='custom-range' min='1' max='10' id='customRange-"+ id +"' value='"+ calificacion +"'>" +
-                  "<h3>"+ calificacion +"</h3>");
+							modal.find('#modalConcursoFooter').html("<div class='form-group w-75 h5'>" +
+                  "<label for='customRange-"+ id +"'>Calificación: </label>" +
+                  "<input type='range' role='button' class='w-50 mx-3' min='1' max='10' id='range-"+ id +"' value='"+ calificacion +"'>" +
+                  "<span id='calificacion-"+ id +"' class='badge badge-info badge-pill'>"+ calificacion +"</span>" +
+                  "</div>");
 					};
            simulaClick = function(id){
                if(id==undefined) return;
@@ -62,8 +66,9 @@
 							actualizaInfoModal($(event.relatedTarget)); // Actualizar Modal con Button that triggered the modal :p
           });
 					
-					$('#modalConcurso').on('change', '.custom-range', function(){
-							$(this).next().html($(this).val());
+					$('#modalConcurso').on('click', "input[type='range']", function(){
+					    var range = $(this);
+							$(range.attr('id').replace('range','#calificacion')).html(range.val());
 					});
 					
 			});
