@@ -2,6 +2,34 @@
 	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
 			$(document).ready(function(){
 					
+					actualizaInfoModal = function(button){
+							var id = button.data('id');
+							var title = "<b class='text-warning'>(" + button.data('id')+") Título: </b>"+button.data('titulo');
+							var tecnica = button.data('tecnica');
+							var descripcion = button.data('descripcion');
+							var compromiso = button.data('compromiso');
+							var calificacion = button.data('calificacion');
+							
+							var foto1 = "/media/ayv/"+ id +"/"+button.data('proceso');
+							var foto2 = "/media/ayv/"+ id +"/"+button.data('terminado');
+							
+							var modal = $('#modalConcurso');
+							modal.find('#modalConcursoTitle').html(title);
+							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left'>" +
+									"<p class='small text-left'><b class='text-warning'>Dibujo en proceso:</b><br />" +
+									"<a class='btn btn-link' href='"+ foto1 +"' target='_blank'><img class='img-fluid ' src='"+ foto1 +"'></a><br /><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
+									"<p class='small text-left'><b class='text-warning'>Técnica:</b><br />"+ tecnica +"</p>" +
+									"<p class='small text-left'><b class='text-warning'>Compromiso:</b><br />"+ compromiso +"</p>" +
+									"</div>" +
+									"<div class='w-75 pull-left'>" +
+									"<p><b class='text-warning'>Dibujo terminado:</b><br />" +
+									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
+									"</div>");
+							modal.find('#modalConcursoFooter').html("<label for='customRange-"+ id +"'>Calificación: <b>"+ calificacion +"</b></label>" +
+									"<input type='range' class='custom-range' min='1' max='10' id='customRange-"+ id +"' value='"+ calificacion +"'>");
+					};
+
+					
 					$('.dibujos_popover').popover({
 							html: true,
 							boundary: 'window',
@@ -19,28 +47,13 @@
 					});
 					
 					$('#modalConcurso').on('show.bs.modal', function (event) {
-							var button = $(event.relatedTarget); // Button that triggered the modal
-              var title = "<b class='text-warning'>(" + button.data('id')+") Título: </b>"+button.data('titulo');
-              var tecnica = button.data('tecnica');
-              var descripcion = button.data('descripcion');
-              var compromiso = button.data('compromiso');
-
-							var foto1 = "/media/ayv/"+button.data('id')+"/"+button.data('proceso');
-							var foto2 = "/media/ayv/"+button.data('id')+"/"+button.data('terminado');
-
-              var modal = $(this);
-							modal.find('.modal-title').html(title);
-							modal.find('.modal-body').html("<div class='w-25 pull-left'>" +
-                  "<p class='small text-left'><b class='text-warning'>Dibujo en proceso:</b><br />" +
-                  "<a class='btn btn-link' href='"+foto1+"' target='_blank'><img class='img-fluid ' src='"+foto1+"'></a><br /><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
-                  "<p class='small text-left'><b class='text-warning'>Técnica:</b><br />"+ tecnica +"</p>" +
-                  "<p class='small text-left'><b class='text-warning'>Compromiso:</b><br />"+ compromiso +"</p>" +
-                  "</div>" +
-                  "<div class='w-75 pull-left'>" +
-                  "<p><b class='text-warning'>Dibujo terminado:</b><br />" +
-                  "<a class='btn btn-link btn-block' href='"+foto2+"' target='_blank'><img class='img-fluid' src='"+foto2+"'></a></p>" +
-                  "</div>");
+							actualizaInfoModal($(event.relatedTarget)); // Actualizar Modal con Button that triggered the modal :p
           });
+					
+					$('#modalConcurso').on('change', '.custom-range', function(){
+							$(this).prev().html("Calificación: <b>"+ $(this).val() +"</b>");
+					});
+					
 			});
 	
 	</script>
