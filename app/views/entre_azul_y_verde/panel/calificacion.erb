@@ -4,17 +4,24 @@
 					
 					actualizaInfoModal = function(button){
 							var id = button.data('id');
-							var title = "<b class='text-warning'>(" + button.data('id')+") Título: </b>"+button.data('titulo');
+							var titulo = button.data('titulo');
 							var tecnica = button.data('tecnica');
 							var descripcion = button.data('descripcion');
 							var compromiso = button.data('compromiso');
 							var calificacion = button.data('calificacion');
-							
+							var idAnterior = button.data('anterior');
+							var idSiguiente = button.data('siguiente');
 							var foto1 = "/media/ayv/"+ id +"/"+button.data('proceso');
 							var foto2 = "/media/ayv/"+ id +"/"+button.data('terminado');
 							
 							var modal = $('#modalConcurso');
-							modal.find('#modalConcursoTitle').html(title);
+
+							modal.find('#modalConcursoTitle').html("<p>" +
+                  "<button class='btn btn-link fa fa-arrow-left pull-left' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
+                  "<b class='text-warning'>(" + id +") </b>" + titulo +
+                  "<button class='btn btn-link fa fa-arrow-right pull-right' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
+                  "</p>").addClass('text-center');
+
 							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left'>" +
 									"<p class='small text-left'><b class='text-warning'>Dibujo en proceso:</b><br />" +
 									"<a class='btn btn-link' href='"+ foto1 +"' target='_blank'><img class='img-fluid ' src='"+ foto1 +"'></a><br /><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
@@ -25,10 +32,15 @@
 									"<p><b class='text-warning'>Dibujo terminado:</b><br />" +
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
-							modal.find('#modalConcursoFooter').html("<label for='customRange-"+ id +"'>Calificación: <b>"+ calificacion +"</b></label>" +
-									"<input type='range' class='custom-range' min='1' max='10' id='customRange-"+ id +"' value='"+ calificacion +"'>");
-					};
 
+							modal.find('#modalConcursoFooter').html("<label for='customRange-"+ id +"'>Calificación: </label>" +
+									"<input type='range' class='custom-range' min='1' max='10' id='customRange-"+ id +"' value='"+ calificacion +"'>" +
+                  "<h3>"+ calificacion +"</h3>");
+					};
+           simulaClick = function(id){
+               if(id==undefined) return;
+               actualizaInfoModal($("#boton-"+ id));
+           };
 					
 					$('.dibujos_popover').popover({
 							html: true,
@@ -51,7 +63,7 @@
           });
 					
 					$('#modalConcurso').on('change', '.custom-range', function(){
-							$(this).prev().html("Calificación: <b>"+ $(this).val() +"</b>");
+							$(this).next().html($(this).val());
 					});
 					
 			});
