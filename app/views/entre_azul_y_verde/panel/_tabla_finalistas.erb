@@ -11,7 +11,7 @@
       <div class="row no-gutters text-center font-weight-bolder">
       <% dibujos.each_with_index do |d, i| %>
           <div class="col-2 p-2">
-            <button class="btn btn-outline-success btn-lg btn-block shadow-sm dibujos_popover" type="button"
+            <button id="boton-<%= d.id %>" class="btn btn-outline-success btn-lg btn-block shadow-sm dibujos_popover" type="button"
                     data-toggle="modal" data-target="#modalConcurso"
                     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
                     data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
