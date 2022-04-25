@@ -15,17 +15,17 @@
 							var foto2 = "/media/ayv/"+ id +"/"+button.data('terminado');
 							
 							var modal = $('#modalConcurso');
-
+							
 							modal.find('#modalConcursoTitle').html("<span class='badge badge-pill badge-secondary mt-1 mr-3 pull-left px-3 py-2'>" + id +"</span>" +
-                  "<p class='text-warning text-wrap text-center'>" +
-                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
-                  titulo +
-                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
-                  "</p>");
-
+									"<p class='text-warning text-wrap text-center'>" +
+									"<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
+									titulo +
+									"<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
+									"</p>");
+							
 							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left'>" +
 									"<p class='small text-left'>" +
-                  "<b class='text-warning'>Dibujo en proceso:</b><br />" +
+									"<b class='text-warning'>Dibujo en proceso:</b><br />" +
 									"<a class='btn btn-link' href='"+ foto1 +"' target='_blank'><img class='img-fluid ' src='"+ foto1 +"'></a><br /><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
 									"<p class='small text-left'><b class='text-warning'>Técnica:</b><br />"+ tecnica +"</p>" +
 									"<p class='small text-left'><b class='text-warning'>Compromiso:</b><br />"+ compromiso +"</p>" +
@@ -34,19 +34,42 @@
 									"<p><b class='text-warning'>Dibujo terminado:</b><br />" +
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
-
+							
 							modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
-                  "<label for='customRange-"+ id +"'>Calificación: </label>" +
-                  "<input type='range' role='button' class='w-50 mx-3' min='1' max='10' id='range-"+ id +"' value='"+ calificacion +"'>" +
-                  "<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ calificacion +"</span>" +
-                  "<button type='button' class='btn btn-lg btn-success btn-calificar'>Confirmar" +
-                  "</button>" +
-                  "</div>");
+									"<label for='customRange-"+ id +"'>Calificación: </label>" +
+									"<input type='range' role='button' class='w-50 mx-3' min='1' max='10' id='range-"+ id +"' value='"+ calificacion +"'>" +
+									"<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ calificacion +"</span>" +
+									"<button type='button' id='confirma-"+ id +"' class='btn btn-lg btn-success btn-calificar'>Confirmar" +
+									"</button>" +
+									"</div>");
 					};
-           simulaClick = function(id){
-               if(id==undefined) return;
-               actualizaInfoModal($("#boton-"+ id));
-           };
+					simulaClick = function(id){
+							if(id==undefined) return;
+							actualizaInfoModal($("#boton-"+ id));
+					};
+					
+					$('#modalConcurso').on('click', '.btn-calificar', function(){
+							this_button = $(this);
+							this_id = this_button.attr('id').replace('confirma-','');
+							this_range = $('#range-'+this_id);
+							new_cal = this_range.val();
+							
+							$.ajax({
+									type:"PUT",
+									url:"/calificaciones/"+this_id,
+									data:{
+											calificacion: {
+													//usuario_id: this_id,
+													calificacion: new_cal
+											}
+									},
+									success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+											this_button.html(new_cal + ' confirmado').toggleClass('btn-success btn-secondary disabled');
+											$('#boton-' + this_id).data('calificacion', new_cal)
+									},
+									dataType: 'json' // El tipo de datos esperados del servidor. Valor predeterminado: Intelligent Guess (xml, json, script, text, html).
+							})
+					});
 					
 					$('.dibujos_popover').popover({
 							html: true,
@@ -66,10 +89,10 @@
 					
 					$('#modalConcurso').on('show.bs.modal', function (event) {
 							actualizaInfoModal($(event.relatedTarget)); // Actualizar Modal con Button that triggered the modal :p
-          });
+					});
 					
 					$('#modalConcurso').on('click', "input[type='range']", function(){
-					    var range = $(this);
+							var range = $(this);
 							$(range.attr('id').replace('range','#calificacion')).html(range.val());
 					});
 					
@@ -89,7 +112,7 @@
 		#acordeon-categorias .row:hover{
 			background-color: #666666!important;
 		}
-
+	
 	</style>
 <% end %>
 

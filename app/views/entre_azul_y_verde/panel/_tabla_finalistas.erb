@@ -1,4 +1,4 @@
-<div class="accordion border-0 col-11 mb-4" id="acordeon-categorias">
+<div class="accordion border-0 col-10 mb-4" id="acordeon-categorias">
   <% @dibujos.each do |categorias, dibujos| %>
     <div class="border-0 rounded p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
       <button class="btn btn-outline-info btn-block py-3 text-center" type="button" data-toggle="collapse" data-target="#collapse-<%= categorias.to_s %>" aria-expanded="true" aria-controls="collapse-<%= categorias.to_s %>">
