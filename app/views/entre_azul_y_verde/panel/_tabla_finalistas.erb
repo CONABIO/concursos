@@ -18,7 +18,7 @@
                     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
                     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-                    data-calificacion="<%= d.calificacion %>">
+                    data-calificacion="<%= d.calificacion.to_s[@juez].to_i %>">
               <small><%=d.id %></small>
             </button>
           </div>
