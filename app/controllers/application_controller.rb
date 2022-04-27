@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 	  authenticate_or_request_with_http_basic do |username, password|
 		  case username
 			  when Rails.application.secrets.dgcc
+				  @juez = 3
 				  password == Rails.application.secrets.password_dgcc
 			  when Rails.application.secrets.juez0
 				  @juez = 0
