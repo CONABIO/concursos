@@ -21,12 +21,12 @@
                     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
                     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-                    data-calificacion="<%= d.calificacion.to_s[@juez].to_i %>">
-              <small><%=d.id %></small><span class="fa fa-check-circle mx-2"></span>
+                    data-calificacion="<%= dgcc ? d.calificacion : d.calificacion.to_s[@juez].to_i %>">
+              <small><%=d.id %>&nbsp;<%= d.calificacion.to_s[0..2].scan(/\w/).to_s if dgcc %></small><span class="fa fa-check-circle mx-2"></span>
             </button>
           </div>
       <% end %>
-	      <%= render partial: 'entre_azul_y_verde/panel/extemporaneos_finalistas' if categorias == :de_12_a_14 %>
+	      <%= render partial: 'entre_azul_y_verde/panel/extemporaneos_finalistas', locals: {dgcc: dgcc} if categorias == :de_12_a_14 %>
       </div>
     </div>
   <% end %>
