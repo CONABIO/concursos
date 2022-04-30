@@ -120,23 +120,13 @@
 			color: #28a745;
 			border-color: #28a745;
 		}
-		<% if dgcc %>
-		.dibujos-popover[data-calificacion="1110"]{
+    .dibujos-popover[data-calificacion$="0"]{
 			color: #ffc107;
 			border-color: #ffc107;
 		}
-		.dibujos-popover[data-calificacion="1110"] .fa{
+		.dibujos-popover[data-calificacion$="0"] .fa{
 			visibility: hidden;
 		}
-		<% else %>
-		.dibujos-popover[data-calificacion="1"]{
-			color: #ffc107;
-			border-color: #ffc107;
-		}
-		.dibujos-popover[data-calificacion="1"] .fa{
-			visibility: hidden;
-		}
-		<% end %>
 		#acordeon-categorias .row:hover{
 			background-color: #666666!important;
 		}
@@ -148,20 +138,12 @@
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
 			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones: <small>(Actualizadas al 27-04-2022)</small></li>
-			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los dibujos finalistass.</li>
-			<li class="list-group-item small">Pasar el mouse encima (hover) de los botones (el número es el id del concursante) para ver un preview de la foto del dibujo.</li>
-			<li class="list-group-item small">Dar click sobre cualquier botón para ver el registro del concursante en un modal (dibujos, proceso, compromiso, título, técnica, etc.)</li>
-			<li class="list-group-item small">Si se desea ver cualquier imagen en otra ventana, al dar click sobre cualquier imagen dentro del modal se abrirá dicha imagen en una nueva ventana.</li>
-			<li class="list-group-item small">Una vez inspeccionadas las imagenes con los criterios a considerar, hay que realizar la calificacion en el slider qeu se muestra en la parte inferior del modal.</li>
-			<li class="list-group-item small">La calificación va del '1' al '9', siendo '1' la peor calificación y '9' el máximo puntaje posible.</li>
-			<li class="list-group-item small">Es necesario GUARDAR los cambios, esto se realiza dando click en el botón verde que dice CONFIRMAR, al realizarse la calificación el botón cambiara de color y se mostrara la leyenda "Confirmado" junto con la califiación dada.</li>
-			<li class="list-group-item small">Al entrar y salir del modal de un dibujo ya calificado, se puede volver a cambiar la calificación.</li>
-			<li class="list-group-item small">A manera de ayuda visual, existe un contador que va cambiando conforme al número de calificaciones distintas a "1".</li>
-			<li class="list-group-item small">Así mismo, los botones cuyos dibujos ya se hayan calificado (cuya calificación sea distinta de "1") se veran de color verde con una palomita, esto servira para identificar si falta algún dibujo por calificar.</li>
-			<li class="list-group-item small">Es importante recalcar que TODOS los dibujos deben ser calificados sin excepción, esto es debido a que con ello tambien se obtienen los mejores por estado (el cual no esta mostrado en los datos para preservar el anonimato).</li>
-			<li class="list-group-item small">Cualquier duda que tengan, favor de remitirla a ggonzalez@conabio.gob.mx o con Ivette Mota.</li>
-			<li class="list-group-item small">Es todo.</li>
-		</ul>
+			<li class="list-group-item small">El listado de dibujos por categoría esta ordenado de mayor a menor de acuerdo al promedio.</li>
+			<li class="list-group-item small">Se muestran los primeros 6 lugares apra poder decidir en caso de multiple empate</li>
+      <li class="list-group-item small">Dar click en el botón de datos para ver el resto de información, técnica, compromiso, etc.</li>
+      <li class="list-group-item small">Dentro del modal, anotar EL LUGAR que se desea establecer como definitivo.</li>
+      <li class="list-group-item small">Es todo.</li>
+    </ul>
 	</div>
 	<%= render partial: "entre_azul_y_verde/panel/tabla_desempate", locals: {dgcc: dgcc} %>
 </div>
