@@ -28,10 +28,10 @@ Rails.application.routes.draw do
 				collection do
 					get :precalificacion
 					get :calificacion
+					get :desempate
 				end
 			end
-			#get 'panel/precalificacion' => 'panel#precalificacion'
-			#resources :registro
+
 		end
 		
 		namespace 'mosaico_natura' do
@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 					collection do
 						get :precalificacion
 						get :calificacion
+						get :desempate
 					end
 				end
 				#resources :registro

@@ -19,4 +19,11 @@ class EntreAzulYVerde::PanelController < EntreAzulYVerde::EntreAzulYVerdeControl
 		@dibujos[:mayores_a_14] = UsuarioAyv.dibujos_finalistas.mayores_a_14
 	end
 	
+  def desempate
+	  @dibujos = {}
+	  @dibujos[:menores_a_9] = UsuarioAyv.dibujos_desempate.menores_a_9
+	  @dibujos[:de_9_a_11] = UsuarioAyv.dibujos_desempate.de_9_a_11
+	  @dibujos[:de_12_a_14] = UsuarioAyv.dibujos_desempate.de_12_a_14
+	  @dibujos[:mayores_a_14] = UsuarioAyv.dibujos_desempate.mayores_a_14
+  end
 end

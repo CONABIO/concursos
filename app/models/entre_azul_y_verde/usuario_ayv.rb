@@ -27,12 +27,17 @@ class UsuarioAyv < Usuario
 	scope :where_basico, -> { where(concurso_id: 1) }
 	
 	scope :select_dibujo, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
+	scope :select_promedio, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as calificacion_final") }
 	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
 	
 	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where_basico }
 	
+	# All los dibujos, por eso el left join
 	scope :dibujos, -> { select_dibujo.joins_dibujos.where_dibujos.order('usuarios.id ASC') }
+	# Solo los finalistas, por eso el inner join
 	scope :dibujos_finalistas, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).where_dibujos.order('usuarios.id ASC') }
+	# Sólo los q se tienen q desempatar
+	scope :dibujos_desempate, -> {select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('calificacion_final DESC').limit(6) }
 	
 	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
@@ -47,8 +52,8 @@ class UsuarioAyv < Usuario
 	scope :mayores_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") }
 	#Para fusionar ambas categorias
 	scope :mayores_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\"") }
-
-
+	
+	
 	def age_in_completed_years (bd)
 		# Difference in years, less one if you have not had a birthday this year.
 		a = FECHA_TERMINO.year - bd.year
