@@ -20,6 +20,7 @@
 							var descripcion = button.data('descripcion');
 							var compromiso = button.data('compromiso');
 							var calificacion = button.data('calificacion');
+              var calificacionCompleta = button.data('calificacion-completa');
               var promedio = button.data('promedio');
 							var idAnterior = button.data('anterior');
 							var idSiguiente = button.data('siguiente');
@@ -47,9 +48,21 @@
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
 							
-              modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
-                  "<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ promedio +"</span>" +
-                  "</div>");
+              modal.find('#modalConcursoFooter').html("<div class='input-group mb-3 h5'>" +
+                  "<div class='input-group-prepend'>" +
+                  "<label class='input-group-text' for='select-"+ id +"'>Lugar asignado: </label>" +
+                  "</div>" +
+                  "<select class='custom-select h-auto' id='select-" + id + "'>" +
+                  "<option " + (calificacion == 0 && "selected") + ">Escoge...</option>" +
+                  "<option " + (calificacion == 1 && "selected") + " value='1'>Primer lugar</option>" +
+                  "<option " + (calificacion == 2 && "selected") + " value='2'>Segundo lugar</option>" +
+                  "<option " + (calificacion == 3 && "selected") + " value='3'>Tercer lugar</option>" +
+                  "</select>" +
+                  "<div class='input-group-append'>" +
+                  "<button type='button' id='confirma-"+ id +"' class='btn btn-success btn-calificar'>Confirmar</button>" +
+                  "</div>" +
+                  "</div>" +
+                  "<p>Promedio: <span id='promedio-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ promedio +"</span></p>");
 
 					};
 					simulaClick = function(id){
@@ -61,7 +74,7 @@
 							calificaBtn = $(this);
 							calificaBtnId = calificaBtn.attr('id').replace('confirma-','');
 							popoverBtn = $('#boton-' + calificaBtnId);
-							newCal = $('#range-'+calificaBtnId).val();
+							newCal = $('#select-'+calificaBtnId).val();
 							
 							
 							if( newCal == popoverBtn.data('calificacion')){
@@ -78,7 +91,8 @@
 											success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
 													calificaBtn.html(newCal + ' confirmado').toggleClass('btn-success btn-secondary disabled');
 													popoverBtn.data('calificacion', newCal).attr('data-calificacion', newCal);
-													actualizaConteo();
+													$('.lugar > b').html(newCal);
+													//actualizaConteo();
 											},
 											dataType: 'json' // El tipo de datos esperados del servidor. Valor predeterminado: Intelligent Guess (xml, json, script, text, html).
 									});
@@ -109,7 +123,7 @@
 							var range = $(this);
 							$(range.attr('id').replace('range','#calificacion')).html(range.val());
 					});
-					actualizaConteo();
+					//actualizaConteo();
 			});
 	</script>
 <% end %>
@@ -120,11 +134,14 @@
 			color: #28a745;
 			border-color: #28a745;
 		}
-    .dibujos-popover[data-calificacion$="0"]{
+    .dibujos-popover[data-calificacion="0"]{
 			color: #ffc107;
 			border-color: #ffc107;
 		}
-		.dibujos-popover[data-calificacion$="0"] .fa{
+    .dibujos-popover[data-calificacion="0"] ~ p.lugar{
+      visibility: hidden;
+    }
+		.dibujos-popover[data-calificacion="0"] .fa{
 			visibility: hidden;
 		}
 		#acordeon-categorias .row:hover{

@@ -4,9 +4,6 @@
       <button class="btn btn-outline-info btn-block py-3 text-center" type="button" data-toggle="collapse" data-target="#collapse-<%= categorias.to_s %>" aria-expanded="true" aria-controls="collapse-<%= categorias.to_s %>">
         <%= categorias.to_s.humanize %>
         <i class="fa fa-sort pull-right"></i>
-	      <i class="pull-right">
-		      <span class="badge badge-light dibujos-calificados" data-categoria="<%= categorias %>"></span> calificados de 50 en esta categoria.
-	      </i>
       </button>
     </div>
 
@@ -15,7 +12,7 @@
       <% dibujos.each_with_index do |d, i| %>
           <div class="col-5 p-2">
             <p class="h4 text-info"><%= d.titulo %></p>
-            <p>Promedio <br /><b class="h5"><%= d.promedio.round(2) %></b></p>
+            <p>Promedio: <b class="h5"><%= d.promedio.round(2) %></b></p>
             <button id="boton-<%= d.id %>" class="btn btn-lg btn-block shadow-sm dibujos-popover" type="button"
                     data-toggle="modal" data-target="#modalConcurso"
                     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
@@ -23,11 +20,12 @@
                     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
                     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-                    data-promedio="<%= d.promedio %>"
+                    data-promedio="<%= d.promedio.round(2) %>"
                     data-calificacion="<%= d.calificacion.to_s[@juez].to_i %>"
                     data-calificacion-completa="<%= d.calificacion %>">
               <small>Datos de participante <%=d.id %></small>&nbsp;<i class="fa fa-search-plus"></i>
             </button>
+            <p class="text-success lugar">Lugar asignado: <b class="h4"><%= d.calificacion.to_s[@juez].to_i %></b></p>
           </div>
           <div class="col-7 p-2">
             <img class="img-fluid img-thumbnail" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
