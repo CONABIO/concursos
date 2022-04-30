@@ -13,7 +13,9 @@
     <div id="collapse-<%= categorias.to_s %>" class="collapse shadow bg-gradient-dark" aria-labelledby="heading-<%= categorias.to_s %>" data-parent="#acordeon-categorias">
       <div class="row no-gutters text-center font-weight-bolder">
       <% dibujos.each_with_index do |d, i| %>
-          <div class="col-2 p-2">
+          <div class="col-5 p-2">
+            <p class="h4 text-info"><%= d.titulo %></p>
+            <p>Promedio <br /><b class="h5"><%= d.promedio.round(2) %></b></p>
             <button id="boton-<%= d.id %>" class="btn btn-lg btn-block shadow-sm dibujos-popover" type="button"
                     data-toggle="modal" data-target="#modalConcurso"
                     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
@@ -21,12 +23,16 @@
                     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
                     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-                    data-calificacion="<%= dgcc ? d.calificacion : d.calificacion.to_s[@juez].to_i %>">
-              <small><%=d.id %>&nbsp;<%= d.calificacion.to_s[0..2].scan(/\w/).to_s if dgcc %></small><span class="fa fa-check-circle mx-2"></span>
+                    data-promedio="<%= d.promedio %>"
+                    data-calificacion="<%= d.calificacion.to_s[@juez].to_i %>"
+                    data-calificacion-completa="<%= d.calificacion %>">
+              <small>ID: <%=d.id %></small>&nbsp;<i class="fa fa-search-plus"></i>
             </button>
           </div>
+          <div class="col-7 p-2">
+            <img class="img-fluid img-thumbnail" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+          </div>
       <% end %>
-	      <%= render partial: 'entre_azul_y_verde/panel/extemporaneos_finalistas', locals: {dgcc: dgcc} if categorias == :de_12_a_14 %>
       </div>
     </div>
   <% end %>

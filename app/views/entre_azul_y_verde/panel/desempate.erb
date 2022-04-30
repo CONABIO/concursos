@@ -20,6 +20,7 @@
 							var descripcion = button.data('descripcion');
 							var compromiso = button.data('compromiso');
 							var calificacion = button.data('calificacion');
+              var promedio = button.data('promedio');
 							var idAnterior = button.data('anterior');
 							var idSiguiente = button.data('siguiente');
 							var foto1 = "/media/ayv/"+ id +"/"+button.data('proceso');
@@ -46,19 +47,10 @@
 									"<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
 									"</div>");
 							
-							<% if dgcc %>
-							modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
-									"<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ calificacion +"</span>" +
-									"</div>");
-							<% else %>
-							modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
-									"<label for='customRange-"+ id +"'>Calificación: </label>" +
-									"<input type='range' role='button' class='w-50 mx-3' min='1' max='9' id='range-"+ id +"' value='"+ calificacion +"'>" +
-									"<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ calificacion +"</span>" +
-									"<button type='button' id='confirma-"+ id +"' class='btn btn-lg btn-success btn-calificar'>Confirmar" +
-									"</button>" +
-									"</div>");
-							<% end %>
+              modal.find('#modalConcursoFooter').html("<div class='form-group w-100 h5'>" +
+                  "<span id='calificacion-"+ id +"' class='badge badge-light badge-pill mr-3'>"+ promedio +"</span>" +
+                  "</div>");
+
 					};
 					simulaClick = function(id){
 							if(id==undefined) return;
@@ -171,7 +163,7 @@
 			<li class="list-group-item small">Es todo.</li>
 		</ul>
 	</div>
-	<%= render partial: "entre_azul_y_verde/panel/tabla_finalistas", locals: {dgcc: dgcc} %>
+	<%= render partial: "entre_azul_y_verde/panel/tabla_desempate", locals: {dgcc: dgcc} %>
 </div>
 
 <%= render :partial => "entre_azul_y_verde/shared/modal" %>
