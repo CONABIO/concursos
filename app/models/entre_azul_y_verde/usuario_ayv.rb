@@ -28,6 +28,8 @@ class UsuarioAyv < Usuario
 	
 	scope :select_dibujo, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
 	scope :select_promedio, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio") }
+	scope :select_lugar, -> { select("(substr(cast(calificacion as char),1,1)) as lugar") }
+
 	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
 	
 	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where_basico }
@@ -37,8 +39,10 @@ class UsuarioAyv < Usuario
 	# Solo los finalistas, por eso el inner join
 	scope :dibujos_finalistas, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).where_dibujos.order('usuarios.id ASC') }
 	# Sólo los q se tienen q desempatar
-	scope :dibujos_desempate, -> {select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('promedio DESC').limit(6) }
-	
+	scope :dibujos_desempate, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('promedio DESC').limit(6) }
+	# Los elegidos por los dioses... (del dibujo :P)
+	scope :dibujos_ganadores, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_lugar.where_dibujos.order('lugar ASC') }
+
 	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
 	#Para fusionar ambas categorias

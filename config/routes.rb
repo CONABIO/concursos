@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 			get 'medios' => 'inicio#index'
 			
 			get 'bases' => 'inicio#bases'
-			resources :galerias
+			get '/galerias/:action', controller: 'galerias'
 			resources :panel do
 				collection do
 					get :precalificacion
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 			get 'medios' => 'inicio#index'
 			get 'bases' => 'inicio#bases'
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
-			resources :galerias
+			get '/galerias/:action', controller: 'galerias'
 			resources :panel
 			resources :registro
 		end
