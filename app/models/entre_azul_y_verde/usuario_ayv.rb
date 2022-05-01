@@ -5,7 +5,9 @@ class UsuarioAyv < Usuario
 	FECHA_NAC_MIN = "2003-01-01"
 	FECHA_NAC_MAX = "2016-01-01"
 	FECHA_TERMINO = Date.new(2022,02,28)
-	
+
+	#alias_attribute :edad, :edad
+
 	validates_presence_of :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio
 	#validates_presence_of :nombre
 	
@@ -58,7 +60,7 @@ class UsuarioAyv < Usuario
 	scope :mayores_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\"") }
 	
 	
-	def age_in_completed_years (bd)
+	def age_in_completed_years(bd)
 		# Difference in years, less one if you have not had a birthday this year.
 		a = FECHA_TERMINO.year - bd.year
 		a = a - 1 if (
@@ -66,5 +68,9 @@ class UsuarioAyv < Usuario
 				(bd.month >= FECHA_TERMINO.month and bd.day > FECHA_TERMINO.day)
 		)
 		a
+	end
+
+	def edad
+		age_in_completed_years(self.fecha_nacimiento)
 	end
 end
