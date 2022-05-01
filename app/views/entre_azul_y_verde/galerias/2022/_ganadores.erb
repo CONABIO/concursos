@@ -1,8 +1,13 @@
 <% @dibujos.each do |categorias, dibujos| %>
-  <div class="row">
+  <div class="row my-5">
     <% dibujos.each_with_index do |d, i| %>
-      <div class="col">
-        <img class="img-fluid img-thumbnail" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+		  <%  podium_class = case i
+			                     when 0 then "5 order-2"
+			                     when 1 then "4 order-1 pt-3"
+			                     when 2 then "3 order-3 pt-5"
+		                     end %>
+		  <div class="col-<%= podium_class %> d-flex align-items-end podiums">
+        <img class="img-fluid shadow-lg" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
       </div>
     <% end %>
   </div>
