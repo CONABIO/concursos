@@ -41,7 +41,7 @@ class UsuarioAyv < Usuario
 	# Sólo los q se tienen q desempatar
 	scope :dibujos_desempate, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('promedio DESC').limit(6) }
 	# Los elegidos por los dioses... (del dibujo :P)
-	scope :dibujos_ganadores, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_lugar.where_dibujos.where("lugar not like '0'").order('lugar ASC') }
+	scope :dibujos_ganadores, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_lugar.where_dibujos.where("calificacion not like '%0'").order('lugar ASC') }
 
 	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
