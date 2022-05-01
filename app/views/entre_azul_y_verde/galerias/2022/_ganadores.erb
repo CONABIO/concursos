@@ -1,14 +1,45 @@
-<% @dibujos.each do |categorias, dibujos| %>
-  <div class="row my-5">
-    <% dibujos.each_with_index do |d, i| %>
-		  <%  podium_class = case i
-			                     when 0 then "5 order-2"
-			                     when 1 then "4 order-1 pt-3"
-			                     when 2 then "3 order-3 pt-5"
-		                     end %>
-		  <div class="col-<%= podium_class %> d-flex align-items-end podiums">
-        <img class="img-fluid shadow-lg" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+<div class="col-12 my-4" id="galerias">
+  <div class="container">
+    <% @dibujos.each do |categorias, dibujos| %>
+      <div class="border-0 p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
+        <h4 class="p-3 m-0 text-info text-center"><%= categorias.to_s.humanize %></h4>
+      </div>
+
+      <div class="d-flex flex-column px-4 bg-dark shadow-lg">
+        <% dibujos.each_with_index do |d, i| %>
+          <% nombre_completo = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' ') %>
+          <div class="w-100 my-4 px-5">
+            <span class="m-n4 px-4 py-3 rounded rounded-pill bg-success text-white h4 pull-left "><%= d.lugar %>°</span>
+            <p class="py-2 h3 bg-gradient-light text-primary text-center">
+              "<%= d.titulo %>"
+            </p>
+          </div>
+          <div class="w-100 d-flex flex-row mb-4 pb-5 bg-dark rounded">
+            <div class="w-50 px-4 text-left">
+              <p class="h5 text-info">
+                <%= nombre_completo %>
+              </p>
+              <p class="small text-white"><%= d.edad %> años</p>
+            </div>
+            <div class="w-50">
+              <button id="boton-<%= d.id %>" class="btn btn-outline-light btn-block shadow-sm dibujos-popover" type="button"
+                      data-toggle="modal" data-target="#modalConcurso"
+                      data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
+                      data-nombre="<%= nombre_completo %>"
+                      data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
+                      data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
+                      data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
+                      data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
+                      data-lugar="<%= d.lugar %>">
+                <img class="img-fluid" alt="<%= nombre_completo %>" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+                <i class="fa fa-search-plus"></i>
+              </button>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
-<% end %>
+</div>
+
+</div>
