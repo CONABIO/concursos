@@ -1,0 +1,9 @@
+<% @dibujos.each do |categorias, dibujos| %>
+  <div class="row">
+    <% dibujos.each_with_index do |d, i| %>
+      <div class="col">
+        <img class="img-fluid img-thumbnail" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+      </div>
+    <% end %>
+  </div>
+<% end %>
