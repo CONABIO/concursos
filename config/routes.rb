@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-	devise_for :users
+  #devise_for :users
 	#devise_for :user_ayv, :controllers => {:confirmations => "entre_azul_y_verde/devise/confirmations", :passwords => "entre_azul_y_verde/devise/passwords", :registrations => "entre_azul_y_verde/devise/registrations", :unlocks => "entre_azul_y_verde/devise/unlocks", :sessions => "entre_azul_y_verde/devise/sessions"}
-	devise_for :user_mn, :controllers => {:confirmations => "mosaico_natura/devise/confirmations", :passwords => "mosaico_natura/devise/passwords", :registrations => "mosaico_natura/devise/registrations", :unlocks => "mosaico_natura/devise/unlocks", :sessions => "mosaico_natura/devise/sessions"}
+  #devise_for :user_mn, :controllers => {:confirmations => "mosaico_natura/devise/confirmations", :passwords => "mosaico_natura/devise/passwords", :registrations => "mosaico_natura/devise/registrations", :unlocks => "mosaico_natura/devise/unlocks", :sessions => "mosaico_natura/devise/sessions"}
 	
 	resources :cat_concursos
 	resources :media_metadatos
@@ -24,15 +24,15 @@ Rails.application.routes.draw do
 			
 			get 'bases' => 'inicio#bases'
 			get '/galerias/:action', controller: 'galerias'
-			resources :panel do
+
+      resources :panel do
 				collection do
 					get :precalificacion
 					get :calificacion
-					get :desempate
-				end
-			end
-
-		end
+          get :desempate
+        end
+      end
+    end
 		
 		namespace 'mosaico_natura' do
 			root 'inicio#index'
@@ -43,8 +43,8 @@ Rails.application.routes.draw do
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 			get '/galerias/:action', controller: 'galerias'
 			resources :panel
-        #resources :registro
-		end
+    end
+
 	else
 		constraints(lambda { |request| ['entreazulyverde.mx','www.entreazulyverde.mx'].include?(request.host) }) do
 			root 'entre_azul_y_verde/inicio#index'
@@ -63,7 +63,6 @@ Rails.application.routes.draw do
 						get :desempate
 					end
 				end
-				#resources :registro
 			end
 		end
 		
@@ -78,7 +77,6 @@ Rails.application.routes.draw do
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				resources :galerias
         resources :panel
-          #resources :registro
 			end
 		end
 	end
