@@ -6,7 +6,7 @@
 		
 		<div class="row no-gutters d-flex justify-content-center align-items-center px-4 bg-gradient-light shadow-lg">
 			<% dibujos.each_with_index do |d, i| %>
-				<% nombre_completo = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' ') %>
+				<% nombre_completo, estado = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' '), d.estado.titleize %>
 				
 				<div class="col-12 col-lg-<%= i==0 ? '8' : i==1 ? '6' : '5' %>">
 					<div class="card bg-dark my-3 mx-1">
@@ -15,6 +15,7 @@
 						     data-toggle="modal" data-target="#modalConcurso"
 						     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
 						     data-nombre="<%= nombre_completo %>"
+						     data-estado="<%= estado %>"
 						     data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
 						     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
 						     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
@@ -26,7 +27,7 @@
 								<%= nombre_completo %>
 							</p>
 							<p class="card-text w-25 bg-dark p-1 small"><%= d.edad %> años</p>
-							<p class="card-text w-50 bg-info p-1"><%= d.estado.titleize %></p>
+							<p class="card-text w-50 bg-info p-1"><%= estado%></p>
 						</div>
 					</div>
 				</div>
