@@ -25,7 +25,8 @@
                   "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
                   "</p>");
 
-              modal.find('#modalConcursoBody').html("<h5 class='text-center text-info font-weight-bolder'>" + nombre + " - " + estado + "</h5>" +
+              modal.find('#modalConcursoBody').html("<h5 class='text-center text-info font-weight-bolder'>" +
+                  nombre + " - " + estado + "</h5>" +
 		              "<p class='small text-left'><b class='text-warning'>Compromiso:</b><br />"+ compromiso +"</p>" +
 		              "<div class='w-25 pull-left'>" +
                   "<p class='small text-left'>" +
@@ -35,10 +36,9 @@
                   "<p class='small text-left'><b class='text-warning'>Técnica:</b><br />"+ tecnica +"</p>" +
                   "</div>" +
                   "<div class='w-75 pull-left'>" +
-                  "<p><a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'><img class='img-fluid' src='"+ foto2 +"'></a></p>" +
+                  "<a class='btn btn-link btn-block' href='"+ foto2 +"' target='_blank'>" +
+                  "<img class='img-fluid' src='"+ foto2 +"'></a>" +
                   "</div>");
-
-
           };
           simulaClick = function(id){
               if(id==undefined) return;
@@ -60,7 +60,7 @@
 <% end %>
 
 
-<div class="row d-flex justify-content-center mt-5 pt-4">
+<div class="row d-flex justify-content-center mt-5">
   <%= render partial: 'entre_azul_y_verde/galerias/2022/ganadores' %>
   <%= render partial: 'entre_azul_y_verde/galerias/2022/menciones_honorificas' %>
 </div>
