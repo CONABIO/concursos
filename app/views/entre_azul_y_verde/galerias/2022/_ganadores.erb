@@ -1,45 +1,37 @@
-<div class="col-12 my-4" id="galerias">
-  <div class="container">
-    <% @dibujos.each do |categorias, dibujos| %>
-      <div class="border-0 p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
-        <h4 class="p-3 m-0 text-info text-center"><%= categorias.to_s.humanize %></h4>
-      </div>
-
-      <div class="d-flex flex-column px-4 bg-dark shadow-lg">
-        <% dibujos.each_with_index do |d, i| %>
-          <% nombre_completo = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' ') %>
-          <div class="w-100 my-4 px-5">
-            <span class="m-n4 px-4 py-3 rounded rounded-pill bg-success text-white h4 pull-left "><%= d.lugar %>°</span>
-            <p class="py-2 h3 bg-gradient-light text-primary text-center">
-              "<%= d.titulo %>"
-            </p>
-          </div>
-          <div class="w-100 d-flex flex-row mb-4 pb-5 bg-dark rounded">
-            <div class="w-50 px-4 text-left">
-              <p class="h5 text-info">
-                <%= nombre_completo %>
-              </p>
-              <p class="small text-white"><%= d.edad %> años</p>
-            </div>
-            <div class="w-50">
-              <button id="boton-<%= d.id %>" class="btn btn-outline-light btn-block shadow-sm dibujos-popover" type="button"
-                      data-toggle="modal" data-target="#modalConcurso"
-                      data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
-                      data-nombre="<%= nombre_completo %>"
-                      data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
-                      data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
-                      data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
-                      data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-                      data-lugar="<%= d.lugar %>">
-                <img class="img-fluid" alt="<%= nombre_completo %>" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
-                <i class="fa fa-search-plus"></i>
-              </button>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
+<div class="col-12 col-md-11 my-4" id="galerias">
+	<% @dibujos.each do |categorias, dibujos| %>
+		<div class="border-0 p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
+			<h4 class="p-3 m-0 text-info text-center"><%= categorias.to_s.humanize %></h4>
+		</div>
+		
+		<div class="row no-gutters d-flex justify-content-center align-items-center px-4 bg-gradient-light shadow-lg">
+			<% dibujos.each_with_index do |d, i| %>
+				<% nombre_completo = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' ') %>
+				
+				<div class="col-12 col-lg-<%= i==0 ? '8' : i==1 ? '6' : '5' %>">
+					<div class="card bg-dark my-3 mx-1">
+							<img class="card-img" alt="<%= nombre_completo %>" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
+						<div class="card-img-overlay p-2" id="boton-<%= d.id %>" type="button"
+						     data-toggle="modal" data-target="#modalConcurso"
+						     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-tecnica="<%= d.tecnica %>"
+						     data-nombre="<%= nombre_completo %>"
+						     data-proceso="<%= d.proceso %>" data-terminado="<%= d.terminado %>"
+						     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
+						     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
+						     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
+						     data-lugar="<%= d.lugar %>">
+							<span class="m-n4 px-3 py-2 rounded rounded-pill bg-gradient-success text-white h5 pull-left "><%= d.lugar %>°</span>
+							<h5 class="card-title p-2 bg-gradient-light text-primary text-center font-weight-bolder">"<%= d.titulo %>"</h5>
+							<p class="card-text w-50 p-2 bg-gradient-primary font-weight-bolder">
+								<%= nombre_completo %>
+							</p>
+							<p class="card-text w-25 bg-dark p-1 small"><%= d.edad %> años</p>
+							<p class="card-text"></p>
+						</div>
+					</div>
+				</div>
+			
+			<% end %>
+		</div>
+	<% end %>
 </div>
