@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 			get '/galerias/:action', controller: 'galerias'
 			resources :panel
-			resources :registro
+        #resources :registro
 		end
 	else
 		constraints(lambda { |request| ['entreazulyverde.mx','www.entreazulyverde.mx'].include?(request.host) }) do
@@ -77,8 +77,8 @@ Rails.application.routes.draw do
 				get 'bases' => 'inicio#bases'
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				resources :galerias
-				resources :panel
-				resources :registro
+        resources :panel
+          #resources :registro
 			end
 		end
 	end
