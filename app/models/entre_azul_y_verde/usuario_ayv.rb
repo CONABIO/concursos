@@ -28,9 +28,9 @@ class UsuarioAyv < Usuario
 	
 	scope :where_basico, -> { where(concurso_id: 1) }
 	
-	scope :select_dibujo, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
+	scope :select_dibujo, -> { select(:id, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
 	scope :select_promedio, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio") }
-	scope :select_lugar, -> { select("(substr(cast(calificacion as char),4,1)) as lugar") }
+	scope :select_ganadores, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion, "(substr(cast(calificacion as char),4,1)) as lugar", :estado) }
 
 	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
 	
@@ -43,7 +43,7 @@ class UsuarioAyv < Usuario
 	# Sólo los q se tienen q desempatar
 	scope :dibujos_desempate, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('promedio DESC').limit(6) }
 	# Los elegidos por los dioses... (del dibujo :P)
-	scope :dibujos_ganadores, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_lugar.where_dibujos.where("calificacion not like '%0'").order('lugar ASC') }
+	scope :dibujos_ganadores, -> { select_ganadores.left_joins(:media, :media_metadato).joins(:calificaciones).joins(:direccion).where_dibujos.where("calificacion not like '%0'").order('lugar ASC') }
 
 	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
 	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
