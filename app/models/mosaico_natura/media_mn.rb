@@ -9,4 +9,6 @@ class MediaMn < Media
 
 	mount_uploader :original_filename, MediaAwsUploader
 	
+	scope :mosaico, -> { where(categoria: (1..9)) }
+	
 end
