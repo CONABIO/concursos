@@ -1,14 +1,17 @@
-<div class="col-12 col-md-11 my-4" id="galerias">
-	<% @dibujos.each do |categorias, dibujos| %>
-		<div class="border-0 p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
+<div class="w-100 pt-4 sub-header text-center">
+	<img class="img-fluid" src="/concursos_assets/entre_azul_y_verde/ganadores.png">
+</div>
+<div class="col-12 col-md-10">
+  <% @dibujos.each do |categorias, dibujos| %>
+		<div class="border-0 p-0 bg-gradient-dark" id="heading-<%= categorias %>">
 			<h4 class="p-3 m-0 text-info text-center"><%= categorias.to_s.humanize %></h4>
 		</div>
 		
-		<div class="row no-gutters d-flex justify-content-center align-items-center px-4 bg-gradient-light shadow-lg">
+		<div class="row no-gutters d-flex justify-content-center align-items-center mb-4 px-4 bg-gradient-light shadow-lg">
 			<% dibujos.each_with_index do |d, i| %>
-				<% nombre_completo, estado = [d.nombre, d.apellido_paterno, d.apellido_paterno].join(' '), d.estado.titleize %>
+				<% nombre_completo, estado = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' '), d.estado.titleize %>
 				
-				<div class="col-12 col-lg-<%= i==0 ? '8' : i==1 ? '6' : '5' %>">
+				<div class="col-12 col-lg-<%= i==0 ? '11' : i==1 ? '6' : '5' %>">
 					<div class="card bg-dark my-3 mx-1">
 							<img class="card-img" alt="<%= nombre_completo %>" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
 						<div class="card-img-overlay p-2" id="boton-<%= d.id %>" type="button"

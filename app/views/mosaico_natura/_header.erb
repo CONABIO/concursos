@@ -39,24 +39,24 @@
 				</li>
 			<% end %>
 			
-			<% if user_mn_signed_in? %>
-				<li class="nav-item">
+			<%# if user_mn_signed_in? %>
+				<!--li class="nav-item">
 					<div class="dropdown">
 						<button class="nav-link btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							CUENTA
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="<%= new_mosaico_natura_registro_path %>" data-turbolinks="false">DATOS DEL REGISTRO</a>
-							<a class="dropdown-item" href="<%= edit_user_mn_registration_path %>" data-turbolinks="false">CORREO/CONTRASEÑA</a>
-							<%= link_to "CERRAR SESIÓN", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
+							<a class="dropdown-item" href="<%#= new_mosaico_natura_registro_path %>" data-turbolinks="false">DATOS DEL REGISTRO</a>
+							<a class="dropdown-item" href="<%#= edit_user_mn_registration_path %>" data-turbolinks="false">CORREO/CONTRASEÑA</a>
+							<%#= link_to "CERRAR SESIÓN", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
 						</div>
 					</div>
-				</li>
-			<% else %>
-				<li class="nav-item">
-					<a class="nav-link" href="<%= new_user_mn_registration_path %>" data-turbolinks="false">REGISTRO</a>
-				</li>
-			<% end %>
+				</li-->
+			<%# else %>
+				<!--li class="nav-item">
+					<a class="nav-link" href="<%#= new_user_mn_registration_path %>" data-turbolinks="false">REGISTRO</a>
+				</li-->
+			<%# end %>
 		</ul>
 	</div>
 </nav>
