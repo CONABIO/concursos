@@ -26,38 +26,36 @@ class UsuarioAyv < Usuario
 
 	has_many :calificaciones, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "CalificacionAyv"
 	
-	scope :where_basico, -> { where(concurso_id: 1) }
-	
 	scope :select_dibujo, -> { select(:id, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion) }
 	scope :select_promedio, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio") }
-	scope :select_ganadores, -> { select(:id, :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, "medias.id as media1_id", "medias.original_filename as proceso", "media_bis_usuarios_join.id as media2_id", "media_bis_usuarios_join.original_filename as terminado", "media_metadatos.titulo", :descripcion, :tecnica, :compromiso, :calificacion, "(substr(cast(calificacion as char),4,1)) as lugar", :estado) }
-
-	scope :joins_dibujos, -> { left_joins(:media, :media_metadato, :calificaciones) }
+	scope :select_datos_usuario, -> { select_dibujo.select(:nombre, :apellido_paterno, :apellido_materno, :estado) } #must join direcciones
+	scope :select_lugar, -> { select("(substr(cast(calificacion as char),4,1)) as lugar") }
+	scope :select_ganadores, -> { select_datos_usuario.select_lugar }
+	scope :select_menciones, -> { select_datos_usuario.select_promedio }
 	
-	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where_basico }
+	scope :joins_dibujos_todos, -> { left_joins(:media, :media_metadato, :calificaciones) }
+	scope :joins_con_calificacion, -> { left_joins(:media, :media_metadato).joins(:calificaciones) }
+	scope :joins_con_calificacion_direccion, -> { joins_con_calificacion.joins(:direccion) }
 	
-	# All los dibujos, por eso el left join
-	scope :dibujos, -> { select_dibujo.joins_dibujos.where_dibujos.order('usuarios.id ASC') }
-	# Solo los finalistas, por eso el inner join
-	scope :dibujos_finalistas, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).where_dibujos.order('usuarios.id ASC') }
-	# Sólo los q se tienen q desempatar
-	scope :dibujos_desempate, -> { select_dibujo.left_joins(:media, :media_metadato).joins(:calificaciones).select_promedio.where_dibujos.order('promedio DESC').limit(6) }
-	# Los elegidos por los dioses... (del dibujo :P)
-	scope :dibujos_ganadores, -> { select_ganadores.left_joins(:media, :media_metadato).joins(:calificaciones).joins(:direccion).where_dibujos.where("calificacion not like '%0'").order('lugar ASC') }
-
-	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") }
+	scope :where_dibujos, -> { where('medias.posicion = 1').where('media_bis_usuarios_join.posicion = 2').where(concurso_id: 1) }
+	
+	scope :dibujos, -> { select_dibujo.joins_dibujos_todos.where_dibujos.order('usuarios.id ASC') } # All los dibujos, por eso el left join
+	scope :dibujos_finalistas, -> { select_dibujo.joins_con_calificacion.where_dibujos.order('usuarios.id ASC') } # Solo los finalistas, por eso el inner join
+	scope :dibujos_desempate, -> { select_dibujo.select_promedio.joins_con_calificacion.where_dibujos.order('promedio DESC').limit(6) } # Sólo los q se tienen q desempatar
+	scope :dibujos_ganadores, -> { select_ganadores.joins_con_calificacion_direccion.where_dibujos.where("calificacion not like '%0'").order('lugar ASC') } # Los elegidos por los dioses... (del dibujo :P)
+	scope :dibujos_para_menciones, -> (estado) { select_menciones.joins_con_calificacion_direccion.where_dibujos.where("calificacion like '%0'").where('direcciones.estado' => estado ).order('estado', 'promedio DESC').limit(1) } # Los "gracias por participar" i.e. las menciones horroríficas (falta escoger los máximos por promedio, no se pudo hacer con sql)
+	
+	scope :menores_a_6, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2016,2,28)}\"") } #estos en teoria no son categoria
 	scope :de_6_a_8, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2016,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
-	#Para fusionar ambas categorias
-	scope :menores_a_9, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") }
+	scope :menores_a_9, -> { where("usuarios.fecha_nacimiento > \"#{Date.new(2013,2,28)}\"") } #Para fusionar ambas "categorias"
 
 	scope :de_9_a_11, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2013,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2010,2,28)}\"") }
 	
 	scope :de_12_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2010,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2007,2,28)}\"") }
 	
 	scope :de_15_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\" and usuarios.fecha_nacimiento > \"#{Date.new(2004,2,28)}\"") }
-	scope :mayores_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") }
-	#Para fusionar ambas categorias
-	scope :mayores_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\"") }
+	scope :mayores_a_17, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2004,2,28)}\"") } #estos en teoria no son categoria
+	scope :mayores_a_14, -> { where("usuarios.fecha_nacimiento <= \"#{Date.new(2007,2,28)}\"") } #Para fusionar ambas "categorias"
 	
 	
 	def age_in_completed_years(bd)
@@ -73,4 +71,5 @@ class UsuarioAyv < Usuario
 	def edad
 		age_in_completed_years(self.fecha_nacimiento)
 	end
+		
 end
