@@ -71,5 +71,5 @@ class UsuarioAyv < Usuario
 	def edad
 		age_in_completed_years(self.fecha_nacimiento)
 	end
-		
+	
 end
