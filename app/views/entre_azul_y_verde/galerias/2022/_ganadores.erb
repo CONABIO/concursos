@@ -2,14 +2,14 @@
 	<img class="img-fluid" src="/concursos_assets/entre_azul_y_verde/ganadores.png">
 </div>
 <div class="col-12 col-md-10">
-  <% @dibujos.each do |categorias, dibujos| %>
+  <% @ganadores.each do |categorias, dibujos| %>
 		<div class="border-0 p-0 bg-gradient-dark" id="heading-<%= categorias %>">
 			<h4 class="p-3 m-0 text-info text-center"><%= categorias.to_s.humanize %></h4>
 		</div>
 		
 		<div class="row no-gutters d-flex justify-content-center align-items-center mb-4 px-4 bg-gradient-light shadow-lg">
 			<% dibujos.each_with_index do |d, i| %>
-				<% nombre_completo, estado = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' '), d.estado.titleize %>
+				<% nombre_completo, estado = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' ').titleize, d.estado.titleize %>
 				
 				<div class="col-12 col-lg-<%= i==0 ? '11' : i==1 ? '6' : '5' %>">
 					<div class="card bg-dark my-3 mx-1">

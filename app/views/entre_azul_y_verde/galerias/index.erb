@@ -55,16 +55,18 @@
 
 <% content_for(:delayedcss) do %>
   <style type="text/css" data-turbolinks-track="true">
-	  #galerias .sub-header{
+	  .galerias .sub-header{
 		  background: #0a6e21 linear-gradient(180deg, #3bac55, #063b12) repeat-x !important;
 	  }
   </style>
 <% end %>
 
 
-<div id="galerias" class="row d-flex justify-content-center mt-5">
+<div id="galeria-ganadores" class="row d-flex justify-content-center mt-5 galerias">
   <%= render partial: 'entre_azul_y_verde/galerias/2022/ganadores' %>
-  <%= render partial: 'entre_azul_y_verde/galerias/2022/menciones_honorificas' %>
+</div>
+<div id="galeria-menciones" class="row mt-5 galerias">
+	<%= render partial: 'entre_azul_y_verde/galerias/2022/menciones_honorificas' %>
 </div>
 
 <%= render :partial => "entre_azul_y_verde/shared/modal" %>
