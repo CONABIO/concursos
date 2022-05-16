@@ -22,7 +22,7 @@
 					     data-descripcion="<%= d.descripcion %>" data-compromiso="<%= d.compromiso %>"
 					     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
 					     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
-					     data-lugar="MH">
+					     data-lugar="<%= estado %>">
 						<h5 class="card-title p-2 bg-gradient-light text-primary text-center font-weight-bolder">"<%= d.titulo %>"</h5>
 						<p class="card-text w-50 p-2 bg-gradient-primary font-weight-bolder">
 							<%= nombre_completo %>

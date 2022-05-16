@@ -18,11 +18,11 @@
 
               var modal = $('#modalConcurso');
 
-              modal.find('#modalConcursoTitle').html("<span class='mr-5 px-3 py-2 rounded rounded-pill bg-gradient-success text-white h5 pull-left'>" + lugar + "°</span>" +
+              modal.find('#modalConcursoTitle').html("<span class='mr-5 px-3 py-2 rounded rounded-pill bg-gradient-success text-white h5 pull-left'>" + lugar + "</span>" +
                   "<p class='text-primary text-wrap text-center h4'>" +
-                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
+                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle " + ((idAnterior=="") ? "invisible" : "")  + "' data-toggle='tooltip' data-placement='bottom' title='Dibujo anterior' type='button' onclick='simulaClick("+ idAnterior +")'></button>" +
                   titulo +
-                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
+                  "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle " + ((idSiguiente=="") ? "invisible" : "") + "' data-toggle='tooltip' data-placement='bottom' title='Dibujo siguiente' type='button' onclick='simulaClick("+ idSiguiente +")'></button>" +
                   "</p>");
 
               modal.find('#modalConcursoBody').html("<h5 class='text-center text-info font-weight-bolder'>" +
