@@ -23,15 +23,17 @@
 							var filenameAnonimo = "/mn2022/"+ categoria +"/"+button.data('filename-anonimo');
 							var descripcion = button.data('descripcion');
 							var marca = button.data('marca');
-							var otraMarca = button.data('otra_marca');
+							var otraMarca = button.data('otra-marca');
 							var calificacion = button.data('calificacion');
+							var edad = button.data('edad');
 							var idAnterior = button.data('anterior');
 							var idSiguiente = button.data('siguiente');
 							var imgVid = '';
 							
 							var modal = $('#modalConcurso');
 							
-							modal.find('#modalConcursoTitle').html("<p class='text-info text-wrap text-center h4'>" +
+							modal.find('#modalConcursoTitle').html("<span class='badge badge-pill badge-secondary mt-1 mr-3 pull-left px-3 py-2'>" + id +"</span>" +
+									"<p class='text-info text-wrap text-center h4'>" +
 									(idAnterior ? "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' " +
 											"title='Dibujo anterior' type='button' onclick='actualizaInfoModal(\"#boton-" + idAnterior + "\")'></button>" : "") +
 									titulo +
@@ -49,7 +51,8 @@
 									"<p><b class='text-warning'>Descripción:</b><br />"+ descripcion +"</p>" +
 									"<p><b class='text-warning'>Localidad:</b><br />"+ localidad +"</p>" +
 									"<p><b class='text-warning'>Marca:</b><br />"+ marca +"</p>" +
-									"<p><b class='text-warning'>Otra marca:</b><br />"+ otraMarca +"</p>" +
+									(otraMarca == '' ? otraMarca : "<p><b class='text-warning'>Otra marca:</b><br />"+ otraMarca +"</p>") +
+									(edad > 17 ? "" : "<p><b class='text-warning'>Edad</b><br />"+ edad +"</p>") +
 									"</div>" +
 									"<div class='w-75 pull-left'>" +
 									"<p>" + imgVid + "</p>" +
