@@ -7,7 +7,7 @@
 	        data-descripcion="LO MANDÓ COMO TEMA(?): <br> las grandes ciudades acaban con el medio ambiente y es necesario hacer un esfuerzo para mantener verde nuestro planeta." data-compromiso="NO MANDÓ"
 	        data-anterior="1492"
 	        data-siguiente=""
-	        data-calificacion="<%= dgcc ? calificacion : calificacion.to_s[@juez].to_i %>">
+	        data-calificacion="<%= dgcc ? calificacion : calificacion.to_s[@juez[:posicion]].to_i %>">
 		<small>99998&nbsp;<%= calificacion.to_s[0..2].scan(/\w/).to_s if dgcc %></small><span class="fa fa-check-circle mx-2"></span>
 	</button>
 </div>

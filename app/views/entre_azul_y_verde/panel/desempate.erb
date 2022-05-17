@@ -1,4 +1,4 @@
-<% dgcc = (@juez.nil? || @juez == 3) %>
+<% dgcc = (@juez.nil? || @juez[:posicion] == 3) %>
 <% content_for(:delayedjs) do %>
 	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
 			$(document).ready(function(){
