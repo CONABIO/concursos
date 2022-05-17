@@ -23,7 +23,7 @@ class CalificacionesController < ApplicationController
 			#Jalo la calificacion entera a tres digitos en la base
 			cal_global = @calificacion.calificacion.to_s
 			#cambio solo lacalificacion determinada por la posicion del juez
-			cal_global[@juez] = calificacion_params[:calificacion]
+			cal_global[@juez[:posicion]] = calificacion_params[:calificacion]
 			#Como era string, pues la calificacion ya cambada a 3 digitos la sustituyo en los params para q el modelo la reciba peladita
 			params[:calificacion][:calificacion] = cal_global
 		end
