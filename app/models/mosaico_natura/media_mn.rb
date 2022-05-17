@@ -13,8 +13,12 @@ class MediaMn < Media
 	mount_uploader :original_filename, MediaAwsUploader
 	
 	scope :mosaico, -> { where(categoria: (1..9)) }
-
 	
+	scope :select_finalistas, -> { select(:id, :original_filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :usuario_id, :categoria_id) }
+	
+	scope :join_media_metadato, -> { joins(:media_metadato) }
+	
+	scope :finalistas, -> { select_finalistas.join_media_metadato }
 	
 	
 	def genera_filename_anonimo
