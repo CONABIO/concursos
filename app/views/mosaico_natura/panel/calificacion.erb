@@ -1,11 +1,15 @@
-<% dgcc = (@juez.nil? || @juez == 3) %>
+<% dgcc = (@juez.nil? || @juez[:posicion] == 4) %>
 <% content_for(:delayedjs) do %>
 	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
 			$(document).ready(function(){
 					
 					actualizaConteo = function(){
 							$('.fotos-calificadas').each(function(){
+									<% if dgcc %>
+									$(this).html(($("#collapse-" + $(this).data('categoria') + " button[data-calificacion]").length)-($("#collapse-" + $(this).data('categoria') + " button[data-calificacion='1110']").length));
+									<% else %>
 									$(this).html(($("#collapse-" + $(this).data('categoria') + " button[data-calificacion]").length)-($("#collapse-" + $(this).data('categoria') + " button[data-calificacion='1']").length));
+									<% end %>
 							});
 					};
 					
@@ -26,7 +30,7 @@
 							
 							var modal = $('#modalConcurso');
 							
-							modal.find('#modalConcursoTitle').html("<p class='text-primary text-wrap text-center h4'>" +
+							modal.find('#modalConcursoTitle').html("<p class='text-info text-wrap text-center h4'>" +
 									(idAnterior ? "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' " +
 											"title='Dibujo anterior' type='button' onclick='actualizaInfoModal(\"#boton-" + idAnterior + "\")'></button>" : "") +
 									titulo +
@@ -34,11 +38,11 @@
 											"title='Dibujo siguiente' type='button' onclick='actualizaInfoModal(\"#boton-" + idSiguiente + "\")'></button>" : "") +
 									"</p>");
 							
-							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left'>" +
-									"<p class='small text-left'><b class='text-warning'>Descripcion:</b><br />"+ descripcion +"</p>" +
-									"<p class='small text-left'><b class='text-warning'>Localidad:</b><br />"+ localidad +"</p>" +
-									"<p class='small text-left'><b class='text-warning'>Marca:</b><br />"+ marca +"</p>" +
-									"<p class='small text-left'><b class='text-warning'>Otra marca:</b><br />"+ otraMarca +"</p>" +
+							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left text-white-50 text-left'>" +
+									"<p><b class='text-warning'>Descripción:</b><br />"+ descripcion +"</p>" +
+									"<p><b class='text-warning'>Localidad:</b><br />"+ localidad +"</p>" +
+									"<p><b class='text-warning'>Marca:</b><br />"+ marca +"</p>" +
+									"<p><b class='text-warning'>Otra marca:</b><br />"+ otraMarca +"</p>" +
 									"</div>" +
 									"<div class='w-75 pull-left'>" +
 									"<p>" +
@@ -75,7 +79,8 @@
 											url:"/calificaciones/"+calificaBtnId,
 											data:{
 													calificacion: {
-															calificacion: newCal
+															calificacion: newCal,
+															concurso: 2
 													}
 											},
 											success: function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
@@ -133,8 +138,8 @@
 <div class="row mt-5 pt-4">
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
-			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones: <small>(Actualizadas al 27-04-2022)</small></li>
-			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los fotos finalistass.</li>
+			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Bienvenido <i><%= @juez[:usuario] %></i><br />Instrucciones: <small>(Actualizadas al 17-05-2022)</small><%= '.'*@juez[:posicion] %></li>
+			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los fotos finalistas.</li>
 			<li class="list-group-item small">Pasar el mouse encima (hover) de los botones (el número es el id del concursante) para ver un preview de la foto del dibujo.</li>
 			<li class="list-group-item small">Dar click sobre cualquier botón para ver el registro del concursante en un modal (fotos, proceso, compromiso, título, técnica, etc.)</li>
 			<li class="list-group-item small">Si se desea ver cualquier imagen en otra ventana, al dar click sobre cualquier imagen dentro del modal se abrirá dicha imagen en una nueva ventana.</li>
