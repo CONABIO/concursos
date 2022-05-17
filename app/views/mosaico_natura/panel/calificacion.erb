@@ -27,6 +27,7 @@
 							var calificacion = button.data('calificacion');
 							var idAnterior = button.data('anterior');
 							var idSiguiente = button.data('siguiente');
+							var imgVid = '';
 							
 							var modal = $('#modalConcurso');
 							
@@ -37,6 +38,12 @@
 									(idSiguiente ? "<button class='btn btn-outline-warning btn-sm fa fa-arrow-right pull-right rounded-circle' data-toggle='tooltip' data-placement='bottom' " +
 											"title='Dibujo siguiente' type='button' onclick='actualizaInfoModal(\"#boton-" + idSiguiente + "\")'></button>" : "") +
 									"</p>");
+
+							<% if @juez[:tipo].to_s.include? 'video' %>
+							imgVid = "<video class='img-fluid' controls><source src='"+ filenameAnonimo + "' type='video/mp4'>Tu navegador no soporta la etiqueta video</video>";
+							<% else %>
+							imgVid = "<a class='btn btn-link btn-block' href='" + filenameAnonimo + "' target='_blank'><img class='img-fluid' src='" + filenameAnonimo + "'></a>";
+							<% end %>;
 							
 							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left text-white-50 text-left'>" +
 									"<p><b class='text-warning'>Descripción:</b><br />"+ descripcion +"</p>" +
@@ -45,8 +52,7 @@
 									"<p><b class='text-warning'>Otra marca:</b><br />"+ otraMarca +"</p>" +
 									"</div>" +
 									"<div class='w-75 pull-left'>" +
-									"<p>" +
-									"<a class='btn btn-link btn-block' href='"+ filenameAnonimo +"' target='_blank'><img class='img-fluid' src='"+ filenameAnonimo +"'></a></p>" +
+									"<p>" + imgVid + "</p>" +
 									"</div>");
 							
 							<% if dgcc %>
