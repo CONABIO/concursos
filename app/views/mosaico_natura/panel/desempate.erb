@@ -1,4 +1,4 @@
-<% dgcc = (@juez.nil? || @juez[:posicion] == 3) %>
+<% dgcc = (@juez.nil? || @juez[:posicion] == 4) %>
 <% content_for(:delayedjs) do %>
 	<script type="text/javascript" charset="utf-8" data-turbolinks-track="true">
 			$(document).ready(function(){
@@ -162,7 +162,7 @@
       <li class="list-group-item small">Es todo.</li>
     </ul>
 	</div>
-	<%= render partial: "entre_azul_y_verde/panel/tabla_desempate", locals: {dgcc: dgcc} %>
+	<%= render partial: "mosaico_natura/panel/tabla_desempate", locals: {dgcc: dgcc} %>
 </div>
 
-<%= render :partial => "entre_azul_y_verde/shared/modal" %>
+<%= render :partial => "mosaico_natura/shared/modal" %>
