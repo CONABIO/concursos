@@ -20,11 +20,11 @@ class MosaicoNatura::MosaicoNaturaController < ApplicationController
 				when Rails.application.secrets.juez2
 					@juez = 2
 					password == Rails.application.secrets.password_juez_foto_2
-				when Rails.application.secrets.juez2
-					@juez = 2
+				when Rails.application.secrets.juez3
+					@juez = 3
 					password == Rails.application.secrets.password_juez_video_0
-				when Rails.application.secrets.juez2
-					@juez = 2
+				when Rails.application.secrets.juez4
+					@juez = 4
 					password == Rails.application.secrets.password_juez_video_1
 				else
 					false
