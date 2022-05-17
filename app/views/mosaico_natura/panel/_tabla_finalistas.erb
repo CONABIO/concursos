@@ -19,9 +19,9 @@
                     data-toggle="modal" data-target="#modalConcurso"
                     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-localidad="<%= d.localidad.titleize %>" data-categoria="<%= d.nombre_categoria %>"
                     data-original-filename="<%= d.original_filename_identifier %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
-                    data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca %>" data-otra-marca="<%= d.otra_marca %>"
+                    data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
                     data-anterior="<%= fotos[i-1].id unless i == 0 %>"
-                    data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>"
+                    data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" data-edad="<%= d.edad %>"
                     data-calificacion="<%= dgcc ? d.calificacion : d.calificacion.to_s[@juez[:posicion]].to_i %>">
               <small><%= d.id %>&nbsp;<%= d.calificacion.to_s[0..3].scan(/\w/).to_s if dgcc %></small><span class="fa fa-check-circle mx-2"></span>
             </button>
