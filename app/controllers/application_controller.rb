@@ -1,29 +1,42 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-
-  protected
-
-  # Limita la aplicacion a un usuario y contrasenia general
-  def authenticate
-	  @juez = nil
-	  authenticate_or_request_with_http_basic do |username, password|
-		  case username
-			  when Rails.application.secrets.dgcc
-				  @juez = 3
-				  password == Rails.application.secrets.password_dgcc
-			  when Rails.application.secrets.juez0
-				  @juez = 0
-				  password == Rails.application.secrets.password_juez0
-			  when Rails.application.secrets.juez1
-				  @juez = 1
-				  password == Rails.application.secrets.password_juez1
-			  when Rails.application.secrets.juez2
-				  @juez = 2
-				  password == Rails.application.secrets.password_juez2
-			  else
-				  false
-		  end
-	  end
-  end
+	protect_from_forgery with: :exception
+	
+	protected
+	
+	# Limita la aplicacion a un usuario y contrasenia general
+	def authenticate
+		@juez = nil
+		if params['calificacion']['concurso'] == '2'
+			authenticate_mn
+		else
+			authenticate_ayv
+		end
+	end
+	
+	def authenticate_ayv
+		puts 'appCAYV'
+		authorized = false
+		authenticate_or_request_with_http_basic do |username, password|
+			Rails.application.secrets.entre_azul_y_verde.each do |k,v|
+				authorized = (v[:usuario] == username && v[:password] == password)
+				@juez = v if authorized
+				return if authorized
+			end
+		end
+	end
+	
+	def authenticate_mn
+		puts 'appCMN'
+		authorized = false
+		authenticate_or_request_with_http_basic do |username, password|
+			Rails.application.secrets.mosaico_natura.each do |k,v|
+				authorized = (v[:usuario] == username && v[:password] == password)
+				@juez = v if authorized
+				@juez[:tipo] = k if authorized
+				return if authorized
+			end
+		end
+	end
 
 end
+

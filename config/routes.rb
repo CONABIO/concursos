@@ -42,7 +42,12 @@ Rails.application.routes.draw do
 			get 'bases' => 'inicio#bases'
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 			get '/galerias/:action', controller: 'galerias'
-			resources :panel
+			resources :panel do
+				collection do
+					get :calificacion
+					get :desempate
+				end
+			end
     end
 
 	else
@@ -76,7 +81,12 @@ Rails.application.routes.draw do
 				get 'bases' => 'inicio#bases'
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				resources :galerias
-        resources :panel
+				resources :panel do
+					collection do
+						get :calificacion
+						get :desempate
+					end
+				end
 			end
 		end
 	end
