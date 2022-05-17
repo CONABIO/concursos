@@ -21,11 +21,11 @@
                     data-anterior="<%= dibujos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= dibujos[i+1].id unless i == dibujos.length - 1 %>"
                     data-promedio="<%= d.promedio.round(2) %>"
-                    data-calificacion="<%= d.calificacion.to_s[@juez].to_i %>"
+                    data-calificacion="<%= d.calificacion.to_s[@juez[:posicion]].to_i %>"
                     data-calificacion-completa="<%= d.calificacion %>">
               <small>Datos de participante <%=d.id %></small>&nbsp;<i class="fa fa-search-plus"></i>
             </button>
-            <p class="text-success lugar">Lugar asignado: <b class="h4"><%= d.calificacion.to_s[@juez].to_i %></b></p>
+            <p class="text-success lugar">Lugar asignado: <b class="h4"><%= d.calificacion.to_s[@juez[:posicion]].to_i %></b></p>
           </div>
           <div class="col-7 p-2">
             <img class="img-fluid img-thumbnail" src=<%= "/media/ayv/#{d.id}/#{d.terminado}" %> >
