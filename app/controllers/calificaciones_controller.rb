@@ -19,7 +19,6 @@ class CalificacionesController < ApplicationController
 	
 	# PATCH/PUT /calificaciones/1 or /calificaciones/1.json
 	def update
-		
 		unless(@juez.nil?)
 			#Jalo la calificacion entera a tres digitos en la base
 			cal_global = @calificacion.calificacion.to_s
@@ -52,8 +51,12 @@ class CalificacionesController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_calificacion
-		usuario_id = params[:id]
-		@calificacion = Calificacion.find_by_usuario_id(usuario_id)
+		id = params[:id]
+		if params['calificacion']['concurso'] == '2'
+			@calificacion = Calificacion.find_by_media_id(id)
+		else
+			@calificacion = Calificacion.find_by_usuario_id(id)
+		end
 	end
 	
 	# Only allow a list of trusted parameters through.
