@@ -1,4 +1,5 @@
 class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
+	before_action :authenticate, only: %i[ calificacion desempate]
 	
 	def calificacion
 		@fotos = {}
