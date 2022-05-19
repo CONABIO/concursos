@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def authenticate_ayv
-		puts 'appCAYV'
 		authorized = false
 		authenticate_or_request_with_http_basic do |username, password|
 			Rails.application.secrets.entre_azul_y_verde.each do |k,v|
@@ -26,7 +25,6 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def authenticate_mn
-		puts 'appCMN'
 		authorized = false
 		authenticate_or_request_with_http_basic do |username, password|
 			Rails.application.secrets.mosaico_natura.each do |k,v|

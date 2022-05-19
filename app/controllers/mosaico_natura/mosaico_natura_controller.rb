@@ -4,7 +4,6 @@ class MosaicoNatura::MosaicoNaturaController < ApplicationController
 	protected
 	
 	def authenticate
-		puts 'MNC'
 		@juez = nil
 		authenticate_mn
 	end

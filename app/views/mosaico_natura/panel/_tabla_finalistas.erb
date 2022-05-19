@@ -22,8 +22,8 @@
                     data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
                     data-anterior="<%= fotos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" data-edad="<%= d.edad %>"
-                    data-calificacion="<%= dgcc ? d.calificacion : d.calificacion.to_s[@juez[:posicion]].to_i %>">
-              <small><%= d.id %>&nbsp;<%= d.calificacion.to_s[0..3].scan(/\w/).to_s if dgcc %></small><span class="fa fa-check-circle mx-2"></span>
+                    data-calificacion="<%= dgcc ? (categorias == 'cineminuto' ? d.calificacion-110 : d.calificacion) : d.calificacion.to_s[@juez[:posicion]].to_i %>">
+              <small><%= d.id %>&nbsp;<%=  d.calificacion.to_s[(categorias == 'cineminuto' ? (0..1) : (0..3))].scan(/\w/).to_s if dgcc  %></small><span class="fa fa-check-circle mx-2"></span>
             </button>
           </div>
       <% end %>
