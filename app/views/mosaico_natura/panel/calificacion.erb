@@ -6,7 +6,7 @@
 					actualizaConteo = function(){
 							$('.fotos-calificadas').each(function(){
 									<% if dgcc %>
-									$(this).html(($("#collapse-" + $(this).data('categoria') + " button[data-calificacion]").length)-($("#collapse-" + $(this).data('categoria') + " button[data-calificacion='1110']").length));
+									$(this).html(($("#collapse-" + $(this).data('categoria') + " button[data-calificacion]").length)-($("#collapse-" + $(this).data('categoria') + " button[data-calificacion*='1']").length));
 									<% else %>
 									$(this).html(($("#collapse-" + $(this).data('categoria') + " button[data-calificacion]").length)-($("#collapse-" + $(this).data('categoria') + " button[data-calificacion='1']").length));
 									<% end %>
@@ -41,11 +41,11 @@
 											"title='Dibujo siguiente' type='button' onclick='actualizaInfoModal(\"#boton-" + idSiguiente + "\")'></button>" : "") +
 									"</p>");
 
-							<% if @juez[:tipo].to_s.include? 'video' %>
-							imgVid = "<video class='img-fluid' controls><source src='"+ filenameAnonimo + "' type='video/mp4'>Tu navegador no soporta la etiqueta video</video>";
-							<% else %>
-							imgVid = "<a class='btn btn-link btn-block' href='" + filenameAnonimo + "' target='_blank'><img class='img-fluid' src='" + filenameAnonimo + "'></a>";
-							<% end %>;
+							if(filenameAnonimo.includes('mp4')){
+									imgVid = "<video class='img-fluid' controls><source src='"+ filenameAnonimo + "' type='video/mp4'>Tu navegador no soporta la etiqueta video</video>";
+							}else {
+									imgVid = "<a class='btn btn-link btn-block' href='" + filenameAnonimo + "' target='_blank'><img class='img-fluid' src='" + filenameAnonimo + "'></a>";
+							}
 							
 							modal.find('#modalConcursoBody').html("<div class='w-25 pull-left text-white-50 text-left'>" +
 									"<p><b class='text-warning'>Descripción:</b><br />"+ descripcion +"</p>" +
