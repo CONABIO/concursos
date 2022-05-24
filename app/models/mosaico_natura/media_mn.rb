@@ -1,4 +1,4 @@
-class MediaMn < Media
+class MosaicoNatura::MediaMn < Media
 	
 	FECHA_TERMINO_INICIAL = Date.new(2022, 01, 16)
 	
