@@ -10,7 +10,15 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 	end
 	
 	def desempate
-		@fotos = {}
+		@medias = {}
+		MosaicoNatura::CategoriaMn.all.each do |c|
+			unless c.id==8
+				@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_foto.where(categoria_id: c.id)
+			else
+				@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_video
+			end
+		end
+	
 	end
 	
 end
