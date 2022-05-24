@@ -21,14 +21,16 @@ class MosaicoNatura::MediaMn < Media
 	
 	scope :select_medias, -> { select(:id, :original_filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, :fecha_nacimiento, :categoria_id, :created_at, :nombre_categoria) }
 	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
+	scope :select_promedio_comparativo, -> { select("(substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez01", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez02", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez03", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio_sin_juez04") }
 	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
+	scope :select_promedio_comparativo_videos, -> { select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
 	
 	scope :joins_con_calificacion, -> { left_joins(:media_metadato, :categoria, :usuario).joins(:calificaciones) }
 	scope :joins_con_calificacion_direccion, -> { left_joins(:media_metadato, :categoria).joins(:calificaciones, :direccion) }
 	
 	scope :finalistas, -> { select_medias.joins_con_calificacion.where_fotos }
-	scope :desempate_foto, -> { select_medias.select_promedio_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC').limit(10) }
-	scope :desempate_video, -> { select_medias.select_promedio_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC').limit(6) }
+	scope :desempate_foto, -> { select_medias.select_promedio_fotos.select_promedio_comparativo.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
+	scope :desempate_video, -> { select_medias.select_promedio_videos.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
 	
 	def genera_filename_anonimo
 		[self.usuario_id, self.categoria_id, self.id, self.created_at.strftime('%Y%m%d%H%M%S'),dame_extension(self.original_filename_identifier)].join('_')

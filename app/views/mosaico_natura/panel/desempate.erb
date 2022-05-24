@@ -25,10 +25,10 @@
 							var juez03 = Number(String(calificacionCompleta)[2]);
 							var juez04 = Number(String(calificacionCompleta)[3]);
 							var promedio = button.data('promedio');
-							var promedioSin01 = round(((categoria == 'cineminuto') ? juez02 : ((promedio*4)-juez01)/3), 2);
-							var promedioSin02 = round(((categoria == 'cineminuto') ? juez01 : ((promedio*4)-juez02)/3), 2);
-							var promedioSin03 = round((((promedio*4)-juez03)/3), 2);
-							var promedioSin04 = round((((promedio*4)-juez04)/3), 2);
+							var promedioSin01 = round(((categoria == 'cineminuto') ? juez02 : (juez02+juez03+juez04)/3), 2);
+							var promedioSin02 = round(((categoria == 'cineminuto') ? juez01 : (juez01+juez03+juez04)/3), 2);
+							var promedioSin03 = round(((juez01+juez02+juez04)/3), 2);
+							var promedioSin04 = round(((juez01+juez02+juez03)/3), 2);
 							var edad = button.data('edad');
 							var idAnterior = button.data('anterior');
 							var idSiguiente = button.data('siguiente');
@@ -171,11 +171,13 @@
 <div class="row mt-5 pt-4">
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
-			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones: <small>(Actualizadas al 30-04-2022)</small></li>
-			<li class="list-group-item small">El listado de dibujos por categoría esta ordenado de mayor a menor de acuerdo al promedio.</li>
-			<li class="list-group-item small">Se muestran los primeros 6 lugares apra poder decidir en caso de multiple empate</li>
-      <li class="list-group-item small">Dar click en el botón de datos para ver el resto de información, técnica, compromiso, etc.</li>
-      <li class="list-group-item small">Dentro del modal, anotar EL LUGAR que se desea establecer como definitivo.</li>
+			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Instrucciones: <small>(Actualizadas al 24-05-2022)</small></li>
+			<li class="list-group-item small">El listado de fotos o videos por categoría esta ordenado de mayor a menor de acuerdo al promedio.</li>
+			<li class="list-group-item small">Se muestran los primeros 10 lugares para poder decidir en caso de multiple empate (cineminuto y tema libre van todos por ser muy pocos)</li>
+			<li class="list-group-item small">En caso de que entres con el parametro de categoría, se meustra TODOS los finalsitas de esa categoria</li>
+      <li class="list-group-item small">Dar click en el botón de datos para ver el resto de información, compromiso, localidad, marca, etc.</li>
+      <li class="list-group-item small">Dentro del modal, anotar EL LUGAR que se desea establecer como válido.</li>
+			<li class="list-group-item small">Si entras y sales del modal puedes reasignar lugares</li>
       <li class="list-group-item small">Es todo.</li>
     </ul>
 	</div>
