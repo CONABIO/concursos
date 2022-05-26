@@ -1,5 +1,5 @@
 class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
-	before_action :authenticate, only: %i[ calificacion desempate]
+	before_action :authenticate, only: %i[ calificacion desempate todos]
 	
 	def calificacion
 		@fotos = {}
@@ -13,7 +13,7 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 		@medias = {}
 		if params[:categoria].present?
 			categoria = params[:categoria]
-			@medias[categoria] = (categoria == 'cineminuto') ?  MosaicoNatura::MediaMn.desempate_video :  MosaicoNatura::MediaMn.desempate_foto.where("nombre_categoria = '#{categoria}'")
+			@medias[categoria] = (categoria == 'cineminuto') ?  MosaicoNatura::MediaMn.desempate_video_con_datos :  MosaicoNatura::MediaMn.desempate_foto_con_datos.where("nombre_categoria = '#{categoria}'")
 		else
 			MosaicoNatura::CategoriaMn.all.each do |c|
 				unless c.id==8
@@ -32,23 +32,23 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 	
 	def ganadores
 		@medias = {}
-		if params[:categoria].present?
-			categoria = params[:categoria]
-			@medias[categoria] = (categoria == 'cineminuto') ?  MosaicoNatura::MediaMn.desempate_video :  MosaicoNatura::MediaMn.desempate_foto.where("nombre_categoria = '#{categoria}'")
-		else
-			MosaicoNatura::CategoriaMn.all.each do |c|
-				unless c.id==8
-					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.ganadores_foto.where(categoria_id: c.id)
-				else
-					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.ganadores_video
-				end
-			end
+		MosaicoNatura::CategoriaMn.all.each do |c|
+				@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.ganadores.where(categoria_id: c.id)
 		end
-		
+
 		respond_to do |format|
 			format.html
 			format.json { render json: @medias.to_json, status: :ok}
 		end
 	end
 	
+	def todos
+		@medias = {}
+		MosaicoNatura::CategoriaMn.all.each do |c|
+			@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todos.where(categoria_id: c.id)
+		end
+		
+		render json: @medias.to_json
+		
+	end
 end
