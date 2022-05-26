@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 				collection do
 					get :calificacion
 					get :desempate
+					get :ganadores
+					get :todos
 				end
 			end
     end
@@ -85,6 +87,8 @@ Rails.application.routes.draw do
 					collection do
 						get :calificacion
 						get :desempate
+						get :ganadores
+						get :todos
 					end
 				end
 			end
