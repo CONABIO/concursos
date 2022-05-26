@@ -44,10 +44,14 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 	
 	def todos
 		@medias = {}
-		MosaicoNatura::CategoriaMn.all.each do |c|
-			@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todo_de_todos.where(categoria_id: c.id)
+		if params[:categoria].present?
+			categoria = params[:categoria]
+			@medias[categoria] = MosaicoNatura::MediaMn.todo_de_finalistas.where("nombre_categoria = '#{categoria}'")
+		else
+			MosaicoNatura::CategoriaMn.all.each do |c|
+				@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todo_de_todos.where(categoria_id: c.id)
+			end
 		end
-		
 		render json: @medias.to_json
 		
 	end
