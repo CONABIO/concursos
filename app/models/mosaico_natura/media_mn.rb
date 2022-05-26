@@ -4,9 +4,8 @@ class MosaicoNatura::MediaMn < Media
 	FECHA_TERMINO_INICIAL = Date.new(2022, 01, 16)
 	
 	belongs_to :usuario, class_name: "UsuarioMn"
-	belongs_to :usuario_bis, class_name: "UsuarioMn"
 	has_one :direccion, through: :usuario, source: :direccion
-	has_one :user, through: :usuario_bis, source: :user
+	has_one :user, through: :usuario, source: :user
 
 	belongs_to :categoria, class_name: "CategoriaMn"
 	has_one :media_metadato, inverse_of: :media, foreign_key: :media_id, class_name: "MediaMetadatoMn", dependent: :destroy
@@ -22,26 +21,29 @@ class MosaicoNatura::MediaMn < Media
 	scope :where_fotos, -> { where('posicion IS NULL').where('usuarios.concurso_id' => 2) }
 	
 	
-	scope :select_medias, -> { select(:id, "original_filename as archivo_original",:filename,  'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, :fecha_nacimiento, :categoria_id, :created_at, :nombre_categoria) }
+	scope :select_medias, -> { select(:id, "original_filename as archivo_original",:filename,  'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria) }
 	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
 	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
 	scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select("(substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez01", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez02", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez03", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio_sin_juez04") }
 	scope :select_promedio_comparativo_videos, -> { select_promedio_videos.select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
-	scope :select_datos_usuario, -> { select("nombre", "apellido_paterno", "apellido_materno")}
-	scope :select_ganadores, -> { select_medias.select_datos_usuario.select("substr(cast(calificacion as char),5,1) as lugar")}
+	scope :select_datos_usuario, -> { select("usuarios.nombre", "usuarios.apellido_paterno", "usuarios.apellido_materno")}
+	scope :select_datos_direccion, -> { select(:calle, :numero, :interior, :colonia, :municipio, :cp, :estado) }
+	
+	scope :select_ganadores, -> { select_medias.select_datos_usuario.select(:estado).select("substr(cast(calificacion as char),5,1) as lugar")}
+	scope :select_todo, -> { select_medias.select_datos_usuario.select_datos_direccion.select("substr(cast(calificacion as char),5,1) as lugar").select( :email, "usuarios.medio", "usuarios.otro_medio" ) }
 	
 	scope :joins_con_calificacion, -> { left_joins(:media_metadato, :categoria, :usuario).joins(:calificaciones) }
-	scope :joins_con_calificacion_direccion, -> { left_joins(:media_metadato, :categoria).joins(:direccion, :calificaciones) }
+	scope :joins_con_calificacion_direccion, -> { left_joins(:media_metadato, :categoria, :user, :direccion).joins(:calificaciones) }
 	
 	scope :finalistas, -> { select_medias.joins_con_calificacion.where_fotos }
-	scope :desempate_foto, -> { select_medias.select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
-	scope :desempate_video, -> { select_medias.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
-	scope :desempate_foto_con_datos, -> { select_medias.select_datos_usuario.select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
-	scope :desempate_video_con_datos, -> { select_medias.select_datos_usuario.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
+	scope :desempate_foto, -> { select_medias.select_promedio_comparativo_fotos.joins_con_calificacion.where('categoria_id != 8').order('promedio DESC') }
+	scope :desempate_video, -> { select_medias.select_promedio_comparativo_videos.joins_con_calificacion.where('categoria_id' => 8).order('promedio DESC') }
+	scope :desempate_foto_con_datos, -> { select_medias.select_datos_usuario.select(:estado).select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
+	scope :desempate_video_con_datos, -> { select_medias.select_datos_usuario.select(:estado).select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
 	
 	scope :ganadores, -> { select_ganadores.joins_con_calificacion_direccion.where_fotos.where("calificacion not like '%0'").order("lugar ASC") }
 	
-	scope :todos, -> { select_medias.select_datos_usuario.select_ganadores.joins_con_calificacion_direccion.joins(:user).where_fotos }
+	scope :todo_de_todos, -> { select_todo.left_joins(:media_metadato, :categoria, :user, :direccion, :calificaciones).where_fotos }
 	
 	def filename
 		[self.usuario_id, self.categoria_id, self.id, self.created_at.strftime('%Y%m%d%H%M%S'),dame_extension(self.archivo_original)].join('_')

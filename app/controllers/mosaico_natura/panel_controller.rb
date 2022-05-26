@@ -45,7 +45,7 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 	def todos
 		@medias = {}
 		MosaicoNatura::CategoriaMn.all.each do |c|
-			@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todos.where(categoria_id: c.id)
+			@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todo_de_todos.where(categoria_id: c.id)
 		end
 		
 		render json: @medias.to_json
