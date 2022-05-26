@@ -16,7 +16,7 @@
                     data-toggle="modal" data-target="#modalConcurso"
                     data-usuario-id="<%=d.usuario_id %>" data-media-id="<%=d.id %>"
                     data-titulo="<%=d.titulo %>" data-localidad="<%= d.localidad.titleize %>" data-categoria="<%= d.nombre_categoria %>"
-                    data-original-filename="<%= d.original_filename_identifier %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
+                    data-original-filename="<%= d.archivo_original %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
                     data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
                     data-anterior="<%= medias[i-1].id unless i == 0 %>" data-siguiente="<%= medias[i+1].id unless i == medias.length - 1 %>"
                     data-promedio="<%= d.promedio.round(2) %>" data-edad="<%= d.edad %>"

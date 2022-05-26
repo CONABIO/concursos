@@ -18,7 +18,7 @@
             <button id="boton-<%= d.id %>" class="btn btn-lg btn-block shadow-sm fotos-popover" type="button"
                     data-toggle="modal" data-target="#modalConcurso"
                     data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-localidad="<%= d.localidad.titleize %>" data-categoria="<%= d.nombre_categoria %>"
-                    data-original-filename="<%= d.original_filename_identifier %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
+                    data-original-filename="<%= d.archivo_original %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
                     data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
                     data-anterior="<%= fotos[i-1].id unless i == 0 %>"
                     data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" data-edad="<%= d.edad %>"
