@@ -43,7 +43,7 @@ class MosaicoNatura::MediaMn < Media
 	
 	scope :ganadores, -> { select_ganadores.joins_con_calificacion_direccion.where_fotos.where("calificacion not like '%0'").order("lugar ASC") }
 	
-	scope :todo_de_finalistas, -> { select_todo.left_joins(:media_metadato, :categoria, :user, :direccion, :calificaciones).where_fotos }
+	scope :todo_de_todos, -> { select_todo.left_joins(:media_metadato, :categoria, :user, :direccion, :calificaciones).where_fotos }
 	
 	def filename
 		[self.usuario_id, self.categoria_id, self.id, self.created_at.strftime('%Y%m%d%H%M%S'),dame_extension(self.archivo_original)].join('_')
