@@ -38,8 +38,8 @@ class MosaicoNatura::MediaMn < Media
 	scope :finalistas, -> { select_medias.joins_con_calificacion.where_fotos }
 	scope :desempate_foto, -> { select_medias.select_promedio_comparativo_fotos.joins_con_calificacion.where('categoria_id != 8').order('promedio DESC') }
 	scope :desempate_video, -> { select_medias.select_promedio_comparativo_videos.joins_con_calificacion.where('categoria_id' => 8).order('promedio DESC') }
-	scope :desempate_foto_con_datos, -> { select_medias.select_datos_usuario.select(:estado).select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
-	scope :desempate_video_con_datos, -> { select_medias.select_datos_usuario.select(:estado).select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
+	scope :desempate_foto_con_datos, -> { select_ganadores.select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
+	scope :desempate_video_con_datos, -> { select_ganadores.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
 	
 	scope :ganadores, -> { select_ganadores.joins_con_calificacion_direccion.where_fotos.where("calificacion not like '%0'").order("lugar ASC") }
 	
