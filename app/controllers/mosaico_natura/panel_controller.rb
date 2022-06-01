@@ -17,9 +17,9 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 		else
 			MosaicoNatura::CategoriaMn.all.each do |c|
 				unless c.id==8
-					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_foto.where(categoria_id: c.id).limit(10)
+					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_foto_con_datos.where(categoria_id: c.id).limit(10)
 				else
-					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_video
+					@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.desempate_video_con_datos
 				end
 			end
 		end
@@ -50,7 +50,6 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 		else
 			MosaicoNatura::CategoriaMn.all.each do |c|
 				@medias[c.nombre_categoria] = MosaicoNatura::MediaMn.todo_de_todos.where(categoria_id: c.id)
-				puts (@medias[c.nombre_categoria].length)
 			end
 		end
 		render json: @medias.to_json
