@@ -9,12 +9,17 @@
 		
 		
 			<% fotos.each_with_index do |d, i| %>
-				<% nombre_completo, foto = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' ').titleize, "/mn2022/#{categorias}/#{d.genera_filename_anonimo}" %>
+				<% nombre_completo, foto = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' ').titleize, "/mn2022/small/#{d.genera_filename_anonimo}" %>
 				
 				<div class="col-12 col-lg-<%= i==0 ? '6' : '4' %>">
 					<div class="card bg-dark border-0 my-3 mx-1">
 						<h5 class="card-title p-2 m-0 bg-primary text-center font-weight-bolder">"<%= d.titulo %>"</h5>
-						<img class="card-img" alt="<%= nombre_completo %>" src=<%= foto %> >
+						<% if categorias == 'cineminuto' %>
+							<video class="card-img" src=<%= "/mn2022/#{categorias}/#{d.genera_filename_anonimo}" %> ></video>
+							<% foto = "/mn2022/#{categorias}/#{d.genera_filename_anonimo}" %>
+						<% else %>
+							<img class="card-img" alt="<%= nombre_completo %>" src=<%= foto %> >
+						<% end %>
 						<div class="card-img-overlay rounded-0 p-0" id="boton-<%= d.id %>" type="button"
 						     data-toggle="modal" data-target="#modalConcurso"
 						     data-id="<%=d.id %>"
