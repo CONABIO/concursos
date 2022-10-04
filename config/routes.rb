@@ -82,6 +82,7 @@ Rails.application.routes.draw do
 				get 'medios' => 'inicio#index'
 				get 'bases' => 'inicio#bases'
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
+				get '/galerias/:action', controller: 'galerias'
 				resources :galerias
 				resources :panel do
 					collection do
