@@ -1,43 +1,37 @@
-<div class="w-100 pt-4 sub-header text-center">
-	<img class="img-fluid" src="/concursos_assets/entre_azul_y_verde/ganadores.png">
+<div class="col-12 sub-header text-center">
+	<h1 class="mt-5 text-light">GANADORES</h1>
 </div>
-<div class="col-12 col-md-10">
-  <% @ganadores.each do |categorias, fotos| %>
-		<% categoria = categorias.titleize %> 
+<div class="col-12 text-light px-0">
+	<% @ganadores.each do |categorias, fotos| %>
+		<% categoria = categorias.titleize %>
+		<h5 class="p-4 m-0 bg-dark text-center font-weight-bolder" id="heading-menciones-<%= categorias %>"><%= categoria %></h5>
+		<div class="row justify-content-center mb-5 pb-5">
 		
-		<div class="border-0 p-0 bg-gradient-dark" id="heading-<%= categorias %>">
-			<h4 class="p-3 m-0 text-info text-center"><%= categoria %></h4>
-		</div>
 		
-		<div class="row no-gutters d-flex justify-content-center align-items-center mb-4 px-4 bg-gradient-light shadow-lg">
 			<% fotos.each_with_index do |d, i| %>
-				<% nombre_completo, foto = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' ').titleize, "/media/mn/#{d.usuario_id}/#{d.archivo_original}" %>
+				<% nombre_completo, foto = [d.nombre, d.apellido_paterno, d.apellido_materno].join(' ').titleize, "/mn2022/#{categorias}/#{d.genera_filename_anonimo}" %>
 				
-				<div class="col-12 col-lg-<%= i==0 ? '11' : i==1 ? '6' : '5' %>">
-					<div class="card bg-dark my-3 mx-1">
+				<div class="col-12 col-lg-<%= i==0 ? '6' : '4' %>">
+					<div class="card bg-dark border-0 my-3 mx-1">
+						<h5 class="card-title p-2 m-0 bg-primary text-center font-weight-bolder">"<%= d.titulo %>"</h5>
 						<img class="card-img" alt="<%= nombre_completo %>" src=<%= foto %> >
-						<div class="card-img-overlay p-2" id="boton-<%= d.id %>" type="button"
+						<div class="card-img-overlay rounded-0 p-0" id="boton-<%= d.id %>" type="button"
 						     data-toggle="modal" data-target="#modalConcurso"
-						     data-id="<%=d.id %>" 
-							 data-titulo="<%=d.titulo %>" 
-							 data-marca="<%= d.marca.present? ? d.marca : d.otra_marca %>"
+						     data-id="<%=d.id %>"
+						     data-titulo="<%=d.titulo %>"
+						     data-marca="<%= d.marca.present? ? d.marca : d.otra_marca %>"
 						     data-nombre="<%= nombre_completo %>"
 						     data-categoria="<%= categoria %>"
-							 data-localidad="<%= d.localidad %>"
-						     data-foto="<%= foto %>" 
-						     data-descripcion="<%= d.descripcion %>" 
+						     data-localidad="<%= d.localidad.titleize %>"
+						     data-foto="<%= foto %>"
+						     data-descripcion="<%= d.descripcion %>"
 						     data-anterior="<%= fotos[i-1].id unless i == 0 %>"
 						     data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>"
 						     data-lugar="<%= d.lugar << "°" %>">
-
-							<span class="m-n4 px-3 py-2 rounded rounded-pill bg-gradient-success text-white h5 pull-left "><%= d.lugar %></span>
-							<h5 class="card-title p-2 bg-gradient-light text-primary text-center font-weight-bolder">"<%= d.titulo %>"</h5>
-							<p class="card-text w-50 p-2 bg-gradient-primary font-weight-bolder">
-								<%= nombre_completo %>
-							</p>
-							<p class="card-text w-25 bg-dark p-1 small"><%= d.localidad %></p>
-							<p class="card-text w-50 bg-info p-1"><%= categoria %></p>
+							<span class="bg-warning font-weight-bolder m-n2 pull-left px-3 py-2 rounded rounded-pill"><%= d.lugar %></span>
 						</div>
+						<p class="bg-dark card-text my-0 p-1 small text-right"><%= d.localidad.titleize %></p>
+						<h6 class="bg-primary card-text font-weight-bolder p-2 shadow-lg text-right" style="opacity: 0.8;"><%= nombre_completo %></h6>
 					</div>
 				</div>
 			
