@@ -23,8 +23,9 @@ Rails.application.routes.draw do
 			get 'medios' => 'inicio#index'
 			
 			get 'bases' => 'inicio#bases'
-			get '/galerias/:action', controller: 'galerias'
-
+			get '/galerias/index'
+			get '/galerias/' => 'galerias#index'
+			
       resources :panel do
 				collection do
 					get :precalificacion
@@ -41,7 +42,8 @@ Rails.application.routes.draw do
 			get 'medios' => 'inicio#index'
 			get 'bases' => 'inicio#bases'
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
-			get '/galerias/:action', controller: 'galerias'
+			get '/galerias/index'
+			get '/galerias/' => 'galerias#index'
 			resources :panel do
 				collection do
 					get :calificacion
@@ -62,7 +64,8 @@ Rails.application.routes.draw do
 				get 'medios' => 'inicio#index'
 				
 				get 'bases' => 'inicio#bases'
-				get '/galerias/:action', controller: 'galerias'
+				get '/galerias/index'
+				get '/galerias/' => 'galerias#index'
 				resources :panel do
 					collection do
 						get :precalificacion
@@ -82,7 +85,8 @@ Rails.application.routes.draw do
 				get 'medios' => 'inicio#index'
 				get 'bases' => 'inicio#bases'
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
-				get '/galerias/:action', controller: 'galerias'
+				get '/galerias/index'
+				get '/galerias/' => 'galerias#index'
 				resources :galerias
 				resources :panel do
 					collection do
