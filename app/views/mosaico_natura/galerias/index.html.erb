@@ -18,6 +18,12 @@
 				
 				var modal = $('#modalConcurso');
 				
+				if(categoria == 'Cineminuto'){
+					imgVid = "<video class='img-fluid' controls><source src='"+ foto + "' type='video/mp4'>Tu navegador no soporta la etiqueta video</video>";
+				}else {
+					imgVid = "<img class='img-fluid ' src='"+ foto +"'>";
+				}
+				
 				modal.find('#modalConcursoTitle').html("<p class='text-white text-wrap text-center h4 font-weight-bolder'>" +
 					(idAnterior ? "<button class='btn btn-outline-warning btn-sm fa fa-arrow-left pull-left rounded-circle' data-toggle='tooltip' data-placement='bottom' " +
 						"title='Dibujo anterior' type='button' onclick='actualizaInfoModal(\"#boton-" + idAnterior + "\")'></button>" : "") +
@@ -28,9 +34,9 @@
 					"</p>");
 				
 				modal.find('#modalConcursoBody').html("<div class='w-50 pull-left'>" +
-					"<p class='text-left'><a class='btn btn-link' href='"+ foto +"' target='_blank'><img class='img-fluid ' src='"+ foto +"'></a></p>" +
+					"<p class='text-left'>" + imgVid + "</p>" +
 					"</div>" +
-					"<div class='w-50 pull-left text-white'>" +
+					"<div class='w-50 pl-5 pull-left text-white'>" +
 					"<h6 class='text-left py-1 font-weight-bolder'><span class='badge-primary px-2 py-1'>" + categoria + "</span></h6>" +
 					"<h6 class='text-left py-1 font-weight-bolder'><span class='badge-primary px-2 py-1'>" + nombre + "</span></h6>" +
 					"<h6 class='text-left py-1 font-weight-bolder'><span class='badge-primary px-2 py-1'>" + localidad + "</span></h6>" +
@@ -45,6 +51,9 @@
 			// Actualizar Modal con Button that triggered the modal :p
 			$('#modalConcurso').on('show.bs.modal', function (event){actualizaInfoModal(event.relatedTarget)});
 			
+			document.oncontextmenu = function() {
+				return false;
+			}
 		});
 	</script>
 <% end %>
