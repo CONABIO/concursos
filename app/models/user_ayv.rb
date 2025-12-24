@@ -1,2 +1,3 @@
 class UserAyv < User
+    
 end

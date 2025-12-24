@@ -4,7 +4,7 @@ class UsuarioAyv < Usuario
 	MEDIO = [["Redes sociales", "redes-sociales"], ["Radio", "radio"], ["Televisión", "television"], ["En la escuela", "escuela"], ["Otro", "otro"]]
 	FECHA_NAC_MIN = "2003-01-01"
 	FECHA_NAC_MAX = "2016-01-01"
-	FECHA_TERMINO = Date.new(2022,02,28)
+	FECHA_TERMINO = Date.new(2025,12,28)
 
 	#alias_attribute :edad, :edad
 
