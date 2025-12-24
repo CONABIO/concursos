@@ -16,9 +16,9 @@
   </thead>
 
   <tbody>
-    <% @usuarios.each do |usuario| %>
+    <% @usuarios.each do |usuario|  %>
       <tr>
-        <td><%= usuario.email %></td>
+        
         <td><%= usuario.nombre %></td>
         <td><%= usuario.apellido_paterno %></td>
         <td><%= usuario.apellido_materno %></td>
@@ -28,7 +28,7 @@
         <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
         <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+    <%  end %>
   </tbody>
 </table>
 

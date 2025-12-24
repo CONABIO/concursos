@@ -25,6 +25,8 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  
+  config.read_encrypted_secrets = true
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -41,6 +43,7 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.read_encrypted_secrets = true
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
