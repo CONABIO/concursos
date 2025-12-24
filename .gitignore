@@ -53,5 +53,7 @@ config/secrets.yml
 
 .DS_STORE
 public/uploads
+public/concursos_assets/
+yarn.lock
 
 
