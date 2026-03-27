@@ -1,7 +1,24 @@
+# == Schema Information
+#
+# Table name: medias
+#
+#  id                :bigint           not null, primary key
+#  fecha_subida      :date
+#  filename          :string(255)
+#  original_filename :string(255)
+#  posicion          :integer
+#  ruta              :string(255)
+#  size              :integer
+#  titulo            :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  categoria_id      :integer
+#  usuario_id        :integer
+#
 class MosaicoNatura::MediaMn < Media
 	
 	#attr_accessor :filename
-	FECHA_TERMINO_INICIAL = Date.new(2022, 01, 16)
+	FECHA_TERMINO_INICIAL = Date.new(2026, 03, 2)
 	
 	belongs_to :usuario, class_name: "UsuarioMn"
 	has_one :direccion, through: :usuario, source: :direccion

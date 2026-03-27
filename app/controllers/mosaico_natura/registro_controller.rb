@@ -2,7 +2,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	before_action :set_registro, only: %i[ show edit update destroy ]
 	before_action :set_categorias, only: %i[ edit update ]
 	before_action :authenticate_user_mn!
-	
+
 	# GET /registro/new
 	def new
 		@registro = MosaicoNatura::UsuarioMn.where(user_id: current_user_mn.id).first
@@ -28,7 +28,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 		@registro = MosaicoNatura::UsuarioMn.new(registro_params)
 
 		# Asigna le concurso
-		concurso = CatConcurso.where(nombre_concurso: UsuarioMn::CONCURSO).first
+     concurso = CatConcurso.where(nombre_concurso: MosaicoNatura::UsuarioMn::CONCURSO).first
 		@registro.concurso_id = concurso.id
 		
 		respond_to do |format|
@@ -57,7 +57,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 			end
 		end
 	end
-
+ 
 	
 	private
 	# Use callbacks to share common setup or constraints between actions.
@@ -77,6 +77,7 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 	
 	# Only allow a list of trusted parameters through.
 	def registro_params
+
 			params.require(:usuario_mn).permit(:nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio, :otro_medio, :user_id,
 			                                    direccion_attributes: [:id, :calle, :numero, :interior, :colonia, :municipio, :cp, :estado, :usuario_id, :_destroy],
 			                                    media_attributes: [:id, :original_filename, :posicion, :filename, :titulo, :fecha_subida, :ruta, :size, :usuario_id, :categoria_id, :_destroy,

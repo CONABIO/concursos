@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-
+gem "annotate"
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 # Use Puma as the app server
@@ -63,4 +63,5 @@ gem 'fontello_rails_converter', git: 'https://github.com/railslove/fontello_rail
 gem 'jquery-rails'
 gem 'rails', '5.1.6.2'
 gem 'simple_form'
+gem 'aws-sdk-s3', '~> 1'  # Necesaria para AWS
 

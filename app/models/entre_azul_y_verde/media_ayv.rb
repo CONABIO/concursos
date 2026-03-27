@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: medias
+#
+#  id                :bigint           not null, primary key
+#  fecha_subida      :date
+#  filename          :string(255)
+#  original_filename :string(255)
+#  posicion          :integer
+#  ruta              :string(255)
+#  size              :integer
+#  titulo            :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  categoria_id      :integer
+#  usuario_id        :integer
+#
 class MediaAyv < Media
 	
 	#belongs_to :categoria
