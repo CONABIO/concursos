@@ -19,7 +19,20 @@
 				            required: true,
 				            label: "Confirma la contraseña",
 				            input_html: { autocomplete: "new-password" } %>
+			
 			</div>
+			<div class="form-check">
+				<%= f.check_box :terms, class: "form-check-input", required: true %>
+				<%= f.label :terms, class: "form-check-label" do %>
+					<div class = "mb-4">
+					Acepto los términos y condiciones</a> establecidas en las bases de este concurso (liga al PDF)
+					<br>
+					Consulta nuestro aviso de privacidad integral para este concurso (liga)
+					</div>
+				<% end %>
+				
+			</div>
+			
 			<div class="form-actions">
 				<%= f.button :submit, "Crear cuenta", class: "btn btn-block btn-success mb-4" %>
 			</div>

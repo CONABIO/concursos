@@ -1,6 +1,9 @@
 <% nuevo = @registro.new_record? %>
-<%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
-	<div class="row mt-4">
+<%= simple_form_for @registro, 
+                    as: :usuario_mn,
+                    url: @form_params[:url], 
+                    method: @form_params[:method], 
+                    html: { multipart: true } do |f| %>	<div class="row mt-4">
 		<div class="bg-gradient-light col-12 col-lg rounded my-4 px-5 py-3">
 			<% unless nuevo %>
 				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('#usuario').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar los datos de usuario"></button>

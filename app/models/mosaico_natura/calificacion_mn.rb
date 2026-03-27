@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: calificaciones
+#
+#  id           :bigint           not null, primary key
+#  calificacion :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  media_id     :integer
+#  usuario_id   :integer
+#
 class MosaicoNatura::CalificacionMn < Calificacion
 
     belongs_to :usuario, class_name: "UsuarioMn"
