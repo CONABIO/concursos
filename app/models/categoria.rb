@@ -4,14 +4,15 @@ class Categoria < ApplicationRecord
 	
 	#Momentaneamente las pondre aquí ya luego las paso  a la base con el crud listo
 	
-	CategoriasMN = [{pequeños_gigantes: "(Macro) Fotografías macro de especies o detalles que comúnmente no son percibidos a simple vista. Incluyen imágenes tomadas con microscopio.",
-	                 fauna: "Incluye animales nativos de México en vida silvestre; desde pequeños insectos hasta grandes mamíferos, siempre que éstos, no estén en cautiverio o sean animales domésticos y/o mascotas.",
-	                 plantas_y_hongos: "Incluye toda clase de especies vegetales y hongos nativos de México, en vida silvestre. No se aceptarán fotografías de plantas cultivadas, de maceta o jardín.",
-	                 naturaleza_y_ser_humano: "Refiere a usos y costumbres relacionadas con el entorno natural (actividades agrícolas, artesanales, gastronómicas, medicinales, espirituales, recreativas, ceremoniales), manejo sustentable, conservación y/o restauración, también se considera en esta categoría, actividades que impacten de manera negativa, directa o indirectamente la biodiversidad."},
-	                {paisajes_con_ecosistemas: "Imágenes de ecosistemas no perturbados de México, desde las costas hasta las altas montañas.",
-	                 fotografía_aérea: "Imágenes de animales, plantas, ecosistemas o paisajes desde el aire.",
-	                 fotografía_subacuática:"Imágenes de animales, plantas o hábitats subacuáticos, ya sea en un entorno marino o dulceacuícola. No se aceptarán fotografías de acuario.",
-	                 cineminuto: "(Video) Breves historias de nuestra naturaleza, su uso, conservación o deterioro."},
-	                {tema_libre: "(Jóvenes) Incluye cualquier fotografía relacionada con la riqueza natural de México, es decir, animales o plantas en su ambiente natural, paisajes naturales, actividades relacionadas con el hombre y la naturaleza. No se aceptarán fotografías de plantas cultivadas, animales en cautiverio o cualquier otro ambiente controlado."}].freeze
-
+CategoriasMN = [{pequeños_gigantes: "La naturaleza en detalle (Fotografía Macro). Imágenes que resalten la belleza de los detalles diminutos de la naturaleza: Texturas, colores, formas y patrones (insectos, flores, líquenes, semillas, gotas de agua, entre otros) pueden ser tu fuente de inspiración.",
+                     fauna: "Latidos de la vida silvestre (Fauna). Animales nativos de México en vida silvestre, desde ambientes marinos hasta las altas montañas. No se aceptan animales en cautiverio, domésticos y/o mascotas.",
+                     plantas_y_hongos: "El mundo secreto de plantas y hongos. Incluye toda clase de especies vegetales y hongos nativos de México en vida silvestre. No se aceptarán fotografías de plantas u hongos cultivados, de maceta o jardín."
+                    },
+                    { naturaleza_y_ser_humano: "Ecosistemas y su gente. Imágenes aéreas o terrestres de ecosistemas que destaquen su belleza paisajística o los cambios e impactos que experimentan. También se aceptan fotografías que muestren la interacción entre las personas y la naturaleza, incluyendo los usos tradicionales, expresiones culturales, prácticas sustentables, impactos al entorno y formas de vida vinculadas con la biodiversidad.
+*En el caso de que fotos que tengan imágenes en donde se pueda distinguir a la persona o personas, se deberá contar con la autorización de uso de imagen y en caso de menores de edad deberá contar con la autorización por escrito de los padres o tutores.",
+											paisajes_con_ecosistemas: "Incluye cualquier fotografía tomada con equipos moviles (celulares) relacionada con la riqueza natural de México, es decir, animales o plantas en su ambiente natural, paisajes naturales, actividades relacionadas con el hombre y la naturaleza. No se aceptarán fotografías de plantas cultivadas, animales en cautiverio o cualquier otro ambiente controlado."},
+										{tema_libre: "(Jóvenes) Cualquier fotografía relacionada con la riqueza natural de México, en condiciones silvestres: es decir, animales o plantas en su ambiente natural, paisajes naturales, actividades relacionadas con el hombre y la naturaleza, impactos y expresiones bioculturales. No se aceptarán fotografías de plantas cultivadas, animales en cautiverio o cualquier otro ambiente controlado.
+En el caso de que la(s) foto(s) tenga(n) imágenes en donde se pueda distinguir a la persona o personas, se deberá contar con la autorización de uso de imagen y en caso de menores de edad deberá contar con la autorización por escrito de los padres o tutores."}].freeze
+ 
 end
+  
