@@ -93,6 +93,7 @@ Rails.application.routes.draw do
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				get '/galerias/index'
 				get '/galerias/' => 'galerias#index'
+				resources :registro
 				resources :galerias
 				resources :panel do
 					collection do
