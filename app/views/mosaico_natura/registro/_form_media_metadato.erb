@@ -1,6 +1,6 @@
 <div class='nested-fields col-12'>
 	<%= f.input_field :titulo, class: 'form-control my-2', placeholder: 'Título de la foto/video' %>
-	<%= f.input_field :descripcion, class: 'form-control my-2', placeholder: 'Descripción de la foto/video' %>
+	<%= f.input_field :descripcion, class: 'form-control my-2', placeholder: 'Historia de tu fotografía' %>
 	<label class="my-2 font-weight-bolder date" for="usuario_mn_medio">¿Cuál es la marca de la cámara utilizada?</label>
 	<%= f.select :marca, options_for_select(MosaicoNatura::MediaMetadatoMn::MARCA, f.object.marca), { prompt: "--- Selecciona la marca de la camara  ---" }, { class: 'form-control' } %>
 	<%= f.input_field :otra_marca, class: 'form-control my-2', placeholder: 'Otro marca (opcional)' %>
