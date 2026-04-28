@@ -2,7 +2,7 @@ class MosaicoNatura::UsuarioMn < Usuario
 
     CONCURSO = "mn".freeze
     MEDIO = [["Redes sociales", "redes-sociales"], ["Radio", "radio"], ["Televisión", "television"], ["En la escuela", "escuela"], ["Otro", "otro"]]
-    FECHA_NAC_MIN = "2012-12-31"
+    FECHA_NAC_MIN = "2009-12-31"
     FECHA_NAC_MIN_ADULTOS = Date.new(2004, 01, 16)
     FECHA_NAC_MAX = "1904-16-01"
 
