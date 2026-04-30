@@ -1,0 +1,19 @@
+es:
+  devise:
+    confirmations:
+      # ... todo tu contenido de devise ...
+    # ... resto de devise ...
+
+  activerecord:
+    errors:
+      models:
+        user_mn:
+          attributes:
+            email:
+              blank: "El correo electrónico no puede estar en blanco"
+              taken: "El correo electrónico ya está en uso"
+            password:
+              blank: "La contraseña no puede estar en blanco"
+              too_short: "es demasiado corta (mínimo 6 caracteres)"
+            password_confirmation:
+              confirmation: "no coincide con la contraseña"
