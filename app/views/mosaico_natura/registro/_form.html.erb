@@ -49,6 +49,9 @@
 					
 				</h5>
 				<div id="medias" class="row">
+					<h5 class="text-center">Selecciona la categoria</h5>
+				</div>
+				<div id="medias" class="row">
 					<div class="links col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 mt-2 mb-5">
 						<% @categorias.each do |c| %>
 							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm position-relative flex-column justify-content-center font-weight-bolder mx-1', render_options: {locals: { nombre_categoria: c[0], categoria_id: c[1] } }, "data-maximos" => (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end), "data-categoria" => c[0] %>
