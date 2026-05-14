@@ -1,7 +1,7 @@
 <div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
 	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Crear cuenta" } %>
 	<div class="col-12 col-xl-8 py-4 text-center">
-		<h4 class="text-info">Recuerda, todo concursante debera crear una cuenta nueva sin importar si ha participado en algún otro concurso anterior.</h4>
+		<h4 class="text-info">Recuerda, todo concursante deberá crear una cuenta nueva sin importar si ha participado en algún otro concurso anterior.</h4>
 		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= f.error_notification %>
 			<div class="form-inputs">
@@ -22,13 +22,13 @@
 			
 			</div>
 			<div class="form-check">
-				<p>Para continuar debe aceptar ls terminos y condiciones del servicio</p>
+				<p>Para continuar debe aceptar los términos y condiciones del servicio</p>
 				<%= f.check_box :terms, class: "form-check-input", required: true %>
 				<%= f.label :terms, class: "form-check-label" do %>
 					<div class = "mb-4">
-					Acepto los términos y condiciones</a> establecidas en las bases de este concurso (liga al PDF)
+					Acepto los términos y condiciones</a> establecidas en las bases de este concurso (<%= link_to "Términos y Condiciones del 7° Concurso Mosaico Natura", "https://www.mosaiconatura.net/concursos_assets/mosaico_natura/Termino-y-Condiciones-7oConcursoMosaicoNatura.pdf", target: "_blank", rel: "noopener noreferrer" %>)
 					<br>
-					Consulta nuestro aviso de privacidad integral para este concurso (liga)
+					Consulta nuestro aviso de privacidad integral para este concurso (<%= link_to "Aviso de Privacidad del 7° Concurso Mosaico Natura", "https://www.mosaiconatura.net/concursos_assets/mosaico_natura/AVISO-DE-PRIVACIDAD-7oConcursoMosaicoNatura.pdf", target: "_blank", rel: "noopener noreferrer" %>)
 					</div>
 				<% end %>
 				
