@@ -54,11 +54,11 @@ $(document).ready(function(){
 								console.log(h + " - " + w);
 								var largerSide = h > w ? h : w;
 								console.log(largerSide);
-								if (largerSide > 3500 && largerSide < 4500) {
+								if (largerSide > 3000 && largerSide < 4500) {
 										console.log("Imagen con medidas adecuadas");
 										return true;
 								}else {
-										alert("Cambia tu foto, no cumple con las medidas mínimas/máximas especificadas en las bases del concurso:\n(Tamaño mínimo: 3,500 pixeles por lado más grande\nTamaño máximo: 4,500 pixeles por lado más grande)\nde subirla sera descalificada.");
+										alert("Cambia tu foto, no cumple con las medidas mínimas/máximas especificadas en las bases del concurso:\n(Tamaño mínimo: 3000 pixeles por lado más grande\nTamaño máximo: 4,500 pixeles por lado más grande)\nde subirla sera descalificada.");
 										return false;
 								}
 								
