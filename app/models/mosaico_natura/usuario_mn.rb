@@ -10,15 +10,16 @@ class MosaicoNatura::UsuarioMn < Usuario
         Date.today - EDAD_MINIMA.years
     end
     
-    # Fecha mínima (dinámica: hoy - 14 años)
-    FECHA_NAC_MIN = fecha_nac_min_adultos.freeze
+    # Fecha mínima: desde el año 1900 (permite seleccionar fechas antiguas)
+    FECHA_NAC_MIN = Date.new(1900, 1, 1).freeze
     
-    # Constante para el controlador (nombre en mayúsculas que busca)
+    # Constante para el controlador
     FECHA_NAC_MIN_ADULTOS = fecha_nac_min_adultos.freeze
     
     # Fecha límite: nacidos en 2012 o antes (14 años cumplidos en 2026)
-    # Ejemplo: si hoy es 2026, FECHA_NAC_MAX_LIMITE = 2012-12-31 (los de 2012 aún entran)
     FECHA_NAC_MAX_LIMITE = Date.new(2012, 12, 31).freeze
+    
+    # Alias para la vista
     FECHA_NAC_MAX = FECHA_NAC_MAX_LIMITE
 
     validates_presence_of :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio
