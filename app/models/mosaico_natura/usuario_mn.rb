@@ -19,6 +19,7 @@ class MosaicoNatura::UsuarioMn < Usuario
     # Fecha límite: nacidos en 2012 o antes (14 años cumplidos en 2026)
     # Ejemplo: si hoy es 2026, FECHA_NAC_MAX_LIMITE = 2012-12-31 (los de 2012 aún entran)
     FECHA_NAC_MAX_LIMITE = Date.new(2012, 12, 31).freeze
+    FECHA_NAC_MAX = FECHA_NAC_MAX_LIMITE
 
     validates_presence_of :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio
 
