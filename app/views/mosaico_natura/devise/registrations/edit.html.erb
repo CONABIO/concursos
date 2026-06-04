@@ -1,35 +1,180 @@
-<div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
-<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Modificar cuenta" } %>
-	<div class="col-12 col-xl-8 py-4 text-center">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
-      <div class="form-inputs">
-        <%= f.input :email, required: true, autofocus: true, label: "Correo" %>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-        <% end %>
-        <%= f.input :password,
-                    hint: "Dejar vacío si no se desea cambiar la contraseña",
-                    required: false,
-                    label: "Nueva contraseña",
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :password_confirmation,
-                    hint: "Dejar vacío si no se desea cambiar la contraseña",
-                    required: false,
-                    label: "Confrima la nueva contraseña",
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :current_password,
-                    hint: "Es necesaria tu contraseña actual para confirmar los cambios",
-                    required: true,
-                    label: "Contraseña actual",
-                    input_html: { autocomplete: "current-password" } %>
+<div id="inscripcion" class="signup-section py-5">
+  <%= render partial: "mosaico_natura/shared/sub-header",
+             locals: { title: "Modificar cuenta" } %>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-7">
+
+```
+    <div class="signup-card">
+
+      <div class="text-center mb-4">
+        <h2 class="fw-bold mb-3">Configuración de la cuenta</h2>
+
+        <p class="text-light opacity-75 mb-0">
+          Actualiza tu correo electrónico o cambia tu contraseña de forma segura.
+        </p>
       </div>
-      <div class="form-actions">
-        <%= f.button :submit, "Actualizar", class: "btn btn-block btn-success mb-4" %>
+
+      <%= simple_form_for(resource,
+                          as: resource_name,
+                          url: registration_path(resource_name),
+                          html: { method: :put }) do |f| %>
+
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      label: "Correo electrónico",
+                      input_html: {
+                        class: "form-control form-control-lg"
+                      } %>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="alert alert-warning border-0 mt-3">
+              Confirmación pendiente para:
+              <strong><%= resource.unconfirmed_email %></strong>
+            </div>
+          <% end %>
+
+          <%= f.input :password,
+                      required: false,
+                      label: "Nueva contraseña",
+                      hint: "Déjalo vacío si no deseas modificarla.",
+                      input_html: {
+                        class: "form-control form-control-lg",
+                        autocomplete: "new-password"
+                      } %>
+
+          <%= f.input :password_confirmation,
+                      required: false,
+                      label: "Confirmar nueva contraseña",
+                      hint: "Déjalo vacío si no deseas modificarla.",
+                      input_html: {
+                        class: "form-control form-control-lg",
+                        autocomplete: "new-password"
+                      } %>
+
+          <%= f.input :current_password,
+                      required: true,
+                      label: "Contraseña actual",
+                      hint: "Necesaria para confirmar los cambios.",
+                      input_html: {
+                        class: "form-control form-control-lg",
+                        autocomplete: "current-password"
+                      } %>
+
+        </div>
+
+        <div class="form-actions mt-4">
+          <%= f.button :submit,
+                       "Guardar cambios",
+                       class: "btn btn-success btn-lg w-100 shadow-sm" %>
+        </div>
+
+      <% end %>
+
+      <div class="danger-zone mt-5">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+
+          <div>
+            <h5 class="mb-1 text-danger">
+              Zona de peligro
+            </h5>
+
+            <small class="text-light opacity-75">
+              Esta acción eliminará permanentemente tu cuenta y todas tus fotografías.
+            </small>
+          </div>
+
+          <%= link_to "Eliminar cuenta",
+                      registration_path(resource_name),
+                      method: :delete,
+                      data: {
+                        confirm: "Una vez cancelada la cuenta se eliminarán tus datos y fotografías. Esta acción no puede revertirse. ¿Deseas continuar?"
+                      },
+                      class: "btn btn-outline-danger mt-3 mt-md-0" %>
+
+        </div>
+
       </div>
-    <% end %>
-		<div class="col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 my-5">
-			<b>¿No estás a gusto?</b> <%= link_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "Una vez que se cancele la cuenta se borrarán tus datos personales, así como las fotos que hayas subido. Este proceso no se puede revertir, ¿estás seguro?" }, method: :delete, class: 'btn btn-sm btn-outline-danger my-0 mx-2' %>
-		</div>
-	</div>
+
+    </div>
+
+  </div>
 </div>
+```
+
+  </div>
+</div>
+<style>
+.signup-section {
+  width: 100%;
+  margin: 0;
+  padding: 3rem 0;
+  background: linear-gradient(
+    180deg,
+    #0f172a 0%,
+    #111827 100%
+  );
+}
+
+.signup-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 1.75rem;
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+.signup-card .form-control {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+
+.signup-card .form-control:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 .2rem rgba(34,197,94,.2);
+}
+
+.terms-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.btn-success {
+  border-radius: 14px;
+  padding: .9rem 1.5rem;
+  font-weight: 600;
+}
+
+.alert-info {
+  border-radius: 14px;
+}
+.danger-zone {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+.danger-zone .btn-outline-danger {
+  border-radius: 12px;
+}
+
+.alert-warning {
+  border-radius: 14px;
+}
+</style>
