@@ -1,25 +1,113 @@
-<div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
-	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Inicia sesión" } %>
-	<div class="col-12 col-xl-8 py-4 text-center">
-		<h4 class="text-info">Recuerda, todo concursante debera crear una cuenta nueva sin importar si ha participado en algún otro concurso anterior.</h4>
-		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-			<div class="form-inputs">
-				<%= f.input :email,
-				            required: false,
-				            autofocus: true,
-				            label: "Correo",
-				            input_html: { autocomplete: "email"} %>
-				<%= f.input :password,
-				            required: false,
-				            label: "Contraseña",
-				            input_html: { autocomplete: "current-password" } %>
-				<%= f.input :remember_me, as: :boolean, label: "Recordarme" if devise_mapping.rememberable? %>
-			</div>
-			
-			<div class="form-actions">
-				<%= f.button :submit, "Inicia sesión", class: "btn btn-block btn-success mb-4" %>
-			</div>
-		<% end %>
-		<%= render "mosaico_natura/devise/shared/links" %>
-	</div>
+<div id="inscripcion" class="signup-section py-5">
+  <%= render partial: "mosaico_natura/shared/sub-header",
+             locals: { title: "Inicia sesión" } %>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-6">
+
+```
+    <div class="signup-card">
+
+      <div class="text-center mb-4">
+        <h2 class="fw-bold mb-3">Bienvenido de nuevo</h2>
+
+        <p class="text-light opacity-75 mb-0">
+          Accede a tu cuenta para continuar con tu participación en el concurso.
+        </p>
+      </div>
+
+      <%= simple_form_for(resource,
+                          as: resource_name,
+                          url: session_path(resource_name)) do |f| %>
+
+        <div class="form-inputs">
+
+          <%= f.input :email,
+                      required: false,
+                      autofocus: true,
+                      label: "Correo electrónico",
+                      input_html: {
+                        class: "form-control form-control-lg",
+                        autocomplete: "email"
+                      } %>
+
+          <%= f.input :password,
+                      required: false,
+                      label: "Contraseña",
+                      input_html: {
+                        class: "form-control form-control-lg",
+                        autocomplete: "current-password"
+                      } %>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="terms-card mt-3 mb-4">
+              <%= f.input :remember_me,
+                          as: :boolean,
+                          label: "Mantener sesión iniciada" %>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit,
+                       "Iniciar sesión",
+                       class: "btn btn-success btn-lg w-100 shadow-sm" %>
+        </div>
+
+      <% end %>
+
+      <hr class="border-secondary my-4">
+
+      <div class="text-center">
+        <%= render "mosaico_natura/devise/shared/links" %>
+      </div>
+
+    </div>
+
+  </div>
 </div>
+```
+
+  </div>
+</div>
+<style>
+						.signup-section {
+  background: linear-gradient(
+    180deg,
+    #0f172a 0%,
+    #111827 100%
+  );
+  padding: 3rem 0;
+}
+
+.signup-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 2rem;
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+.signup-card .form-control {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+
+.signup-card .form-control:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 .2rem rgba(34,197,94,.2);
+}
+
+.terms-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: .75rem 1rem;
+}
+</style>
