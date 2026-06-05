@@ -1,5 +1,4 @@
 <div class="col-12 col-md-8 py-4 text-left">
-
   <p>
     La Comisión Nacional para el Conocimiento y Uso de la Biodiversidad
     <strong>(<span class="conabio">Conabio</span>)</strong>,
@@ -50,10 +49,8 @@
   </h4>
 
   <h4>Temas</h4>
-
   <div class="row">
     <div class="col-12 col-md-6">
-
       <% @categorias[0].each do |k,v| %>
         <div class="media mb-4">
           <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
@@ -66,27 +63,21 @@
           </div>
         </div>
       <% end %>
-
     </div>
-
     <div class="col-12 col-md-6">
-
       <% @categorias[1].each do |k,v| %>
         <div class="media mb-4">
           <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
             class: "mr-3 img-fluid",
             alt: k.to_s.camelize %>
-
           <div class="media-body">
             <h5 class="mt-0"><%= k.to_s.humanize %></h5>
             <p><%= v %></p>
           </div>
         </div>
       <% end %>
-
     </div>
   </div>
-
   <h4 class="bases-content p-3 mb-4 bg-warning text-dark">
     Jóvenes
     <i class="fa fa-caret-right"></i>
@@ -97,10 +88,8 @@
       Deberán aceptar los términos y condiciones del Aviso de Privacidad.
     </small>
   </h4>
-
   <div class="row">
     <div class="col-12">
-
       <% @categorias[2].each do |k,v| %>
         <div class="media mb-4">
           <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
@@ -113,22 +102,18 @@
           </div>
         </div>
       <% end %>
-
     </div>
   </div>
-
   <div class="text-center mt-5">
     <h3 class="p-3 mb-4 bg-dark text-white">
       ¿CÓMO PARTICIPAR?
     </h3>
   </div>
-
   <div class="alert alert-warning text-center mx-auto">
     <p>
       Antes de registrarse, el participante deberá haber leído,
       entendido y aceptado las Bases del Concurso.
     </p>
-
     <p>
       <%= link_to "<b>Bases completas del concurso</b>".html_safe,
       mosaico_natura_root_path.to_s + '/terminos_condiciones' %>
@@ -136,36 +121,28 @@
   </div>
 
   <div class="row mt-5 text-center">
-
     <div class="col-12 col-md-2 offset-md-1 mb-4">
       <img src="/concursos_assets/mosaico_natura/participa-01.png" class="img-fluid">
-
       <p class="mt-3">
         Todos los participantes deben crear una cuenta nueva
       </p>
     </div>
-
     <div class="col-md-1 d-none d-md-flex justify-content-center align-items-center">
       <img src="/concursos_assets/mosaico_natura/participa-flecha.png" class="img-fluid">
     </div>
-
     <div class="col-12 col-md-2 mb-4">
       <p class="font-weight-bolder">
         <strong>Realiza el registro de tus datos personales</strong>
       </p>
     </div>
-
     <div class="col-md-1 d-none d-md-flex justify-content-center align-items-center">
       <img src="/concursos_assets/mosaico_natura/participa-flecha.png" class="img-fluid">
     </div>
-
     <div class="col-12 col-md-2 mb-4">
       <img src="/concursos_assets/mosaico_natura/participa-03.png" class="img-fluid">
-
       <p class="mt-3 font-weight-bolder">
         Envía tus fotografías
       </p>
-
       <p>
         No olvides incluir lugar, título, nombre de la especie y la localidad
         (estado) donde fue tomada, según sea el caso.
@@ -180,10 +157,9 @@
       <p class="font-weight-bolder">
         Espera los resultados.
       </p>
-
       <p>
         ¡Mucha suerte!
       </p>
     </div>
-
   </div>
+  
