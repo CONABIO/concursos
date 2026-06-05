@@ -1,71 +1,174 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-	<%= link_to (image_tag '/concursos_assets/mosaico_natura/logo-mosaiconatura.png', alt: 'Mosaico Natura', title: 'Mosaico Natura', class: 'img-fluid'), mosaico_natura_root_path.to_s, class: "navbar-brand btn btn-link", data: { turbolinks: false } %>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-		<ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark py-1">
 
-			<% if user_mn_signed_in? %>
-				<li class="nav-item">
-					<div class="dropdown">
-						<button class="nav-link btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							CUENTA
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="<%= edit_mosaico_natura_registro_path(@registro) %>" data-turbolinks="false">Actualizar datos personales</a>
-							<%= link_to "Cerrar sesión", destroy_user_mn_session_path, :method => :delete, data: {confirm: '¿Estás seguro que deseas cerrar la sesión?'.html_safe}, class: 'dropdown-item' %>
-						</div>
-					</div>
-				</li>
-				<li class="nav-item">
-          <a class="nav-link" href="<%= mosaico_natura_registro_path(@registro) %>" data-turbolinks="false">Subir fotografias</a>
+  <%= link_to mosaico_natura_root_path.to_s,
+      class: "navbar-brand d-none d-sm-block",
+      data: { turbolinks: false } do %>
+
+    <%= image_tag(
+      '/concursos_assets/mosaico_natura/logo-mosaiconatura.png',
+      alt: 'Mosaico Natura',
+      title: 'Mosaico Natura',
+      class: 'img-fluid',
+      style: 'max-height:45px; width:auto;'
+    ) %>
+
+  <% end %>
+
+  <span class="navbar-text text-white d-block d-sm-none">
+    Mosaico Natura
+  </span>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+    <ul class="navbar-nav">
+
+      <% if user_mn_signed_in? %>
+
+        <li class="nav-item dropdown">
+
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="dropdownMenuButton"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+
+            CUENTA
+
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+
+            <%= link_to(
+              "Actualizar datos personales",
+              edit_mosaico_natura_registro_path(@registro),
+              class: "dropdown-item",
+              data: { turbolinks: false }
+            ) %>
+
+            <%= link_to(
+              "Cerrar sesión",
+              destroy_user_mn_session_path,
+              method: :delete,
+              data: {
+                confirm: "¿Estás seguro que deseas cerrar la sesión?"
+              },
+              class: "dropdown-item"
+            ) %>
+
+          </div>
+
         </li>
-			<% else %>
-				<li class="nav-item">
-					<a class="nav-link" href="<%= new_user_mn_session_path %>" data-turbolinks="false">INICIAR SESION</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%= new_user_mn_registration_path %>" data-turbolinks="false">CREAR CUENTA</a>
-				</li>
-			<% end %>
-			
-			<% if params[:controller] == "mosaico_natura/inicio" && params[:action] == "index" %>
-				<li class="nav-item">
-					<button class="nav-link btn btn-link" onclick="document.getElementById('quienesSomos').scrollIntoView();">¿QUIÉNES SOMOS?</button>
-				</li>
-				<li class="nav-item">
-					<button class="nav-link btn btn-link" onclick="document.getElementById('concurso').scrollIntoView();">CONCURSO</button>
-				</li>
-				<li class="nav-item">
-					<button class="nav-link btn btn-link" onclick="document.getElementById('exposiciones').scrollIntoView();">EXPOSICIONES</button>
-				</li>
-				
-				<li class="nav-item">
-					<%= link_to "GANADORES", mosaico_natura_galerias_index_path, class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li>
 
-				<li class="nav-item">
-					<button class="nav-link btn btn-link" onclick="document.getElementById('medios').scrollIntoView();">MEDIOS</button>
-				</li>
-			<% else %>
-				<li class="nav-item">
-					<%= link_to "¿QUIÉNES SOMOS?", mosaico_natura_root_path.to_s + '#quienesSomos', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li>
-				<li class="nav-item">
-					<%= link_to "CONCURSO", mosaico_natura_root_path.to_s + '#concurso', class: "nav-link btn btn-link", "data-turbolinks"=>"false"  %>
-				</li>
-				<li class="nav-item">
-					<%= link_to "EXPOSICIONES", mosaico_natura_root_path.to_s + '#exposiciones', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li>
-				<!--li class="nav-item">
-					<%= link_to "GANADORES", mosaico_natura_galerias_index_path, class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li-->
+        <li class="nav-item">
+          <%= link_to(
+            "SUBIR FOTOGRAFÍAS",
+            mosaico_natura_registro_path(@registro),
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
 
-				<!--li class="nav-item">
-					<%= link_to "MEDIOS", mosaico_natura_root_path.to_s + '#medios', class: "nav-link btn btn-link", "data-turbolinks"=>"false" %>
-				</li-->
-			<% end %>
-		</ul>
-	</div>
+      <% else %>
+
+        <li class="nav-item">
+          <%= link_to(
+            "INICIAR SESIÓN",
+            new_user_mn_session_path,
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to(
+            "CREAR CUENTA",
+            new_user_mn_registration_path,
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+      <% end %>
+
+      <% if params[:controller] == "mosaico_natura/inicio" &&
+            params[:action] == "index" %>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#quienesSomos">
+            ¿QUIÉNES SOMOS?
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#concurso">
+            CONCURSO
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#exposiciones">
+            EXPOSICIONES
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to(
+            "GANADORES",
+            mosaico_natura_galerias_index_path,
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+      <% else %>
+
+        <li class="nav-item">
+          <%= link_to(
+            "¿QUIÉNES SOMOS?",
+            "#{mosaico_natura_root_path}#quienesSomos",
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to(
+            "CONCURSO",
+            "#{mosaico_natura_root_path}#concurso",
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to(
+            "EXPOSICIONES",
+            "#{mosaico_natura_root_path}#exposiciones",
+            class: "nav-link",
+            data: { turbolinks: false }
+          ) %>
+        </li>
+
+      <% end %>
+
+    </ul>
+
+  </div>
+
 </nav>

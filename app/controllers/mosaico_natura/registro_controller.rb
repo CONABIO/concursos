@@ -48,11 +48,11 @@ class MosaicoNatura::RegistroController < MosaicoNatura::MosaicoNaturaController
 		respond_to do |format|
 			if @registro.update(registro_params)
 				@form_params = { url: mosaico_natura_registro_path(@registro), method: 'put' }
-				format.html { redirect_to edit_mosaico_natura_registro_path(@registro), notice: "Tu registro fue actualizado exitosamente." }
+				format.html { redirect_to mosaico_natura_registro_path(@registro), notice: "Tu registro fue actualizado exitosamente." }
 				format.json { render :show, status: :ok, location: @registro }
 			else
 				@form_params = { url: mosaico_natura_registro_path(@registro), method: 'put' }
-				format.html { redirect_to edit_mosaico_natura_registro_path(@registro),  notice: "Hubo un problema al guardar tus datos. Verifica haber llenado todos los campos"}
+				format.html { redirect_to mosaico_natura_registro_path(@registro),  notice: "Hubo un problema al guardar tus datos. Verifica haber llenado todos los campos"}
 				format.json { render json: @registro.errors, status: :unprocessable_entity }
 			end
 		end

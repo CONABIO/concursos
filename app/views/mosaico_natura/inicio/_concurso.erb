@@ -1,178 +1,189 @@
-<div class="col-12 col-md-8 py-4 text-left">    
-<p>La Comisión Nacional para el Conocimiento y Uso de la Biodiversidad <strong>(<span class="conabio">Conabio</span>)</strong>, convoca al <strong>“7o. Concurso Nacional de Fotografía de la Naturaleza Mosaico Natura de México”</strong>, que ha sido posible gracias al <a href="https://fmcn.org/project/cosmos/" target="_blank">Proyecto Conservación y Uso de Montañas y Sierras (CoSMoS)</a>, con el apoyo de la Cooperación Alemana a través del Banco Alemán de Desarrollo (KfW), y la colaboración de la Comisión Nacional de Áreas Naturales Protegidas (CONANP) y Fondo Mexicano para la Conservación de la Naturaleza (FMCN).
-    <p>En este certamen podrán participar todas las personas, nacionales o extranjeras radicadas en México. Las fotografías deberán representar la riqueza natural en México: especies de plantas, hongos y animales nativos del país en hábitat natural, así como ecosistemas, usos de la biodiversidad, expresiones culturales, amenazas y/o actividades humanas que tengan un impacto positivo en la naturaleza.</p>
-    <h3 class="p-3 mb-2 bg-dark text-white text-center">¿QUIÉNES PUEDEN PARTICIPAR?</h3>
-    <p>El concurso está abierto a personas aficionadas y profesionales de la fotografía, mexicanas y extranjeras que radiquen en México.</p>
-    <p>No podrán participar en este Concurso el personal de la <strong><span class="conabio">Conabio</span>, </strong> ni de las instituciones aliadas como el Fideicomiso Fondo para la Biodiversidad (FFB), el Fondo Mexicano para la Conservación de la Naturaleza (FMCN), la Comisión Nacional de Áreas Naturales Protegidas (CONANP), y el KfW, ni sus familiares directos.</p>  
-    <h3 class="p-3 mb-2 bg-dark text-white text-center">CATEGORÍAS Y TEMAS</h3>
-    
-    <h4 class="bases-content p-3 mb-2 bg-warning text-dark">Adultos <i class="fa fa-caret-right"></i> <small>De 18 años en adelante | Podrán enviar 2 fotografías por cada tema</small></h4>
-    
-    <h4>Temas</h4>
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <% @categorias[0].each do |k,v| %>
-                <div class="media">
-                    <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
-                    <div class="media-body">
-                        <h5 class="mt-0"><%= k.to_s.humanize %></h5>
-                        <p><%= v %></p>
-                    </div>
-                </div>
-            <% end %>
+<div class="col-12 col-md-8 py-4 text-left">
+
+  <p>
+    La Comisión Nacional para el Conocimiento y Uso de la Biodiversidad
+    <strong>(<span class="conabio">Conabio</span>)</strong>,
+    convoca al
+    <strong>“7o. Concurso Nacional de Fotografía de la Naturaleza Mosaico Natura de México”</strong>,
+    que ha sido posible gracias al
+    <a href="https://fmcn.org/project/cosmos/" target="_blank">
+      Proyecto Conservación y Uso de Montañas y Sierras (CoSMoS)
+    </a>,
+    con el apoyo de la Cooperación Alemana a través del Banco Alemán de Desarrollo (KfW),
+    y la colaboración de la Comisión Nacional de Áreas Naturales Protegidas (CONANP)
+    y Fondo Mexicano para la Conservación de la Naturaleza (FMCN).
+  </p>
+
+  <p>
+    En este certamen podrán participar todas las personas, nacionales o extranjeras radicadas en México.
+    Las fotografías deberán representar la riqueza natural en México: especies de plantas, hongos y animales
+    nativos del país en hábitat natural, así como ecosistemas, usos de la biodiversidad, expresiones culturales,
+    amenazas y/o actividades humanas que tengan un impacto positivo en la naturaleza.
+  </p>
+
+  <h3 class="p-3 mb-4 bg-dark text-white text-center">
+    ¿QUIÉNES PUEDEN PARTICIPAR?
+  </h3>
+
+  <p>
+    El concurso está abierto a personas aficionadas y profesionales de la fotografía,
+    mexicanas y extranjeras que radiquen en México.
+  </p>
+
+  <p>
+    No podrán participar en este Concurso el personal de la
+    <strong><span class="conabio">Conabio</span></strong>,
+    ni de las instituciones aliadas como el Fideicomiso Fondo para la Biodiversidad (FFB),
+    el Fondo Mexicano para la Conservación de la Naturaleza (FMCN),
+    la Comisión Nacional de Áreas Naturales Protegidas (CONANP),
+    y el KfW, ni sus familiares directos.
+  </p>
+
+  <h3 class="p-3 mb-4 bg-dark text-white text-center">
+    CATEGORÍAS Y TEMAS
+  </h3>
+
+  <h4 class="bases-content p-3 mb-4 bg-warning text-dark">
+    Adultos
+    <i class="fa fa-caret-right"></i>
+    <small>De 18 años en adelante | Podrán enviar 2 fotografías por cada tema</small>
+  </h4>
+
+  <h4>Temas</h4>
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+
+      <% @categorias[0].each do |k,v| %>
+        <div class="media mb-4">
+          <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
+            class: "mr-3 img-fluid",
+            alt: k.to_s.camelize %>
+
+          <div class="media-body">
+            <h5 class="mt-0"><%= k.to_s.humanize %></h5>
+            <p><%= v %></p>
+          </div>
         </div>
-        <div class="col-12 col-md-6">
-            <% @categorias[1].each do |k,v| %>
-                <div class="media">
-                    <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
-                    <div class="media-body">
-                        <h5 class="mt-0"><%= k.to_s.humanize %></h5>
-                        <p><%= v %></p>
-                    </div>
-                </div>
-            <% end %>
-        </div>
+      <% end %>
+
     </div>
-    
-    <h4 class="bases-content p-3 mb-2 bg-warning text-dark"> Jóvenes <i class="fa fa-caret-right"></i> <small>Personas de 14 a 17 años cumplidos al cierre del concurso | Podrán enviar 2 fotografías en <b>tema libre</b>, a través de sus padres, tutor o representante legal. Deberán aceptar los términos y condiciones del Aviso de Privacidad.</small></h4>
-    
-    <div class="col-12 col-md-12">
-    <% @categorias[2].each do |k,v| %>
-        <div class="media">
-            <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png", class: "align-self-start mr-3", alt: k.to_s.camelize %>
-            <div class="media-body">
-                <h5 class="mt-0"><%= k.to_s.humanize %></h5>
-                <p><%= v %></p>
-            </div>
+
+    <div class="col-12 col-md-6">
+
+      <% @categorias[1].each do |k,v| %>
+        <div class="media mb-4">
+          <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
+            class: "mr-3 img-fluid",
+            alt: k.to_s.camelize %>
+
+          <div class="media-body">
+            <h5 class="mt-0"><%= k.to_s.humanize %></h5>
+            <p><%= v %></p>
+          </div>
         </div>
-    <% end %>
+      <% end %>
+
     </div>
- 
-<div class="col-12 mt-5 text-center">
-    <h3 class="p-3 mb-2 bg-dark text-white text-center">¿CÓMO PARTICIPAR?</h3>
+  </div>
+
+  <h4 class="bases-content p-3 mb-4 bg-warning text-dark">
+    Jóvenes
+    <i class="fa fa-caret-right"></i>
+    <small>
+      Personas de 14 a 17 años cumplidos al cierre del concurso |
+      Podrán enviar 2 fotografías en <b>tema libre</b>,
+      a través de sus padres, tutor o representante legal.
+      Deberán aceptar los términos y condiciones del Aviso de Privacidad.
+    </small>
+  </h4>
+
+  <div class="row">
+    <div class="col-12">
+
+      <% @categorias[2].each do |k,v| %>
+        <div class="media mb-4">
+          <%= image_tag "/concursos_assets/mosaico_natura/bases_#{k.to_s}.png",
+            class: "mr-3 img-fluid",
+            alt: k.to_s.camelize %>
+
+          <div class="media-body">
+            <h5 class="mt-0"><%= k.to_s.humanize %></h5>
+            <p><%= v %></p>
+          </div>
+        </div>
+      <% end %>
+
     </div>
-    <div class="alert alert-warning alert alert-warning mt-4 mx-auto text-center w-60 text-center mt-4" role="alert">
-        <p>Antes de registrarse, el participante deberá de haber leído, entendido y aceptado las Bases del Concurso.</b></p>
-        <p><%= link_to "<b>Bases completas del concurso</b>".html_safe, mosaico_natura_root_path.to_s + '/terminos_condiciones' %></p>
+  </div>
+
+  <div class="text-center mt-5">
+    <h3 class="p-3 mb-4 bg-dark text-white">
+      ¿CÓMO PARTICIPAR?
+    </h3>
+  </div>
+
+  <div class="alert alert-warning text-center mx-auto">
+    <p>
+      Antes de registrarse, el participante deberá haber leído,
+      entendido y aceptado las Bases del Concurso.
+    </p>
+
+    <p>
+      <%= link_to "<b>Bases completas del concurso</b>".html_safe,
+      mosaico_natura_root_path.to_s + '/terminos_condiciones' %>
+    </p>
+  </div>
+
+  <div class="row mt-5 text-center">
+
+    <div class="col-12 col-md-2 offset-md-1 mb-4">
+      <img src="/concursos_assets/mosaico_natura/participa-01.png" class="img-fluid">
+
+      <p class="mt-3">
+        Todos los participantes deben crear una cuenta nueva
+      </p>
     </div>
-    
-    <div class="row mt-5 text-center">
-        <div class="col-md-2 offset-md-1">
-            <img src="/concursos_assets/mosaico_natura/participa-01.png">
-            <!--p class="mt-3 font-weight-bolder"><a class="btn btn-link" href="<%# new_user_mn_registration_path %>" data-turbolinks="false">Crea una cuenta</a></p-->
-            <p class="mt-1"> Todos los participantes deben crear una cuenta nueva</p>
-        </div>
-        <div class="col-md-1 d-flex justify-content-center align-items-center mt-3"><img src="/concursos_assets/mosaico_natura/participa-flecha.png"></div>
-        <div class="col-md-2 mt-5">
-            <p class="mt-5 font-weight-bolder"><strong>Realiza el registro de tus datos personales</strong></p>
-        </div>
-        <div class="col-md-1 d-flex justify-content-center align-items-center mt-3"><img src="/concursos_assets/mosaico_natura/participa-flecha.png"></div>
-        <div class="col-md-2">
-            <img src="/concursos_assets/mosaico_natura/participa-03.png">
-            <p class="mt-3 font-weight-bolder">Envía tus fotografías</p>
-            <p class="mt-1">No olvides incluir lugar, título, nombre de la especie y la localidad (estado) donde fue tomada, según sea el caso</p>
-        </div>
-        <div class="col-md-1 d-flex justify-content-center align-items-center mt-3"><img src="/concursos_assets/mosaico_natura/participa-flecha.png"></div>
-        <div class="col-md-2 mt-5">
-            <p class="mt-5 font-weight-bolder">Espera los resultados. <br>¡Mucha suerte!</p>
-        </div>
+
+    <div class="col-md-1 d-none d-md-flex justify-content-center align-items-center">
+      <img src="/concursos_assets/mosaico_natura/participa-flecha.png" class="img-fluid">
     </div>
-    
-    <div class="row mt-5 text-center">
-        <div class="col">
-    <img src="/concursos_assets/mosaico_natura/participa-04.png">
-    <p><strong>Características de las fotografías</strong></p>
-        <p>Resoluci&oacute;n 300 dpi´s (píxeles por pulgada)<br>
-        Tamaño mínimo: 3000 pixeles por lado más largo<br>
-        Tamaño máximo: 4,500 pixeles por lado más largo<br>
-        Formato jpg o tiff<br>
-        No se aceptan manipulaciones digitales que alteren el contenido original ni imágenes generadas o modificadas con inteligencia artificial.<br>
-        Los participantes podrán utilizar ajustes básicos de edición (exposición, saturación, contraste, etcétera)</p>
-        Además de las anteriores para las fotografías con dispositivo móvil:</p>
-        Resolución mínima recomendada: 10 megapixeles<br>
-        La imagen deberá estar correctamente enfocada y con buena definición<br>
-        No se aceptan capturas de pantalla</p>
-        <p>Las fotografías participantes deberán cumplir con lo siguiente:</p><br>
-        Ser inéditas y originales<br>
-        No haber participado en concursos similares<br>
-        No haber ganado en otro concurso<br>
-        No haber sido expuestas en exposiciones públicas o privadas<br>
-        No tener una temporalidad mayor a tres años<br>
-        No haber sido utilizadas con fines comerciales<br>
-        No tener firma, sello o alguna otra marca de identificación<br>
-        No estar borrosas, pixeladas o con fallas técnicas evidentes</p>
-</ul>
-    <!--<p><a href="/concursos_assets/mosaico_natura/tutorial_foto.pdf" target="_blank"><i class="fa fa-caret-right"></i>  Ver tutorial</a></p> -->
-</div>
-<!-- <div class="col">
-    <img src="/concursos_assets/mosaico_natura/participa-05.png">
-    <p><strong>Características de los videos</strong></br>
-        Formato: .mp4 (H264)</br>
-        Bitrate mínimo de 10mbps</br>
-        Aspecto: pixeles cuadrados</br>
-        Tamaño pixeles: FullHD: 1920 x 1080</br>
-        Cuadros por segundo: 24fps, 29.97fps, 30fps</br>
-        Orden de campos: progresivo</br>
-        Audio: códec: AAC</br>
-        Velocidad de muestreo: 48000Hz</br>
-        Canales: Estéreo</br>
-        Velocidad: 320 Kbps</br>
-        Sin marcas de agua</br>
-        Sin alteraciones digitales</p>
-</div> -->
-</div>
- 
-<div class="col-12 mt-5 text-center">
-    <h3 class="p-3 mb-2 bg-dark text-white text-center">PREMIOS Y RECONOCIMIENTOS</h3>
+
+    <div class="col-12 col-md-2 mb-4">
+      <p class="font-weight-bolder">
+        <strong>Realiza el registro de tus datos personales</strong>
+      </p>
     </div>
-    <div class="card-group text-center mt-4">
-        <div class="card bg-light d-flex justify-content-center align-items-center">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/premios-1o.png" alt="primer lugar">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/bases_tema_libre.png" alt="tema libre">
-            <h5 class="card-title mt-4">Premios por cada tema</h5>
-            <h5>Categoría adultos</h5>
-            <h4>Fauna, plantas y hongos, paisaje y su gente, <br>foto macro, CoSMoS montañas y sierras</h4>
-            <div class="card-body text-center">
-                <p class="card-text">$30,000  pesos en efectivo</p>
-            </div>
-            <h4>La naturaleza al alcance de tu mano</h4>
-            <div class="card-body text-center">
-                <p class="card-text">$15,000  pesos en efectivo</p>
-            </div>
-        </div>
-        <div class="card alert-secondary d-flex justify-content-center align-items-center">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/premios-2o.png" alt="segundo lugar">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/bases_tema_libre.png" alt="tema libre">
-            <h5 class="card-title mt-4">Premios por cada tema</h5>
-            <h5>Categoría adultos</h5>
-            <h4>Fauna, plantas y hongos, paisaje y su gente, <br>foto macro, CoSMoS montañas y sierras</h4>
-            <div class="card-body text-center">
-                <p class="card-text">$20,000 pesos en efectivo</p>
-            </div>
-             <h4>La naturaleza al alcance de tu mano</h4>
-            <div class="card-body text-center">
-                <p class="card-text">$10,000  pesos en efectivo</p>
-            </div>
-        </div>
+
+    <div class="col-md-1 d-none d-md-flex justify-content-center align-items-center">
+      <img src="/concursos_assets/mosaico_natura/participa-flecha.png" class="img-fluid">
     </div>
-    <div class="card-group text-center mt-4">
-        <div class="card alert-secondary d-flex justify-content-center align-items-center">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/premios-1o.png" alt="primer lugar">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/bases_tema_libre.png" alt="tema libre">
-            <h5 class="card-title mt-4">Premio tema libre</h5>
-            <h5>Categoría jóvenes</h5>
-            <div class="card-body text-center">
-                <p class="card-text">$20,000  pesos en efectivo</p>
-            </div>
-        </div>
-        <div class="card bg-light d-flex justify-content-center align-items-center">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/premios-2o.png" alt="segundo lugar">
-            <img class="mt-3" src="/concursos_assets/mosaico_natura/bases_tema_libre.png" alt="tema libre">
-            <h5 class="card-title mt-4">Premio tema libre</h5>
-            <h5>Categoría jóvenes</h5>
-            <div class="card-body text-center">
-                <p class="card-text">$15,000 pesos en efectivo</p>
-            </div>
-        </div>
+
+    <div class="col-12 col-md-2 mb-4">
+      <img src="/concursos_assets/mosaico_natura/participa-03.png" class="img-fluid">
+
+      <p class="mt-3 font-weight-bolder">
+        Envía tus fotografías
+      </p>
+
+      <p>
+        No olvides incluir lugar, título, nombre de la especie y la localidad
+        (estado) donde fue tomada, según sea el caso.
+      </p>
     </div>
-</div>
+
+    <div class="col-md-1 d-none d-md-flex justify-content-center align-items-center">
+      <img src="/concursos_assets/mosaico_natura/participa-flecha.png" class="img-fluid">
+    </div>
+
+    <div class="col-12 col-md-2 mb-4">
+      <p class="font-weight-bolder">
+        Espera los resultados.
+      </p>
+
+      <p>
+        ¡Mucha suerte!
+      </p>
+    </div>
+
+  </div>
