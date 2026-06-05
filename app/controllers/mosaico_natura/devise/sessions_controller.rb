@@ -7,7 +7,7 @@ class MosaicoNatura::Devise::SessionsController < ::Devise::SessionsController
     registro = MosaicoNatura::UsuarioMn.find_by(user_id: resource.id)
 
     if registro.present?
-      edit_mosaico_natura_registro_path(registro)
+      mosaico_natura_registro_path(registro)
     else
       new_mosaico_natura_registro_path
     end

@@ -1,0 +1,47 @@
+<div class="container">
+  <%= simple_form_for @registro, **@form_params, html: { multipart: true } do |f| %>
+    <div class="bg-gradient-light rounded my-4 px-5 py-3">
+      <h4 class="my-3">Sube tus fotografias para participar</h4>
+      <h5 class="text-secondary">
+        Podrás participar en una o en las siete categorías disponibles, según tu interés.
+        En cada categoría se permite un máximo de dos fotografías.
+      </h5>
+      <ul class="small text-left">
+        <li>Puedes subir hasta dos fotografías por cada categoría.</li>
+        <li>Debes completar todos los campos de la categoría seleccionada.</li>
+        <li>Si eliminas una fotografía, podrás subir una nueva.</li>
+        <li>Después de subir una fotografía, guarda los cambios.</li>
+      </ul>
+      <h4 class="my-3">Paso 1: Selecciona la categoria</h4>
+      <div id="medias" class="row">
+        <div class="links col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 mt-2 mb-5">
+          <% @categorias.each do |c| %>
+            <%= link_to_add_association "#{c[0].humanize}",
+                f,
+                :media,
+                partial: "mosaico_natura/registro/form_media",
+                class: 'btn btn-outline-info btn-sm position-relative flex-column justify-content-center font-weight-bolder mx-1',
+                render_options: {
+                  locals: {
+                    nombre_categoria: c[0],
+                    categoria_id: c[1]
+                  }
+                },
+                "data-maximos" => (
+                  case c[0]
+                  when 'cineminuto' then 1
+                  when 'tema_libre' then 3
+                  else 2
+                  end
+                ),
+                "data-categoria" => c[0] %>
+          <% end %>
+        </div>
+        <%= f.simple_fields_for :media do |media_form| %>
+          <%= render "mosaico_natura/registro/form_media", f: media_form %>
+        <% end %>
+      </div>
+    </div>
+    <%= f.button :submit, ' Subir fotografia',class: 'btn btn-success btn-lg btn-block my-4' %>
+  <% end %>
+</div>

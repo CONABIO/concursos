@@ -1,50 +1,72 @@
 class MosaicoNatura::UsuarioMn < Usuario
 
-    CONCURSO = "mn".freeze
-    MEDIO = [["Redes sociales", "redes-sociales"], ["Radio", "radio"], ["Televisión", "television"], ["En la escuela", "escuela"], ["Otro", "otro"]]
-    
-    # Edad mínima de 14 años
-    EDAD_MINIMA = 14
-    
-    def self.fecha_nac_min_adultos
-        Date.today - EDAD_MINIMA.years
+  CONCURSO = "mn".freeze
+
+  MEDIO = [
+    ["Redes sociales", "redes-sociales"],
+    ["Radio", "radio"],
+    ["Televisión", "television"],
+    ["En la escuela", "escuela"],
+    ["Otro", "otro"]
+  ]
+
+  FECHA_NAC_MIN = Date.new(1925, 1, 1).freeze
+  FECHA_NAC_MAX = Date.new(2012, 7, 6).freeze
+
+  FECHA_ADULTOS_HASTA = Date.new(2008, 7, 5).freeze
+  FECHA_JOVENES_DESDE = Date.new(2008, 7, 6).freeze
+  FECHA_JOVENES_HASTA = Date.new(2012, 7, 6).freeze
+
+  validates_presence_of(
+    :nombre,
+    :apellido_paterno,
+    :apellido_materno,
+    :fecha_nacimiento,
+    :lugar_nacimiento,
+    :medio
+  )
+
+  has_one :direccion,
+          inverse_of: :usuario,
+          foreign_key: :usuario_id,
+          class_name: "DireccionMn",
+          dependent: :destroy
+
+  accepts_nested_attributes_for :direccion,
+                                allow_destroy: true
+
+  has_many :media,
+           inverse_of: :usuario,
+           foreign_key: :usuario_id,
+           class_name: "MediaMn",
+           dependent: :destroy
+
+  accepts_nested_attributes_for :media,
+                                allow_destroy: true
+
+  validate :fecha_nacimiento_valida
+
+  def joven?
+    fecha_nacimiento.present? &&
+      fecha_nacimiento.between?(FECHA_JOVENES_DESDE, FECHA_JOVENES_HASTA)
+  end
+
+  def adulto?
+    fecha_nacimiento.present? &&
+      fecha_nacimiento <= FECHA_ADULTOS_HASTA
+  end
+
+  private
+
+  def fecha_nacimiento_valida
+    return if fecha_nacimiento.blank?
+
+    unless fecha_nacimiento.between?(FECHA_NAC_MIN, FECHA_NAC_MAX)
+      errors.add(
+        :fecha_nacimiento,
+        "Debe estar entre el 01/01/1925 y el 06/07/2012."
+      )
     end
-    
-    # Fecha mínima: desde el año 1900 (permite seleccionar fechas antiguas)
-    FECHA_NAC_MIN = Date.new(1900, 1, 1).freeze
-    
-    # Constante para el controlador
-    FECHA_NAC_MIN_ADULTOS = fecha_nac_min_adultos.freeze
-    
-    # Fecha límite: nacidos en 2012 o antes (14 años cumplidos en 2026)
-    FECHA_NAC_MAX_LIMITE = Date.new(2012, 12, 31).freeze
-    
-    # Alias para la vista
-    FECHA_NAC_MAX = FECHA_NAC_MAX_LIMITE
+  end
 
-    validates_presence_of :nombre, :apellido_paterno, :apellido_materno, :fecha_nacimiento, :lugar_nacimiento, :medio
-
-    has_one :direccion, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "DireccionMn", dependent: :destroy
-    accepts_nested_attributes_for :direccion, allow_destroy: true
-
-    has_many :media, inverse_of: :usuario, foreign_key: :usuario_id, class_name: "MediaMn", dependent: :destroy
-    accepts_nested_attributes_for :media, allow_destroy: true 
-    
-    # Validación personalizada para edad mínima (nacimiento hasta 2012 inclusive)
-    validate :fecha_nacimiento_valida
-    
-    private
-    
-    def fecha_nacimiento_valida
-        return if fecha_nacimiento.blank?
-        
-        # Calcular edad exacta
-        hoy = Date.today
-        edad = hoy.year - fecha_nacimiento.year
-        edad -= 1 if hoy < fecha_nacimiento + edad.years
-        
-        if edad < EDAD_MINIMA
-            errors.add(:fecha_nacimiento, "Debes tener al menos #{EDAD_MINIMA} años. Solo personas nacidas en #{hoy.year - EDAD_MINIMA} o antes pueden registrarse.")
-        end
-    end
 end

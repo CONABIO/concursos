@@ -4,6 +4,8 @@ class MosaicoNatura::GaleriasController < MosaicoNatura::MosaicoNaturaController
 
   # GET /mosaico_natura/galerias
   def index
+    @registro = MosaicoNatura::UsuarioMn.find_by(user_id: current_user_mn.id) if current_user_mn.present?
+
     ganadores = MosaicoNatura::MediaMn.ganadores
     @ganadores = {}
     @menciones = {}
