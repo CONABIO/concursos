@@ -20,7 +20,7 @@
 							var localidad = button.data('localidad');
 							var categoria = button.data('categoria');
 							var originalFilename = "/media/mn/"+ id +"/"+button.data('original-filename');
-							var filenameAnonimo = "/mn2022/"+ categoria +"/"+button.data('filename-anonimo');
+              var filenameAnonimo = button.data('image-url');
 							var descripcion = button.data('descripcion');
 							var marca = button.data('marca');
 							var otraMarca = button.data('otra-marca');
@@ -147,7 +147,12 @@
 <div class="row mt-5 pt-4">
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
-			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Bienvenido <i><%= @juez[:usuario] %></i><br />Instrucciones: <small>(Actualizadas al 17-05-2022)</small><%= '.'*@juez[:posicion] %></li>
+			<li class="active list-group-item list-group-item-info font-weight-bolder h4">
+        Bienvenido <i><%= @juez[:usuario] %></i><br />
+        Instrucciones:
+        <small>(Actualizadas al <%= Date.current.strftime('%d-%m-%Y') %>)</small>
+        <%= '.' * @juez[:posicion] %>
+      </li>
 			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los fotos finalistas.</li>
 			<li class="list-group-item small">Dar click sobre cualquier botón para ver el registro del concursante en un modal (fotos, título, descrición, localidad, marca de la cámara, etc.)</li>
 			<li class="list-group-item small">Si se desea ver cualquier imagen en otra ventana, al dar click sobre la imagen dentro del modal se abrirá dicha imagen en una nueva ventana.</li>

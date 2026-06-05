@@ -18,10 +18,9 @@ class MosaicoNatura::MediaMn < Media
 	mount_uploader :original_filename, MediaAwsUploader
 	
 	scope :mosaico, -> { where(categoria: (1..9))}
-	scope :where_fotos, -> { where('posicion IS NULL').where('usuarios.concurso_id' => 2) }
+  scope :where_fotos, -> { where('posicion IS NULL').where('usuarios.concurso_id' => 2).where('medias.created_at >= ?', Date.current.beginning_of_year)}	
 	
-	
-	scope :select_medias, -> { select(:id, "original_filename as archivo_original", :filename,  'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria) }
+  scope :select_medias, -> {select(:id, :original_filename, "original_filename as archivo_original", :filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria)}
 	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
 	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
 	scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select("(substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez01", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez02", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez03", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio_sin_juez04") }

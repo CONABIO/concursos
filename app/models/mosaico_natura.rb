@@ -3,6 +3,5 @@ module MosaicoNatura
 		def self.todos
 		end
 	end
-	
 end
 

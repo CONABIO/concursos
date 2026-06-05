@@ -17,13 +17,19 @@
           <div class="col-2 p-2">
             <button id="boton-<%= d.id %>" class="btn btn-lg btn-block shadow-sm fotos-popover" type="button"
                     data-toggle="modal" data-target="#modalConcurso"
-                    data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-localidad="<%= d.localidad.titleize %>" data-categoria="<%= d.nombre_categoria %>"
-                    data-original-filename="<%= d.archivo_original %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
-                    data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
+                    data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" 
+                    data-localidad="<%= d.localidad.titleize %>" 
+                    data-categoria="<%= d.nombre_categoria %>"
+                    data-original-filename="<%= d.archivo_original %>" 
+                    data-filename-anonimo="<%= d.genera_filename_anonimo %>"
+                    data-image-url="<%= d.original_filename.url %>"
+                    data-descripcion="<%= d.descripcion %>" 
+                    data-marca="<%= d.marca.titleize %>" 
+                    data-otra-marca="<%= d.otra_marca.titleize %>"
                     data-anterior="<%= fotos[i-1].id unless i == 0 %>"
-                    data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" data-edad="<%= d.edad %>"
-                    data-calificacion="<%= dgcc ? (categorias == 'cineminuto' ? d.calificacion-110 : d.calificacion) : d.calificacion.to_s[@juez[:posicion]].to_i %>">
-              <small><%= d.id %>&nbsp;<%=  d.calificacion.to_s[(categorias == 'cineminuto' ? (0..1) : (0..3))].scan(/\w/).to_s if dgcc  %></small><span class="fa fa-check-circle mx-2"></span>
+                    data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" 
+                    data-edad="<%= d.edad %>"
+                    data-calificacion="<%= dgcc ? (categorias == 'cineminuto' ? d.calificacion.to_i - 110 : d.calificacion.to_i) : (d.calificacion.present? ? d.calificacion.to_s[@juez[:posicion]].to_i : 1) %>"              <small><%= d.id %>&nbsp;<%=  d.calificacion.to_s[(categorias == 'cineminuto' ? (0..1) : (0..3))].scan(/\w/).to_s if dgcc  %></small><span class="fa fa-check-circle mx-2"></span>
             </button>
           </div>
       <% end %>
