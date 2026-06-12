@@ -1,5 +1,5 @@
 <div id="inscripcion" class="bg-dark border-bottom border-light text-light justify-content-center mt-5 pb-5 row">
-	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "CAambia tu contraseña" } %>
+	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "Cambia tu contraseña" } %>
 	<div class="col-12 col-xl-8 py-4 text-center">
 		<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
 			<%= f.error_notification %>
