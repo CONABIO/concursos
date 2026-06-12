@@ -1,3 +1,3 @@
 class MosaicoNatura::DeviseMailer < Devise::Mailer
-  default template_path: 'mosaico_natura/devise/mailer'
+  prepend_view_path Rails.root.join('app', 'views', 'mosaico_natura')
 end
