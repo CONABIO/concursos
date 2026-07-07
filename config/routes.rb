@@ -42,11 +42,7 @@ Rails.application.routes.draw do
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 			get '/galerias/index'
 			get '/galerias/' => 'galerias#index'
-      resources :selector, only: [:index] do
-        member do
-          patch :update
-        end
-      end
+      resources :selector, only: [:index, :update]
 			resources :registro
 			resources :panel do
 				collection do
