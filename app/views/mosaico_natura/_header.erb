@@ -38,9 +38,7 @@
       <% if user_mn_signed_in? %>
         <li class="nav-item">
           <% if current_user_mn.selector? %>
-            <%= link_to "SELECCION PRELIMINAR",
-            Rails.application.routes.url_helpers.mosaico_natura_selector_index_path,
-            class: "nav-link" %>
+            
           <% end %>
         </li>
 
