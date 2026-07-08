@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 	resources :usuarios
 	resources :medias
 	resources :calificaciones
-  resources :selector, only: [:index, :update]
 
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	if Rails.env.development?
@@ -89,6 +88,7 @@ Rails.application.routes.draw do
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				get '/galerias/index'
 				get '/galerias/' => 'galerias#index'
+        resources :selector, only: [:index, :update]
 				resources :registro
 				resources :galerias
 				resources :panel do
