@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 	resources :usuarios
 	resources :medias
 	resources :calificaciones
+  resources :selector, only: [:index, :update]
+
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	if Rails.env.development?
 		namespace 'entre_azul_y_verde' do
