@@ -17,20 +17,25 @@ class MosaicoNatura::MediaMn < Media
 
 	mount_uploader :original_filename, MediaAwsUploader
 
+  scope :by_estado, ->(estado) {
+    case estado
+    when "selected"
+      selected
+    when "discarded"
+      discarded
+    else
+      reviewed
+    end
+  }
+  
+  scope :reviewed, -> { where(reviewed: true) }
+  scope :by_categoria, ->(categoria_id) { categoria_id.present? ? where(categoria_id: categoria_id) : all }
 	scope :pending_selection, -> { where(reviewed: false) }
   scope :selected, -> { where(reviewed: true, selected: true) }
   scope :discarded, -> { where(reviewed: true, selected: false) }
-	scope :sin_calificacion, -> {
-  left_joins(:calificaciones)
-    .where(calificaciones: { id: nil })
-  }
+	scope :sin_calificacion, -> { left_joins(:calificaciones).where(calificaciones: { id: nil }) }
   scope :mosaico, -> { where(categoria: (1..9))}
-  scope :where_fotos, -> {
-    joins(:usuario)
-      .where(posicion: nil)
-      .where(usuarios: { concurso_id: 2 })
-      .where('medias.created_at >= ?', Date.current.beginning_of_year)
-  }
+  scope :where_fotos, -> { joins(:usuario).where(posicion: nil).where(usuarios: { concurso_id: 2 }).where('medias.created_at >= ?', Date.current.beginning_of_year)}
   scope :select_medias, -> {select(:id, :original_filename, "original_filename as archivo_original", :filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria)}
 	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
 	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }

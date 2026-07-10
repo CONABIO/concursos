@@ -1,69 +1,21 @@
 <div class="container mt-5 mb-5">
-
-<% if @foto.present? %>
-
-  <h2>
-    Categoría:
-    <%= @foto.categoria.nombre_categoria %>
-  </h2>
-
-  <p>
-    Revisadas:
-    <strong><%= @revisadas %></strong>
-    de
-    <strong><%= @total %></strong>
-  </p>
-
-  <div class="text-center">
-
-    <%= image_tag @foto.original_filename.url,
-        style: "max-width:900px; max-height:650px;" %>
-
-    <br><br>
-
-    <%= link_to "⬇ Descargar original",
-          @foto.original_filename.url,
-          target: "_blank",
-          class: "btn btn-info" %>
-
-    <br><br>
-
-    <%= form_with url: mosaico_natura_selector_path(@foto),
-                  method: :patch,
-                  local: true do %>
-
-      <button
-        type="submit"
-        name="selected"
-        value="false"
-        class="btn btn-danger btn-lg">
-
-        ❌ Descartar
-
-      </button>
-
-      <button
-        type="submit"
-        name="selected"
-        value="true"
-        class="btn btn-success btn-lg">
-
-        ✅ Seleccionar
-
-      </button>
-
-    <% end %>
-
-  </div>
-
-<% else %>
-
-  <div class="alert alert-success">
-
-    <h3>✔ No hay fotografías pendientes por revisar.</h3>
-
-  </div>
-
-<% end %>
-
+  <% if @foto.present? %>
+    <h2> Categoría: <%= @foto.categoria.nombre_categoria %> </h2>
+    <p> Revisadas: <strong><%= @revisadas %></strong> de <strong><%= @total %></strong> </p>
+    <div class="text-center"> <%= image_tag @foto.original_filename.url, style: "max-width:900px; max-height:650px;" %> 
+      <br><br>
+      <%= form_with url: mosaico_natura_selector_path(@foto), method: :patch, local: true do %>
+        <div class="d-flex justify-content-center flex-wrap gap-2">
+          <%= link_to "⬇ Descargar original", @foto.original_filename.url, target: "_blank", class: "btn btn-info btn-lg mr-3 mb-2" %>
+          <%= link_to "🖼 Galería", gallery_mosaico_natura_selector_index_path, class: "btn btn-primary btn-lg mr-3 mb-2" %>
+          <button type="submit" name="selected" value="false" class="btn btn-danger btn-lg mr-3 mb-2"> ❌ Descartar </button>
+          <button type="submit" name="selected" value="true" class="btn btn-success btn-lg mr-3 mb-2"> ✅ Seleccionar </button>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-success">
+      <h3>✔ No hay fotografías pendientes por revisar.</h3>
+    </div>
+  <% end %>
 </div>
