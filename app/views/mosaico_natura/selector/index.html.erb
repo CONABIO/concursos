@@ -2,6 +2,9 @@
   <% if @foto.present? %>
     <h2> Categoría: <%= @foto.categoria.nombre_categoria %> </h2>
     <p> Revisadas: <strong><%= @revisadas %></strong> de <strong><%= @total %></strong> </p>
+    <p> Seleccionadas: <strong><%= @seleccionadas %></strong>  </p>
+    <p> Descartadas: <strong><%= @descartadas %></strong></p>
+
     <div class="text-center"> <%= image_tag @foto.original_filename.url, style: "max-width:900px; max-height:650px;" %> 
       <br><br>
       <%= form_with url: mosaico_natura_selector_path(@foto), method: :patch, local: true do %>

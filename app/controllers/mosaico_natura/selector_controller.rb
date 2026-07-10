@@ -4,6 +4,8 @@ class MosaicoNatura::SelectorController < MosaicoNatura::MosaicoNaturaController
     @foto = MosaicoNatura::MediaMn.where_fotos.pending_selection.sin_calificacion.includes(:categoria).order(:categoria_id, :id).first
     @total = MosaicoNatura::MediaMn.where_fotos.sin_calificacion.count
     @revisadas = MosaicoNatura::MediaMn.where_fotos.where(reviewed: true).count
+    @seleccionadas = MosaicoNatura::MediaMn.where_fotos.sin_calificacion.selected.count
+    @descartadas = MosaicoNatura::MediaMn.where_fotos.sin_calificacion.discarded.count
   end
 
   def update
