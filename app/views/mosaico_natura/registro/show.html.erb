@@ -1,8 +1,27 @@
+<% fecha_cierre = Date.new(Date.current.year, 7, 8) %>
+
 <div id="inscripcion" class="bg-dark border-bottom border-light text-info justify-content-center mt-5 pb-5 row">
-	<%= render partial: "mosaico_natura/shared/sub-header", locals: { title: "¿Que hacemos ahora?" } %>
-  <% if @registro.persisted? %>
-    <%= render 'upload_images', usuario: @registro %>
+
+  <%= render partial: "mosaico_natura/shared/sub-header",
+             locals: { title: "¿Qué hacemos ahora?" } %>
+
+  <% if Date.current > fecha_cierre %>
+
+    <div class="col-12">
+      <div class="alert alert-warning text-center">
+        <h3>La convocatoria ha cerrado.</h3>
+        <p>El periodo de inscripción y recepción de fotografías ha finalizado.</p>
+      </div>
+    </div>
+
   <% else %>
-    <%= render 'datos_user', usuario: @registro %>
+
+    <% if @registro.persisted? %>
+      <%= render 'upload_images', usuario: @registro %>
+    <% else %>
+      <%= render 'datos_user', usuario: @registro %>
+    <% end %>
+
   <% end %>
+
 </div>
