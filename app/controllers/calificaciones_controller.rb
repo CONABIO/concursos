@@ -61,6 +61,6 @@ class CalificacionesController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def calificacion_params
-		params.fetch(:calificacion, {}).permit(:usuario_id, :medias_id, :calificacion )
+		params.fetch(:calificacion, {}).permit(:usuario_id, :media_id, :calificacion )
 	end
 end

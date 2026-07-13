@@ -1,5 +1,6 @@
 class MosaicoNatura::MediaMn < Media
-	
+	after_create :crear_calificacion
+
 	#attr_accessor :filename
 	FECHA_TERMINO_INICIAL = Date.new(2022, 01, 16)
 	
@@ -82,5 +83,13 @@ class MosaicoNatura::MediaMn < Media
 	def edad
 		age_in_completed_years(self.fecha_nacimiento)
 	end
+  private
+
+  def crear_calificacion
+    MosaicoNatura::CalificacionMn.find_or_create_by!(media_id: id) do |c|
+      c.usuario_id = usuario_id
+      c.calificacion = 0
+    end
+  end
 	
 end
