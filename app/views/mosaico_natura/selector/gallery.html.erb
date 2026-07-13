@@ -27,6 +27,36 @@
             <h6>
               <%= foto.categoria.nombre_categoria %>
             </h6>
+            <% if foto.media_metadato.present? %>
+              <small class="text-muted d-block">
+                <strong>Título:</strong>
+                <%= foto.media_metadato.titulo.presence || "-" %>
+              </small>
+
+              <small class="text-muted d-block">
+                <strong>Localidad:</strong>
+                <%= foto.media_metadato.localidad.presence || "-" %>
+              </small>
+
+              <small class="text-muted d-block">
+                <strong>Marca:</strong>
+                <%= foto.media_metadato.marca.presence || "-" %>
+              </small>
+
+              <% if foto.media_metadato.otra_marca.present? %>
+                <small class="text-muted d-block">
+                  <strong>Otra marca:</strong>
+                  <%= foto.media_metadato.otra_marca %>
+                </small>
+              <% end %>
+
+              <small class="text-muted d-block mt-2">
+                <strong>Descripción:</strong><br>
+                <%= truncate(foto.media_metadato.descripcion,
+                            length: 120,
+                            separator: ' ') %>
+              </small>
+            <% end %>
             <p>
               <% if foto.selected %>
                 <span class="badge badge-success">
