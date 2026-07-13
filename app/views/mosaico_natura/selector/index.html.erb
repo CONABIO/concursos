@@ -1,6 +1,6 @@
 <div class="container mt-5 mb-5">
   <% if @foto.present? %>
-    <h2> Categoría: <%= @foto.categoria.nombre_categoria %> </h2>
+    <h2> Categoría: <%= @foto&.categoria&.nombre_categoria %> </h2>
     <p> Revisadas: <strong><%= @revisadas %></strong> de <strong><%= @total %></strong> </p>
     <p> Seleccionadas: <strong><%= @seleccionadas %></strong>  </p>
     <p> Descartadas: <strong><%= @descartadas %></strong></p>
