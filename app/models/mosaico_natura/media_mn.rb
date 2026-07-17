@@ -38,10 +38,41 @@ class MosaicoNatura::MediaMn < Media
   scope :mosaico, -> { where(categoria: (1..9))}
   scope :where_fotos, -> { joins(:usuario).where(posicion: nil).where(usuarios: { concurso_id: 2 }).where('medias.created_at >= ?', Date.current.beginning_of_year)}
   scope :select_medias, -> {select(:id, :original_filename, "original_filename as archivo_original", :filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria)}
-	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
-	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
-	scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select("(substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez01", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez02", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez03", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio_sin_juez04") }
-	scope :select_promedio_comparativo_videos, -> { select_promedio_videos.select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
+	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1) + substr(cast(calificacion as char),6,1) + substr(cast(calificacion as char),7,1))/6 as promedio") }
+  scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
+  scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select(
+      "(substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez01",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez02",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez03",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez04",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez05",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1))/5 as promedio_sin_juez06"
+    )}	
+  scope :select_promedio_comparativo_videos, -> { select_promedio_videos.select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
 	scope :select_datos_usuario, -> { select("usuarios.nombre", "usuarios.apellido_paterno", "usuarios.apellido_materno")}
 	scope :select_datos_direccion, -> { select(:calle, :numero, :interior, :colonia, :municipio, :cp, :estado) }
 	
@@ -88,7 +119,7 @@ class MosaicoNatura::MediaMn < Media
   def crear_calificacion
     MosaicoNatura::CalificacionMn.find_or_create_by!(media_id: id) do |c|
       c.usuario_id = usuario_id
-      c.calificacion = 0
+      c.calificacion = '1111111'
     end
   end
 	

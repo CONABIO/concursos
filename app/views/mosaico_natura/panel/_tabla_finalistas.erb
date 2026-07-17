@@ -1,6 +1,5 @@
 <div class="accordion border-0 col-10 mb-4" id="acordeon-categorias">
   <% @fotos.each do |categorias, fotos| %>
-    <% next if ((@juez[:tipo].to_s.include? 'foto') && (categorias == 'cineminuto')) || ((@juez[:tipo].to_s.include? 'video') && (categorias != 'cineminuto')) %>
 
     <div class="border-0 rounded p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
       <button class="btn btn-outline-info btn-block py-3 text-center"
@@ -54,24 +53,13 @@
               data-anterior="<%= fotos[i-1].id unless i == 0 %>"
               data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>"
               data-edad="<%= d.edad %>"
-              data-calificacion="<%= dgcc ? (categorias == 'cineminuto' ? d.calificacion.to_i - 110 : d.calificacion.to_i) : (d.calificacion.present? ? d.calificacion.to_s[@juez[:posicion]].to_i : 1) %>">
+              data-calificacion="<%= dgcc ? d.calificacion.to_i : (d.calificacion.present? ? d.calificacion.to_s[@juez[:posicion]].to_i : 1) %>">
 
-              <% if categorias == 'cineminuto' %>
-
-                <div class="bg-dark text-white d-flex align-items-center justify-content-center"
-                     style="width:100%;height:120px;">
-                  <i class="fa fa-play-circle fa-3x"></i>
-                </div>
-
-              <% else %>
-
-                <img
-                  src="<%= d.original_filename.url %>"
-                  class="img-fluid rounded"
-                  style="width:100%;height:140px;object-fit:cover;"
-                  loading="lazy">
-
-              <% end %>
+              <img
+                src="<%= d.original_filename.url %>"
+                class="img-fluid rounded"
+                style="width:100%;height:140px;object-fit:cover;"
+                loading="lazy">
 
               <div class="mt-2 text-center">
 
@@ -80,7 +68,7 @@
                 <% if dgcc %>
                   <br>
                   <small>
-                    <%= d.calificacion.to_s[(categorias == 'cineminuto' ? (0..1) : (0..3))].scan(/\w/).join(' ') %>
+                    <%= [0,1,2,3,5,6].map { |i| d.calificacion.to_s[i] }.join(' ') %>
                   </small>
                 <% end %>
 
@@ -102,6 +90,7 @@
 
   <% end %>
 </div>
+
 <style>
   .fotos-popover img{
       border-radius:6px;
