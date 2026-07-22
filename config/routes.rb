@@ -96,6 +96,7 @@ Rails.application.routes.draw do
         resources :selector, only: [:index, :update] do
           collection do
             get :gallery
+            get :reporte
           end
         end
 				resources :registro
