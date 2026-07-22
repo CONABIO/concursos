@@ -112,8 +112,9 @@ class MosaicoNatura::MediaMn < Media
 	end
 	
 	def edad
-		age_in_completed_years(self.fecha_nacimiento)
-	end
+  return nil unless usuario&.fecha_nacimiento.present?
+    age_in_completed_years(usuario.fecha_nacimiento)
+  end
   private
 
   def crear_calificacion

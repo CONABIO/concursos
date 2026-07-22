@@ -1,0 +1,46 @@
+wb = xlsx_package.workbook
+
+styles = wb.styles
+
+header = styles.add_style(
+  b: true,
+  bg_color: "4F81BD",
+  fg_color: "FFFFFF"
+)
+
+wb.add_worksheet(name: "Participantes") do |sheet|
+
+  sheet.add_row [
+    "Nombre",
+    "Edad",
+    "Lugar de origen",
+    "Lugar donde tomó la foto",
+    "Categoría",
+    "Cómo se enteró"
+  ], style: header
+
+  @medias.each do |media|
+    usuario = media.usuario
+    metadato = media.media_metadato
+
+    medio = if usuario.medio == "otro"
+              usuario.otro_medio
+            else
+              MosaicoNatura::UsuarioMn::MEDIO.detect { |m| m[1] == usuario.medio }&.first
+            end
+
+    sheet.add_row [
+      [
+        usuario.nombre,
+        usuario.apellido_paterno,
+        usuario.apellido_materno
+      ].compact.join(" "),
+      media.edad,
+      usuario.lugar_nacimiento,
+      metadato&.localidad,
+      media.categoria&.nombre_categoria,
+      medio
+    ]
+  end
+
+end

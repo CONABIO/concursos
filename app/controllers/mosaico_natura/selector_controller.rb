@@ -1,6 +1,22 @@
 class MosaicoNatura::SelectorController < MosaicoNatura::MosaicoNaturaController
   before_action :verificar_selector!
 
+def reporte
+  @medias = MosaicoNatura::MediaMn
+              .joins(:usuario)
+              .includes(:usuario, :categoria, :media_metadato)
+              .where("medias.created_at >= ?", Date.current.beginning_of_year)
+              .order(:categoria_id, :usuario_id)
+
+  respond_to do |format|
+    format.xlsx do
+      response.headers['Content-Disposition'] =
+        'attachment; filename="reporte_participantes.xlsx"'
+      render layout: false
+    end
+  end
+end
+
   def index
     @foto = MosaicoNatura::MediaMn
               .where_fotos
