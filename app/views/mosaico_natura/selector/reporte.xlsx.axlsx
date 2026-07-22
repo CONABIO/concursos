@@ -13,6 +13,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
   sheet.add_row [
     "Nombre",
     "Edad",
+    "Correo electrónico",
     "Lugar de origen",
     "Lugar donde tomó la foto",
     "Categoría",
@@ -20,14 +21,19 @@ wb.add_worksheet(name: "Participantes") do |sheet|
   ], style: header
 
   @medias.each do |media|
-    usuario = media.usuario
+    usuario  = media.usuario
+    next unless usuario
+
     metadato = media.media_metadato
 
-    medio = if usuario.medio == "otro"
-              usuario.otro_medio
-            else
-              MosaicoNatura::UsuarioMn::MEDIO.detect { |m| m[1] == usuario.medio }&.first
-            end
+    medio =
+      if usuario.medio == "otro"
+        usuario.otro_medio
+      else
+        MosaicoNatura::UsuarioMn::MEDIO
+          .detect { |m| m[1] == usuario.medio }
+          &.first
+      end
 
     sheet.add_row [
       [
@@ -36,6 +42,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
         usuario.apellido_materno
       ].compact.join(" "),
       media.edad,
+      usuario.user&.email,
       usuario.lugar_nacimiento,
       metadato&.localidad,
       media.categoria&.nombre_categoria,
