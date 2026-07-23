@@ -6,6 +6,7 @@
         <label>Categoría</label>
         <%= select_tag :categoria_id, options_from_collection_for_select(@categorias, :id, :nombre_categoria, @categoria_id), include_blank: "Todas", class: "form-control" %>
       </div>
+
       <div class="col-md-4">
         <label>Estado</label>
         <%= select_tag :estado, options_for_select( [ ["Todas", ""], ["Seleccionadas", "selected"], ["Descartadas", "discarded"]], @estado), class: "form-control" %>
@@ -22,6 +23,9 @@
     <% @fotos.each do |foto| %>
       <div class="col-md-3 mb-4">
         <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            Foto #<%= foto.id %>
+          </div>
           <%= image_tag foto.original_filename.url,class: "card-img-top", style: "height:220px; object-fit:cover;" %>
           <div class="card-body">
             <h6>
