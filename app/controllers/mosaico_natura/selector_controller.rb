@@ -6,6 +6,8 @@ def reporte
               .joins(:usuario)
               .includes(:usuario, :categoria, :media_metadato)
               .where("medias.created_at >= ?", Date.current.beginning_of_year)
+              .where.not(foto: [nil, ''])
+              .where.not(descripcion: [nil, ''])
               .order(:categoria_id, :usuario_id)
 
   respond_to do |format|
