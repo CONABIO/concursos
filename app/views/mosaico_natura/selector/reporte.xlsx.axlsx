@@ -11,17 +11,19 @@ header = styles.add_style(
 wb.add_worksheet(name: "Participantes") do |sheet|
 
   sheet.add_row [
+    "ID Foto",
     "Nombre",
     "Edad",
     "Correo electrónico",
     "Lugar de origen",
     "Lugar donde tomó la foto",
     "Categoría",
+    "Descripción",
     "Cómo se enteró"
   ], style: header
 
   @medias.each do |media|
-    usuario  = media.usuario
+    usuario = media.usuario
     next unless usuario
 
     metadato = media.media_metadato
@@ -36,6 +38,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
       end
 
     sheet.add_row [
+      media.id,
       [
         usuario.nombre,
         usuario.apellido_paterno,
@@ -46,6 +49,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
       usuario.lugar_nacimiento,
       metadato&.localidad,
       media.categoria&.nombre_categoria,
+      metadato&.descripcion,
       medio
     ]
   end
