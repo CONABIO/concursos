@@ -3,11 +3,11 @@ class MosaicoNatura::SelectorController < MosaicoNatura::MosaicoNaturaController
 
 def reporte
   @medias = MosaicoNatura::MediaMn
-              .joins(:usuario)
+              .joins(:usuario, :media_metadato)
               .includes(:usuario, :categoria, :media_metadato)
               .where("medias.created_at >= ?", Date.current.beginning_of_year)
-              .where.not(foto: [nil, ''])
-              .where.not(descripcion: [nil, ''])
+              .where.not(medias: { original_filename: [nil, ''] })
+              .where.not(media_metadatos: { descripcion: [nil, ''] })
               .order(:categoria_id, :usuario_id)
 
   respond_to do |format|
