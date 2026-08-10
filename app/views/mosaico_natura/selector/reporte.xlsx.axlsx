@@ -18,6 +18,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
     "Lugar de origen",
     "Lugar donde tomó la foto",
     "Categoría",
+    "Título de la foto",
     "Descripción",
     "Cómo se enteró"
   ], style: header
@@ -49,6 +50,7 @@ wb.add_worksheet(name: "Participantes") do |sheet|
       usuario.lugar_nacimiento,
       metadato&.localidad,
       media.categoria&.nombre_categoria,
+      metadato&.titulo,
       metadato&.descripcion,
       medio
     ]
