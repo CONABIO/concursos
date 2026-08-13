@@ -64,7 +64,7 @@ class MosaicoNatura::InicioController < MosaicoNatura::MosaicoNaturaController
         { id: 7415, posicion: "Finalista" },
         { id: 7240, posicion: "Finalista" },
         { id: 8480, posicion: "Finalista" },
-        { id: 9964, posicion: "finalista" },
+        { id: 9964, posicion: "Finalista" },
         { id: 9736, posicion: "Finalista" },
         { id: 9738, posicion: "Finalista" },
         { id: 8278, posicion: "Finalista" }
