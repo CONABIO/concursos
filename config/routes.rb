@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 			get 'quees' => 'inicio#index'
 			get 'categorias' => 'inicio#index'
 			get 'medios' => 'inicio#index'
+
 			
 			get 'bases' => 'inicio#bases'
 			get '/galerias/index'
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
 			get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 			get '/galerias/index'
 			get '/galerias/' => 'galerias#index'
+      get 'finalistas', to: 'inicio#finalistas'
+
       resources :selector, only: [:index, :update] do
           collection do
             get :gallery
@@ -93,6 +96,8 @@ Rails.application.routes.draw do
 				get 'terminos_condiciones' => 'inicio#terminos_condiciones'
 				get '/galerias/index'
 				get '/galerias/' => 'galerias#index'
+        get 'finalistas', to: 'inicio#finalistas'
+
         resources :selector, only: [:index, :update] do
           collection do
             get :gallery
