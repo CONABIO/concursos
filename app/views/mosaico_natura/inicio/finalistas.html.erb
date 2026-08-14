@@ -32,7 +32,9 @@
         <article class="finalista-card">
 
           <div class="finalista-imagen">
-            <%= image_tag foto.original_filename.url %>
+            <%= image_tag foto.original_filename.url,
+              loading: "lazy",
+              decoding: "async" %>
 
             <div class="finalista-overlay">
               <h3>
