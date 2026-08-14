@@ -45,6 +45,16 @@
             <h3>
               <%= foto.media_metadato.titulo.presence || "Sin título" %>
             </h3>
+            <% if foto.usuario.present? %>
+              <p class="finalista-autor">
+                <span>Autor:</span>
+                <strong>
+                  <%= [foto.usuario.nombre,
+                      foto.usuario.apellido_paterno,
+                      foto.usuario.apellido_materno].compact.join(" ") %>
+                </strong>
+              </p>
+            <% end %>
 
             <% if finalista[:posicion] != "Finalista" %>
               <span>
