@@ -75,6 +75,72 @@
 
 <% end %>
 
+<% if @especiales.present? %>
+
+  <section class="finalistas-categoria">
+
+    <div class="categoria-header">
+      <h2>Selección especial</h2>
+      <span><%= @especiales.count %> fotografías</span>
+    </div>
+
+    <div class="finalistas-grid">
+
+      <% @especiales.each do |especial| %>
+
+        <% foto = especial[:foto] %>
+
+        <article class="finalista-card">
+
+          <div class="finalista-imagen">
+
+            <%= image_tag foto.original_filename.galeria.url,
+              loading: "lazy",
+              decoding: "async" %>
+
+            <div class="finalista-overlay">
+              <h3>
+                <%= foto.media_metadato.titulo.presence || "Sin título" %>
+                <br>
+                <small>Selección especial</small>
+              </h3>
+            </div>
+
+          </div>
+
+          <div class="finalista-info">
+
+            <h3>
+              <%= foto.media_metadato.titulo.presence || "Sin título" %>
+            </h3>
+
+            <span>Selección especial</span>
+
+            <% if foto.usuario.present? %>
+              <p class="finalista-autor">
+                <span>Autor:</span>
+                <strong>
+                  <%= [
+                    foto.usuario.nombre,
+                    foto.usuario.apellido_paterno,
+                    foto.usuario.apellido_materno
+                  ].compact.join(" ") %>
+                </strong>
+              </p>
+            <% end %>
+
+          </div>
+
+        </article>
+
+      <% end %>
+
+    </div>
+
+  </section>
+
+<% end %>
+
 </div>
   
 

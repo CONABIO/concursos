@@ -112,7 +112,22 @@ class MosaicoNatura::InicioController < MosaicoNatura::MosaicoNaturaController
       ]
     }
 
+    especiales = [
+      9711,
+      9886,
+      6739,
+      9098,
+      7649,
+      6214,
+      9317,
+      6492,
+      8088,
+      8517
+    ]
+
     ids = seleccionadas.values.flatten.map { |foto| foto[:id] }
+
+    ids += especiales
 
     fotos = MosaicoNatura::MediaMn
       .includes(:categoria, :media_metadato)
@@ -128,5 +143,11 @@ class MosaicoNatura::InicioController < MosaicoNatura::MosaicoNaturaController
         }
       end.compact
     end
+
+    @especiales = especiales.map do |id|
+      {
+        foto: fotos_por_id[id]
+      }
+    end.compact
   end
 end
