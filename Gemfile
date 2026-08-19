@@ -63,4 +63,6 @@ gem 'fontello_rails_converter', git: 'https://github.com/railslove/fontello_rail
 gem 'jquery-rails'
 gem 'rails', '5.1.6.2'
 gem 'simple_form'
-
+gem 'kaminari'
+gem 'caxlsx'
+gem 'caxlsx_rails'

@@ -1,66 +1,85 @@
 <% nuevo = @registro.new_record? %>
-<%= simple_form_for @registro, **@form_params, :html => {:multipart => true} do |f| %>
-	<div class="row mt-4">
-		<div class="bg-gradient-light col-12 col-lg rounded my-4 px-5 py-3">
-			<% unless nuevo %>
-				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('#usuario').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar los datos de usuario"></button>
-			<% end %>
-			<h4> Datos del concursante</h4>
-			<fieldset id="usuario" class="text-left mb-4" <%= 'disabled' unless nuevo %>>
-				<%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)' %>
-				<%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido Paterno' %>
-				<%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido Materno' %>
-				<label class="my-2 font-weight-bolder date" for="usuario_mn_fecha_nacimiento_1i">Fecha de nacimiento (dd/mm/aaaa)</label>
-				<%= f.date_field :fecha_nacimiento, min: MosaicoNatura::UsuarioMn::FECHA_NAC_MIN, max: MosaicoNatura::UsuarioMn::FECHA_NAC_MAX, class: 'form-control', "data-toggle"=>"tooltip", "data-placement"=>"bottom", title: "Recuerda que tu edad determina la categoria en la que concursas" %>
-				<label class="my-2 font-weight-bolder" for="usuario_mn_lugar_nacimiento">Lugar de nacimiento</label>
-				<%= f.select :lugar_nacimiento, options_for_select(Direccion::ESTADOS, f.object.lugar_nacimiento), { prompt: "--- Seleccionar estado de nacimiento  ---" }, { class: 'form-control' } %>
-				<label class="my-2 font-weight-bolder date" for="usuario_mn_medio">¿Por cuál medio te enteraste del concurso?</label>
-				<%= f.select :medio, options_for_select(MosaicoNatura::UsuarioMn::MEDIO, f.object.medio), { prompt: "--- Selecciona ---" }, { class: 'form-control' } %>
-				<%= f.input_field :otro_medio, class: 'form-control my-2', placeholder: 'Otro medio (opcional)' %>
-				<%= f.hidden_field :user_id, value: current_user_mn.id %>
-			</fieldset>
-		
-		</div>
-		<div class="col-lg-1"></div>
-		<div class="bg-gradient-light col-12 col-lg rounded my-4 px-5 py-3">
-			<% unless nuevo %>
-				<button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill" onclick="$('#direccion').removeAttr('disabled');$(this).hide();" data-toggle="tooltip" data-placement="bottom" title="Editar la dirección"></button>
-			<% end %>
-			<h4> Dirección </h4>
-			<fieldset id="direccion" <%= 'disabled' unless nuevo %>>
-				<%= f.fields_for :direccion do |direccion_form| %>
-					<%= render "mosaico_natura/registro/form_direccion", f: direccion_form %>
-				<% end %>
-			</fieldset>
-		</div>
-		<% unless nuevo %>
-			<div class="bg-gradient-light col-12 rounded my-4 px-5 py-3">
-				<h4 class="my-3">¿Con que tema deseas participar?</h4>
-				<h5 class="text-secondary">Podrás participar en una o en las siete categorías disponibles, según tu interés. En cada categoría se permite un máximo de dos fotografías.
-					
-				<ul class="small text-left">
-					
-					<li>Toma en cuenta lo siguiente al momento de registrar tus imágenes:</li>
-					<li>Puedes subir hasta dos fotografías por cada categoría.</li>
-					<li>Una vez que des click en alguna categoría, deberás llenar todos los campos solicitados; de lo contrario, no se te permitirá actualizar tu registro.</li>
-					<li>Si eliminas una fotografía, podrás subir una nueva dando nuevamente clic en la categoría correspondiente.</li>
-					<li>Cada vez que subas una fotografía, es indispensable que hagas clic en el botón verde “Actualizar el registro” para guardar correctamente tus cambios.</li>
-				</ul>
-					
-				</h5>
-				<div id="medias" class="row">
-					<div class="links col-12 d-flex justify-content-around align-items-center align-items-stretch shadow p-3 mt-2 mb-5">
-						<% @categorias.each do |c| %>
-							<%= link_to_add_association "#{c[0].humanize}", f, :media, partial: "mosaico_natura/registro/form_media", class: 'btn btn-outline-info btn-sm position-relative flex-column justify-content-center font-weight-bolder mx-1', render_options: {locals: { nombre_categoria: c[0], categoria_id: c[1] } }, "data-maximos" => (case c[0] when 'cineminuto'; 1 when 'tema_libre'; 3 else 2 end), "data-categoria" => c[0] %>
-						<% end %>
-					</div>
-					<%= f.simple_fields_for :media do |media_form| %>
-						<%= render "mosaico_natura/registro/form_media", f: media_form %>
-					<% end %>
-				</div>
-			</div>
-		<% end %>
-	</div>
-	
-	<%= f.button :submit, nuevo ? 'Guardar registro' : 'Actualizar registro', class: 'btn btn-success btn-lg btn-block my-4' %>
+<%= simple_form_for @registro, **@form_params, html: { multipart: true } do |f| %>
+  <%= f.error_notification %>
+  <% if @registro.errors.any? %> 
+    <div class="alert alert-danger"> 
+      <h5>No fue posible guardar el registro:</h5> 
+      <ul class="mb-0">
+        <% @registro.errors.full_messages.each do |message| %> 
+          <li><%= message %></li>
+        <% end %> 
+      </ul> 
+    </div>
+  <% end %>
+    <div class="row mt-4">
+    <!-- DATOS DEL CONCURSANTE -->
+    <div class="bg-gradient-light col-12 col-lg rounded my-4 px-5 py-3">
+      <% unless nuevo %>
+        <button type="button"
+                class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill"
+                onclick="$('#usuario').removeAttr('disabled');$(this).hide();"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="Editar los datos de usuario"></button>
+      <% end %>
+      <h4>Datos del concursante</h4>
+      <fieldset id="usuario" class="text-left mb-4"
+        <%= 'disabled' unless nuevo %>>
+        <%= f.input_field :nombre, class: 'form-control my-2', placeholder: 'Nombre(s)' %>
+        <%= f.input_field :apellido_paterno, class: 'form-control my-2', placeholder: 'Apellido paterno' %>
+        <%= f.input_field :apellido_materno, class: 'form-control my-2', placeholder: 'Apellido materno' %>
+        <label class="my-2 font-weight-bolder"> Fecha de nacimiento (dd/mm/aaaa) </label>
+        <%= f.date_field :fecha_nacimiento, min: MosaicoNatura::UsuarioMn::FECHA_NAC_MIN, max: MosaicoNatura::UsuarioMn::FECHA_NAC_MAX, class: 'form-control', title: 'La categoría se determina automáticamente según la fecha de nacimiento' %>
+        <div class="alert alert-info mt-3 small">
+          <strong>Categorías:</strong>
+          <ul class="mb-0">
+            <li>
+              Nacidos del 06/07/2008 al 05/07/2012:
+              <strong>Tema Libre</strong>.
+            </li>
+            <li>
+              Nacidos el 05/07/2008 o antes:
+              <strong>Todas las categorías excepto Tema Libre</strong>.
+            </li>
+          </ul>
+        </div>
+        <label class="my-2 font-weight-bolder">
+          Lugar de nacimiento
+        </label>
+        <%= f.select :lugar_nacimiento, options_for_select(Direccion::ESTADOS,f.object.lugar_nacimiento),
+          {prompt: "--- Seleccionar estado de nacimiento ---"},{ class: 'form-control'} 
+        %>
+        <label class="my-2 font-weight-bolder">
+          ¿Por cuál medio te enteraste del concurso?
+        </label>
+        <%= f.select :medio, options_for_select(
+          MosaicoNatura::UsuarioMn::MEDIO,f.object.medio),
+          {prompt: "--- Selecciona ---"},
+          {class: 'form-control' } %>
+        <%= f.input_field :otro_medio,
+          class: 'form-control my-2',placeholder: 'Otro medio (opcional)' %>
+        <%= f.hidden_field :user_id, value: current_user_mn.id %>
+      </fieldset>
+    </div>
+    <!-- DIRECCIÓN -->
+    <div class="col-lg-1"></div>
+    <div class="bg-gradient-light col-12 col-lg rounded my-4 px-5 py-3">
+      <% unless nuevo %>
+        <button type="button" class="btn btn-outline-secondary btn-sm fa fa-unlock pull-right rounded rounded-pill"
+          onclick="$('#direccion').removeAttr('disabled');$(this).hide();"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Editar la dirección"></button>
+      <% end %>
+      <h4>Dirección</h4>
+      <fieldset id="direccion"
+        <%= 'disabled' unless nuevo %>>
+        <%= f.fields_for :direccion do |direccion_form| %>
+          <%= render "mosaico_natura/registro/form_direccion",f: direccion_form %>
+        <% end %>
+      </fieldset>
+    </div>
+      <%= f.button :submit, nuevo ? 'Guardar datos' : 'Actualizar datos', class: 'btn btn-success btn-lg btn-block my-4' %>
+
+    </div>
 <% end %>

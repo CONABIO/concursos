@@ -1,5 +1,6 @@
 class MosaicoNatura::MediaMn < Media
-	
+	after_create :crear_calificacion
+
 	#attr_accessor :filename
 	FECHA_TERMINO_INICIAL = Date.new(2022, 01, 16)
 	
@@ -16,16 +17,62 @@ class MosaicoNatura::MediaMn < Media
 	validates_presence_of :original_filename, :categoria_id
 
 	mount_uploader :original_filename, MediaAwsUploader
-	
-	scope :mosaico, -> { where(categoria: (1..9))}
-	scope :where_fotos, -> { where('posicion IS NULL').where('usuarios.concurso_id' => 2) }
-	
-	
-	scope :select_medias, -> { select(:id, "original_filename as archivo_original", :filename,  'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria) }
-	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/4 as promedio") }
-	scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
-	scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select("(substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez01", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez02", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),4,1))/3 as promedio_sin_juez03", "(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1))/3 as promedio_sin_juez04") }
-	scope :select_promedio_comparativo_videos, -> { select_promedio_videos.select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
+
+  scope :by_estado, ->(estado) {
+    case estado
+    when "selected"
+      selected
+    when "discarded"
+      discarded
+    else
+      reviewed
+    end
+  }
+  
+  scope :reviewed, -> { where(reviewed: true) }
+  scope :by_categoria, ->(categoria_id) { categoria_id.present? ? where(categoria_id: categoria_id) : all }
+	scope :pending_selection, -> { where(reviewed: false) }
+  scope :selected, -> { where(reviewed: true, selected: true) }
+  scope :discarded, -> { where(reviewed: true, selected: false) }
+	scope :sin_calificacion, -> { left_joins(:calificaciones).where(calificaciones: { id: nil }) }
+  scope :mosaico, -> { where(categoria: (1..9))}
+  scope :where_fotos, -> { joins(:usuario).where(posicion: nil).where(usuarios: { concurso_id: 2 }).where('medias.created_at >= ?', Date.current.beginning_of_year)}
+  scope :select_medias, -> {select(:id, :original_filename, "original_filename as archivo_original", :filename, 'media_metadatos.titulo', :descripcion, :marca, :localidad, :otra_marca, :calificacion, :usuario_id, "usuarios.fecha_nacimiento", :categoria_id, :created_at, :nombre_categoria)}
+	scope :select_promedio_fotos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1) + substr(cast(calificacion as char),3,1) + substr(cast(calificacion as char),4,1) + substr(cast(calificacion as char),6,1) + substr(cast(calificacion as char),7,1))/6 as promedio") }
+  scope :select_promedio_videos, -> { select("(substr(cast(calificacion as char),1,1) + substr(cast(calificacion as char),2,1))/2 as promedio") }
+  scope :select_promedio_comparativo_fotos, -> { select_promedio_fotos.select(
+      "(substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez01",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez02",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez03",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),6,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez04",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),7,1))/5 as promedio_sin_juez05",
+      "(substr(cast(calificacion as char),1,1) +
+        substr(cast(calificacion as char),2,1) +
+        substr(cast(calificacion as char),3,1) +
+        substr(cast(calificacion as char),4,1) +
+        substr(cast(calificacion as char),6,1))/5 as promedio_sin_juez06"
+    )}	
+  scope :select_promedio_comparativo_videos, -> { select_promedio_videos.select("substr(cast(calificacion as char),2,1) as promedio_sin_juez01", "substr(cast(calificacion as char),1,1) as promedio_sin_juez02", "'' as promedio_sin_juez03", "'' as promedio_sin_juez04")  }
 	scope :select_datos_usuario, -> { select("usuarios.nombre", "usuarios.apellido_paterno", "usuarios.apellido_materno")}
 	scope :select_datos_direccion, -> { select(:calle, :numero, :interior, :colonia, :municipio, :cp, :estado) }
 	
@@ -36,10 +83,23 @@ class MosaicoNatura::MediaMn < Media
 	scope :joins_con_calificacion_direccion, -> { joins_con_calificacion.joins(:direccion) }
 	
 	scope :finalistas, -> { select_medias.joins_con_calificacion.where_fotos }
-	scope :desempate_foto, -> { select_medias.select_promedio_comparativo_fotos.joins_con_calificacion.where('categoria_id != 8').order('lugar ASC, promedio DESC') }
-	scope :desempate_video, -> { select_medias.select_promedio_comparativo_videos.joins_con_calificacion.where('categoria_id' => 8).order('lugar ASC, promedio DESC') }
-	scope :desempate_foto_con_datos, -> { select_ganadores.select_promedio_comparativo_fotos.joins_con_calificacion_direccion.where('categoria_id != 8').order('promedio DESC') }
-	scope :desempate_video_con_datos, -> { select_ganadores.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
+	scope :desempate_foto, -> {
+    select_medias
+      .select_promedio_comparativo_fotos
+      .joins_con_calificacion
+      .where_fotos
+      .order('lugar ASC, promedio DESC')
+  }
+  scope :desempate_video, -> { select_medias.select_promedio_comparativo_videos.joins_con_calificacion.where('categoria_id' => 8).order('lugar ASC, promedio DESC') }
+	
+  scope :desempate_foto_con_datos, -> {
+    select_ganadores
+      .select_promedio_comparativo_fotos
+      .joins_con_calificacion_direccion
+      .where_fotos
+      .order('promedio DESC')
+  }
+  scope :desempate_video_con_datos, -> { select_ganadores.select_promedio_comparativo_videos.joins_con_calificacion_direccion.where('categoria_id' => 8).order('promedio DESC') }
 	
 	scope :ganadores, -> { select_ganadores.joins_con_calificacion_direccion.where_fotos.where("calificacion not like '%0'").order("categoria_id ASC, lugar ASC") }
 	
@@ -65,7 +125,16 @@ class MosaicoNatura::MediaMn < Media
 	end
 	
 	def edad
-		age_in_completed_years(self.fecha_nacimiento)
-	end
+  return nil unless usuario&.fecha_nacimiento.present?
+    age_in_completed_years(usuario.fecha_nacimiento)
+  end
+  private
+
+  def crear_calificacion
+    MosaicoNatura::CalificacionMn.find_or_create_by!(media_id: id) do |c|
+      c.usuario_id = usuario_id
+      c.calificacion = '1111111'
+    end
+  end
 	
 end

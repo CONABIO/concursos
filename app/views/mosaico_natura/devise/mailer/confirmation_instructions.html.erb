@@ -1,5 +1,63 @@
-<p>Welcome <%= @email %>!</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8;padding:30px 0;font-family:Arial,Helvetica,sans-serif;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
-<p>You can confirm your account email through the link below:</p>
+```
+    <tr>
+      <td style="background:#2d6a4f;padding:30px;text-align:center;color:#ffffff;">
+        <h1 style="margin:0;font-size:28px;">Bienvenido a Mosaico Natura</h1>
+        <p style="margin:10px 0 0 0;font-size:15px;">
+          Tu cuenta está casi lista
+        </p>
+      </td>
+    </tr>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+    <tr>
+      <td style="padding:40px;color:#333333;">
+        <h2 style="margin-top:0;color:#2d6a4f;">
+          ¡Hola <%= @email %>!
+        </h2>
+
+        <p style="font-size:16px;line-height:1.7;">
+          Gracias por registrarte en <strong>Mosaico Natura</strong>.
+        </p>
+
+        <p style="font-size:16px;line-height:1.7;">
+          Para activar tu cuenta y comenzar a utilizar la plataforma, es necesario confirmar tu dirección de correo electrónico.
+        </p>
+
+        <div style="text-align:center;margin:35px 0;">
+          <%= link_to 'Confirmar mi cuenta',
+              confirmation_url(@resource, confirmation_token: @token),
+              style: 'background-color:#2d6a4f;color:#ffffff;text-decoration:none;padding:14px 30px;border-radius:6px;font-weight:bold;display:inline-block;' %>
+        </div>
+
+        <div style="background:#f8f9fa;border-left:4px solid #2d6a4f;padding:15px;margin:25px 0;">
+          <strong>Importante:</strong><br>
+          La confirmación de tu correo electrónico ayuda a proteger tu cuenta y garantizar la seguridad de la plataforma.
+        </div>
+
+        <p style="font-size:16px;line-height:1.7;">
+          Si no creaste esta cuenta, puedes ignorar este mensaje sin realizar ninguna acción.
+        </p>
+
+        <p style="font-size:16px;line-height:1.7;">
+          Nos alegra contar con tu participación.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="background:#f8f9fa;padding:20px;text-align:center;color:#777777;font-size:12px;">
+        © <%= Time.current.year %> Mosaico Natura<br>
+        Este es un mensaje automático. Por favor, no respondas a este correo.
+      </td>
+    </tr>
+
+  </table>
+</td>
+```
+
+  </tr>
+</table>

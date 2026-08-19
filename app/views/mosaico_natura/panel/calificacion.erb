@@ -20,7 +20,7 @@
 							var localidad = button.data('localidad');
 							var categoria = button.data('categoria');
 							var originalFilename = "/media/mn/"+ id +"/"+button.data('original-filename');
-							var filenameAnonimo = "/mn2022/"+ categoria +"/"+button.data('filename-anonimo');
+              var filenameAnonimo = button.data('image-url');
 							var descripcion = button.data('descripcion');
 							var marca = button.data('marca');
 							var otraMarca = button.data('otra-marca');
@@ -147,19 +147,76 @@
 <div class="row mt-5 pt-4">
 	<div class="col-12 mb-3">
 		<ul class="list-group list-group-flush text-dark">
-			<li class="active list-group-item list-group-item-info font-weight-bolder h4">Bienvenido <i><%= @juez[:usuario] %></i><br />Instrucciones: <small>(Actualizadas al 17-05-2022)</small><%= '.'*@juez[:posicion] %></li>
-			<li class="list-group-item small">Dar click en la categoría deseada para mostrar los fotos finalistas.</li>
-			<li class="list-group-item small">Dar click sobre cualquier botón para ver el registro del concursante en un modal (fotos, título, descrición, localidad, marca de la cámara, etc.)</li>
-			<li class="list-group-item small">Si se desea ver cualquier imagen en otra ventana, al dar click sobre la imagen dentro del modal se abrirá dicha imagen en una nueva ventana.</li>
-			<li class="list-group-item small">Una vez inspeccionadas las imagenes con los criterios a considerar, hay que realizar la calificacion en el slider qeu se muestra en la parte inferior del modal.</li>
-			<li class="list-group-item small">La calificación va del '1' al '9', siendo '1' la peor calificación y '9' el máximo puntaje posible.</li>
-			<li class="list-group-item small">Es necesario GUARDAR los cambios, esto se realiza dando click en el botón verde que dice CONFIRMAR, al realizarse la calificación el botón cambiara de color y se mostrara la leyenda "Confirmado" junto con la califiación dada.</li>
-			<li class="list-group-item small">Al entrar y salir del modal de una foto o video ya calificado, se puede volver a cambiar la calificación.</li>
-			<li class="list-group-item small">A manera de ayuda visual, existe un contador que va cambiando conforme al número de calificaciones distintas a "1".</li>
-			<li class="list-group-item small">Así mismo, los botones cuyos fotos ya se hayan calificado (cuya calificación sea distinta de "1") se veran de color verde con una palomita, esto servira para identificar si falta algún dibujo por calificar.</li>
-			<li class="list-group-item small">Es importante recalcar que TODOS los fotos deben ser calificados sin excepción.</li>
-			<li class="list-group-item small">Cualquier duda que tengan, favor de remitirla a ggonzalez@conabio.gob.mx o con Ivan Montes</li>
-			<li class="list-group-item small">Es todo.</li>
+			<ul class="list-group list-group-flush text-dark">
+  <li class="active list-group-item list-group-item-info font-weight-bolder h4">
+    Bienvenido <i><%= @juez[:usuario] %></i><br />
+    Instrucciones:
+    <small>(Actualizadas al <%= Date.current.strftime('%d-%m-%Y') %>)</small>
+    <%= '.' * @juez[:posicion] %>
+  </li>
+
+  <li class="list-group-item small">
+    Haz clic en la categoría que deseas evaluar para mostrar las fotografías finalistas.
+  </li>
+
+  <li class="list-group-item small">
+    Haz clic en cualquiera de las fotografías para abrir el registro del concursante en una ventana emergente, donde podrás consultar la siguiente información:
+    <ul class="mt-2 mb-0">
+      <li>Título.</li>
+      <li>Descripción.</li>
+      <li>Localidad.</li>
+      <li>Marca de la cámara.</li>
+      <li>Información adicional del registro.</li>
+    </ul>
+  </li>
+
+  <li class="list-group-item small">
+    Si deseas visualizar una fotografía con mayor detalle, haz clic sobre la imagen. Esta se abrirá en una nueva ventana.
+  </li>
+
+  <li class="list-group-item small">
+    Una vez revisadas las fotografías y considerando los criterios de evaluación, asigna una calificación utilizando el control deslizante (slider) ubicado en la parte inferior de la ventana.
+  </li>
+
+  <li class="list-group-item small">
+    La calificación va del <strong>1</strong> al <strong>9</strong>, donde:
+    <ul class="mt-2 mb-0">
+      <li><strong>1</strong> corresponde a la calificación más baja.</li>
+      <li><strong>9</strong> corresponde al puntaje más alto.</li>
+    </ul>
+  </li>
+
+  <li class="list-group-item small">
+    Después de asignar la calificación, es indispensable guardar el resultado haciendo clic en el botón verde <strong>CONFIRMAR</strong>.
+  </li>
+
+  <li class="list-group-item small">
+    Una vez guardada la calificación, el botón cambiará de color y se mostrará la leyenda <strong>"Confirmado"</strong> junto con la calificación asignada.
+  </li>
+
+  <li class="list-group-item small">
+    Si vuelves a abrir una fotografía que ya fue calificada, podrás modificar la calificación y volver a confirmar el cambio.
+  </li>
+
+  <li class="list-group-item small">
+    Como apoyo visual, encontrarás un contador que se actualizará automáticamente conforme aumente el número de fotografías calificadas (es decir, aquellas con una calificación distinta de <strong>1</strong>).
+  </li>
+
+  <li class="list-group-item small">
+    Asimismo, las fotografías que ya hayan recibido una calificación distinta de <strong>1</strong> aparecerán con un botón verde y una marca de verificación (✓). Esto facilitará identificar cuáles aún están pendientes de evaluar.
+  </li>
+
+  <li class="list-group-item small">
+    Es muy importante que <strong>todas las fotografías sean calificadas, sin excepción</strong>.
+  </li>
+
+  <li class="list-group-item small">
+    Si tienes alguna duda o requieres apoyo técnico, comunícate con:
+    <br><strong>Ivette Mota</strong> — imota@conabio.gob.mx
+    <br><strong>Alejandra Salazar</strong> — asalazar@conabio.gob.mx
+  </li>
+</ul>
+
 		</ul>
 	</div>
 	<%= render partial: "mosaico_natura/panel/tabla_finalistas", locals: {dgcc: dgcc} %>

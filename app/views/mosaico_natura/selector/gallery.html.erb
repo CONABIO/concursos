@@ -1,0 +1,104 @@
+<div class="container mt-5 mb-5">
+  <h2>Galería de fotografías</h2>
+  <%= form_with url: gallery_mosaico_natura_selector_index_path, method: :get, local: true do %>
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <label>Categoría</label>
+        <%= select_tag :categoria_id, options_from_collection_for_select(@categorias, :id, :nombre_categoria, @categoria_id), include_blank: "Todas", class: "form-control" %>
+      </div>
+
+      <div class="col-md-4">
+        <label>Estado</label>
+        <%= select_tag :estado, options_for_select( [ ["Todas", ""], ["Seleccionadas", "selected"], ["Descartadas", "discarded"]], @estado), class: "form-control" %>
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <%= link_to "Regresar a Preseleccion", mosaico_natura_selector_index_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <% @fotos.each do |foto| %>
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <div class="card-header text-center font-weight-bold">
+            Foto #<%= foto.id %>
+          </div>
+          <%= image_tag foto.original_filename.url,class: "card-img-top", style: "height:220px; object-fit:cover;" %>
+          <div class="card-body">
+            <h6>
+              <%= foto.categoria.nombre_categoria %>
+            </h6>
+            <% if foto.media_metadato.present? %>
+              <small class="text-muted d-block">
+                <strong>Título:</strong>
+                <%= foto.media_metadato.titulo.presence || "-" %>
+              </small>
+
+              <small class="text-muted d-block">
+                <strong>Localidad:</strong>
+                <%= foto.media_metadato.localidad.presence || "-" %>
+              </small>
+
+              <small class="text-muted d-block">
+                <strong>Marca:</strong>
+                <%= foto.media_metadato.marca.presence || "-" %>
+              </small>
+
+              <% if foto.media_metadato.otra_marca.present? %>
+                <small class="text-muted d-block">
+                  <strong>Otra marca:</strong>
+                  <%= foto.media_metadato.otra_marca %>
+                </small>
+              <% end %>
+
+              <small class="text-muted d-block mt-2">
+                <strong>Descripción:</strong><br>
+                <%= truncate(foto.media_metadato.descripcion,
+                            length: 120,
+                            separator: ' ') %>
+              </small>
+            <% end %>
+            <p>
+              <% if foto.selected %>
+                <span class="badge badge-success">
+                  Seleccionada
+                </span>
+              <% else %>
+                <span class="badge badge-danger">
+                  Descartada
+                </span>
+              <% end %>
+            </p>
+            <%= link_to "Ver",
+                  foto.original_filename.url,
+                  target: "_blank",
+                  class: "btn btn-info btn-sm btn-block" %>
+            <hr>
+            <%= button_to "✅ Seleccionar",
+                  mosaico_natura_selector_path(foto),
+                  method: :patch,
+                  params: { selected: true },
+                  class: "btn btn-success btn-xs btn-block mb-2" %>
+
+            <%= button_to "❌ Descartar",
+                  mosaico_natura_selector_path(foto),
+                  method: :patch,
+                  params: { selected: false },
+                  class: "btn btn-danger btn-sm btn-block" %>
+          </div>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @fotos %>
+</div>

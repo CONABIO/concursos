@@ -1,0 +1,314 @@
+
+
+  <div class="finalistas-page">
+
+  <header class="finalistas-header">
+    <span class="finalistas-kicker">MOSAICONATURA 2026</span>
+
+    <h1>Finalistas</h1>
+
+    <p>
+      Conoce las fotografías seleccionadas para formar parte
+      de la exposición final.
+    </p>
+  </header>
+
+
+  <% @finalistas.each do |categoria, finalistas| %>
+
+  <section class="finalistas-categoria">
+
+    <div class="categoria-header">
+      <h2><%= categoria %></h2>
+      <span><%= finalistas.count %> fotografías</span>
+    </div>
+
+    <div class="finalistas-grid">
+
+      <% finalistas.each do |finalista| %>
+
+        <% foto = finalista[:foto] %>
+
+        <article class="finalista-card">
+
+          <div class="finalista-imagen">
+            <%= image_tag foto.original_filename.galeria.url,
+              loading: "lazy",
+              decoding: "async" %>
+
+            <div class="finalista-overlay">
+              <h3>
+                <%= foto.media_metadato.titulo.presence || "Sin título" %>
+              </h3>
+            </div>
+          </div>
+
+          <div class="finalista-info">
+            <h3>
+              <%= foto.media_metadato.titulo.presence || "Sin título" %>
+            </h3>
+            <% if foto.usuario.present? %>
+              <p class="finalista-autor">
+                <span>Autor:</span>
+                <strong>
+                  <%= [foto.usuario.nombre,
+                      foto.usuario.apellido_paterno,
+                      foto.usuario.apellido_materno].compact.join(" ") %>
+                </strong>
+              </p>
+            <% end %>
+
+            <% if finalista[:posicion] != "Finalista" %>
+              <span>
+                <%= finalista[:posicion] == "1" ? "🥇 1er lugar" : "🥈 2º lugar" %>
+              </span>
+            <% end %>
+          </div>
+
+        </article>
+
+      <% end %>
+
+    </div>
+
+  </section>
+
+<% end %>
+
+<% if @especiales.present? %>
+
+  <section class="finalistas-categoria">
+
+    <div class="categoria-header">
+      <h2>Selección especial</h2>
+      <span><%= @especiales.count %> fotografías</span>
+    </div>
+
+    <div class="finalistas-grid">
+
+      <% @especiales.each do |especial| %>
+
+        <% foto = especial[:foto] %>
+
+        <article class="finalista-card">
+
+          <div class="finalista-imagen">
+
+            <%= image_tag foto.original_filename.galeria.url,
+              loading: "lazy",
+              decoding: "async" %>
+
+            <div class="finalista-overlay">
+              <h3>
+                <%= foto.media_metadato.titulo.presence || "Sin título" %>
+                <br>
+                <small>Selección especial</small>
+              </h3>
+            </div>
+
+          </div>
+
+          <div class="finalista-info">
+
+            <h3>
+              <%= foto.media_metadato.titulo.presence || "Sin título" %>
+            </h3>
+
+            <span>Selección especial</span>
+
+            <% if foto.usuario.present? %>
+              <p class="finalista-autor">
+                <span>Autor:</span>
+                <strong>
+                  <%= [
+                    foto.usuario.nombre,
+                    foto.usuario.apellido_paterno,
+                    foto.usuario.apellido_materno
+                  ].compact.join(" ") %>
+                </strong>
+              </p>
+            <% end %>
+
+          </div>
+
+        </article>
+
+      <% end %>
+
+    </div>
+
+  </section>
+
+<% end %>
+
+</div>
+  
+
+</div>
+
+<style>
+.finalista-autor {
+  margin: 5px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: .7;
+}
+
+.finalista-autor strong {
+  font-weight: 600;
+}
+
+.finalistas-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 30px 100px;
+}
+
+.finalistas-header {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.finalistas-kicker {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: .6;
+}
+
+.finalistas-header h1 {
+  margin: 0 0 10px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.finalistas-header p {
+  margin: 0 auto;
+  max-width: 650px;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: .7;
+}
+
+
+.finalistas-categoria {
+  margin-bottom: 90px;
+}
+
+.categoria-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+.categoria-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.categoria-header span {
+  font-size: 13px;
+  opacity: .55;
+}
+
+.finalistas-grid {
+  columns: 3 300px;
+  column-gap: 20px;
+}
+
+.finalista-card {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+  break-inside: avoid;
+}
+
+.finalista-imagen {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  background: #eee;
+  border-radius: 14px;
+}
+
+.finalista-imagen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform .5s ease;
+}
+
+.finalista-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 25px;
+  color: white;
+  opacity: 0;
+  background: linear-gradient(
+    transparent 30%,
+    rgba(0, 0, 0, .8)
+  );
+  transition: opacity .3s ease;
+}
+
+.finalista-card:hover .finalista-overlay {
+  opacity: 1;
+}
+
+.finalista-card:hover .finalista-imagen img {
+  transform: scale(1.04);
+}
+
+.finalista-overlay h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.finalista-info {
+  padding: 12px 4px;
+}
+
+.finalista-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+
+  .finalistas-page {
+    padding: 40px 18px 70px;
+  }
+
+  .finalistas-header {
+    margin-bottom: 55px;
+  }
+
+  .categoria-header h2 {
+    font-size: 22px;
+  }
+
+  .finalistas-grid {
+    columns: 2 180px;
+    column-gap: 12px;
+  }
+
+  .finalista-card {
+    margin-bottom: 12px;
+  }
+
+}
+</style>

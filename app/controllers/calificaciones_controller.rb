@@ -20,12 +20,11 @@ class CalificacionesController < ApplicationController
 	# PATCH/PUT /calificaciones/1 or /calificaciones/1.json
 	def update
 		unless(@juez.nil?)
-			#Jalo la calificacion entera a tres digitos en la base
-			cal_global = @calificacion.calificacion.to_s
-			#cambio solo lacalificacion determinada por la posicion del juez
-			cal_global[@juez[:posicion]] = calificacion_params[:calificacion]
-			#Como era string, pues la calificacion ya cambada a 3 digitos la sustituyo en los params para q el modelo la reciba peladita
-			params[:calificacion][:calificacion] = cal_global
+      
+      cal_global = @calificacion.calificacion.to_s.ljust(7, '1')
+      cal_global[@juez[:posicion]] = calificacion_params[:calificacion]
+      params[:calificacion][:calificacion] = cal_global
+
 		end
 		
 		respond_to do |format|
@@ -61,6 +60,6 @@ class CalificacionesController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def calificacion_params
-		params.fetch(:calificacion, {}).permit(:usuario_id, :medias_id, :calificacion )
+		params.fetch(:calificacion, {}).permit(:usuario_id, :media_id, :calificacion )
 	end
 end

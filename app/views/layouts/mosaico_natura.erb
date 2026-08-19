@@ -24,7 +24,7 @@
 <header>
 	<%= render :partial => 'mosaico_natura/header' %>
 </header>
-<div class="container-fluid position-relative">
+<div class="container-fluid px-0 position-relative">
 	<%= render :partial => 'mosaico_natura/shared/notice', locals: {notice: notice} if notice.present? %>
 	<%= yield %>
 </div>

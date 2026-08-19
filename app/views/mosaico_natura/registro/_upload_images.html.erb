@@ -1,0 +1,130 @@
+<div class="container">
+
+  <%= simple_form_for @registro,
+      **@form_params,
+      html: { multipart: true } do |f| %>
+
+    <div class="bg-gradient-light rounded my-4 p-3 p-md-4">
+
+      <h3 class="mb-3">
+        Participa con tus fotografías
+      </h3>
+
+      <div class="alert alert-info">
+
+        <h5 class="mb-3">
+          ¿Cómo subir tus fotografías?
+        </h5>
+
+        <ol class="mb-0">
+          <li>
+            Haz clic en la categoría donde deseas participar.
+          </li>
+
+          <li>
+            Completa la información de la fotografía.
+          </li>
+
+          <li>
+            Repite el proceso para agregar más fotografías.
+          </li>
+
+          <li>
+            Cuando termines, presiona
+            <strong>"Subir fotografías"</strong>.
+          </li>
+        </ol>
+
+      </div>
+
+      <div class="alert alert-warning">
+
+        <strong>Límites por categoría:</strong>
+
+        <ul class="mb-0 mt-2">
+          <li>Las categorías permiten hasta 2 fotografías.</li>
+        </ul>
+
+        <hr>
+
+        <strong>
+          Para agregar una segunda fotografía en la misma categoría,
+          vuelve a hacer clic en la categoría correspondiente.
+        </strong>
+
+      </div>
+
+      <h4 class="my-4">
+        Paso 1: Selecciona una categoría
+      </h4>
+
+      <div id="medias" class="row">
+
+        <div class="links col-12 shadow rounded p-3 mb-5 text-center">
+
+          <div class="mb-3 text-muted small">
+            Los contadores muestran cuántas fotografías has agregado.
+          </div>
+
+          <% @categorias.each do |c| %>
+
+            <% maximo =
+              case c[0]
+              when 'cineminuto'
+                1
+              when 'tema_libre'
+                3
+              else
+                2
+              end %>
+
+            <%= link_to_add_association(
+              "Agregar foto a #{c[0].humanize} (0/#{maximo})",
+              f,
+              :media,
+              partial: "mosaico_natura/registro/form_media",
+              class: 'btn btn-outline-info btn-sm m-1 categoria-btn',
+              render_options: {
+                locals: {
+                  nombre_categoria: c[0],
+                  categoria_id: c[1]
+                }
+              },
+              "data-maximos" => maximo,
+              "data-categoria" => c[0]
+            ) %>
+
+          <% end %>
+
+        </div>
+
+        <%= f.simple_fields_for :media do |media_form| %>
+          <%= render(
+            "mosaico_natura/registro/form_media",
+            f: media_form
+          ) %>
+        <% end %>
+
+      </div>
+
+      <div class="alert alert-success mt-4">
+
+        <strong>Consejo:</strong>
+
+        Si una categoría muestra:
+
+        <strong>(2/2)</strong>
+
+        significa que ya alcanzaste el máximo permitido y no podrás agregar más fotografías a esa categoría.
+
+      </div>
+
+    </div>
+
+    <%= f.button :submit,
+      'Subir fotografías',
+      class: 'btn btn-success btn-lg btn-block my-4' %>
+
+  <% end %>
+
+</div>

@@ -1,33 +1,111 @@
 <div class="accordion border-0 col-10 mb-4" id="acordeon-categorias">
   <% @fotos.each do |categorias, fotos| %>
-		<% next if  ((@juez[:tipo].to_s.include? 'foto') && (categorias == 'cineminuto')) || ((@juez[:tipo].to_s.include? 'video') && (categorias != 'cineminuto')) %>
+
     <div class="border-0 rounded p-0 mt-3 bg-gradient-dark" id="heading-<%= categorias %>">
-      <button class="btn btn-outline-info btn-block py-3 text-center" type="button" data-toggle="collapse" data-target="#collapse-<%= categorias.to_s %>" aria-expanded="true" aria-controls="collapse-<%= categorias.to_s %>">
+      <button class="btn btn-outline-info btn-block py-3 text-center"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapse-<%= categorias.to_s %>"
+              aria-expanded="true"
+              aria-controls="collapse-<%= categorias.to_s %>">
+
         <%= categorias.to_s.humanize %>
+
         <i class="fa fa-sort pull-right"></i>
-	      <i class="pull-right">
-		      <span class="badge badge-light fotos-calificadas" data-categoria="<%= categorias %>"></span> calificados de <%= fotos.length %> en esta categoria.
-	      </i>
+
+        <i class="pull-right">
+          <span class="badge badge-light fotos-calificadas"
+                data-categoria="<%= categorias %>"></span>
+          calificados de <%= fotos.length %> en esta categoría.
+        </i>
       </button>
     </div>
 
-    <div id="collapse-<%= categorias.to_s %>" class="collapse shadow bg-gradient-dark" aria-labelledby="heading-<%= categorias.to_s %>" data-parent="#acordeon-categorias">
-      <div class="row no-gutters text-center font-weight-bolder">
-      <% fotos.each_with_index do |d, i| %>
-          <div class="col-2 p-2">
-            <button id="boton-<%= d.id %>" class="btn btn-lg btn-block shadow-sm fotos-popover" type="button"
-                    data-toggle="modal" data-target="#modalConcurso"
-                    data-id="<%=d.id %>" data-titulo="<%=d.titulo %>" data-localidad="<%= d.localidad.titleize %>" data-categoria="<%= d.nombre_categoria %>"
-                    data-original-filename="<%= d.archivo_original %>" data-filename-anonimo="<%= d.genera_filename_anonimo %>"
-                    data-descripcion="<%= d.descripcion %>" data-marca="<%= d.marca.titleize %>" data-otra-marca="<%= d.otra_marca.titleize %>"
-                    data-anterior="<%= fotos[i-1].id unless i == 0 %>"
-                    data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>" data-edad="<%= d.edad %>"
-                    data-calificacion="<%= dgcc ? (categorias == 'cineminuto' ? d.calificacion-110 : d.calificacion) : d.calificacion.to_s[@juez[:posicion]].to_i %>">
-              <small><%= d.id %>&nbsp;<%=  d.calificacion.to_s[(categorias == 'cineminuto' ? (0..1) : (0..3))].scan(/\w/).to_s if dgcc  %></small><span class="fa fa-check-circle mx-2"></span>
+    <div id="collapse-<%= categorias.to_s %>"
+         class="collapse shadow bg-gradient-dark"
+         aria-labelledby="heading-<%= categorias.to_s %>"
+         data-parent="#acordeon-categorias">
+
+      <div class="row no-gutters">
+
+        <% fotos.each_with_index do |d, i| %>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 p-2">
+
+            <button
+              id="boton-<%= d.id %>"
+              class="btn btn-block shadow-sm fotos-popover p-1"
+              type="button"
+
+              data-toggle="modal"
+              data-target="#modalConcurso"
+
+              data-id="<%= d.id %>"
+              data-titulo="<%= d.titulo %>"
+              data-localidad="<%= d.localidad.titleize %>"
+              data-categoria="<%= d.nombre_categoria %>"
+              data-original-filename="<%= d.archivo_original %>"
+              data-filename-anonimo="<%= d.genera_filename_anonimo %>"
+              data-image-url="<%= d.original_filename.url %>"
+              data-descripcion="<%= d.descripcion %>"
+              data-marca="<%= d.marca.titleize %>"
+              data-otra-marca="<%= d.otra_marca.titleize %>"
+              data-anterior="<%= fotos[i-1].id unless i == 0 %>"
+              data-siguiente="<%= fotos[i+1].id unless i == fotos.length - 1 %>"
+              data-edad="<%= d.edad %>"
+              data-calificacion="<%= dgcc ? d.calificacion.to_i : (d.calificacion.present? ? d.calificacion.to_s[@juez[:posicion]].to_i : 1) %>">
+
+              <img
+                src="<%= d.original_filename.url %>"
+                class="img-fluid rounded"
+                style="width:100%;height:140px;object-fit:cover;"
+                loading="lazy">
+
+              <div class="mt-2 text-center">
+
+                <strong>#<%= d.id %></strong>
+
+                <% if dgcc %>
+                  <br>
+                  <small>
+                    <%= [0,1,2,3,5,6].map { |i| d.calificacion.to_s[i] }.join(' ') %>
+                  </small>
+                <% end %>
+
+                <br>
+
+                <span class="fa fa-check-circle mx-1"></span>
+
+              </div>
+
             </button>
+
           </div>
-      <% end %>
+
+        <% end %>
+
       </div>
+
     </div>
+
   <% end %>
 </div>
+
+<style>
+  .fotos-popover img{
+      border-radius:6px;
+      transition:.2s;
+  }
+
+  .fotos-popover:hover img{
+      transform:scale(1.03);
+  }
+
+  .fotos-popover{
+      min-height:190px;
+  }
+
+  .fotos-popover .fa-check-circle{
+      font-size:18px;
+  }
+</style>

@@ -1,28 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% fecha_cierre = Date.new(Date.current.year, 7, 8) %>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @registro.nombre %>
-</p>
+<div id="inscripcion" class="bg-dark border-bottom border-light text-info justify-content-center mt-5 pb-5 row">
 
-<p>
-  <strong>Apellido paterno:</strong>
-  <%= @registro.apellido_paterno %>
-</p>
+  <%= render partial: "mosaico_natura/shared/sub-header",
+             locals: { title: "¿Qué hacemos ahora?" } %>
 
-<p>
-  <strong>Apellido materno:</strong>
-  <%= @registro.apellido_materno %>
-</p>
+  <% if Date.current > fecha_cierre %>
 
-<p>
-  <strong>Fecha nacimiento nac:</strong>
-  <%= @registro.fecha_nacimiento %>
-</p>
+    <div class="col-12">
+      <div class="alert alert-warning text-center">
+        <h3>La convocatoria ha cerrado.</h3>
+        <p>El periodo de inscripción y recepción de fotografías ha finalizado.</p>
+      </div>
+    </div>
 
-<p>
-  <strong>Lugar nacimiento:</strong>
-  <%= @registro.lugar_nacimiento %>
-</p>
+  <% else %>
 
-<%= link_to 'Edit', edit_mosaico_natura_registro_path(@registro) %> |
+    <% if @registro.persisted? %>
+      <%= render 'upload_images', usuario: @registro %>
+    <% else %>
+      <%= render 'datos_user', usuario: @registro %>
+    <% end %>
+
+  <% end %>
+
+</div>

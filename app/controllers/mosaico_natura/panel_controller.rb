@@ -3,9 +3,9 @@ class MosaicoNatura::PanelController < MosaicoNatura::MosaicoNaturaController
 	
 	def calificacion
 		@fotos = {}
-		MosaicoNatura::CategoriaMn.all.each do |c|
-			@fotos[c.nombre_categoria] = MosaicoNatura::MediaMn.finalistas.where(categoria_id: c.id)
-		end
+    MosaicoNatura::CategoriaMn.all.each do |c|
+      @fotos[c.nombre_categoria] = MosaicoNatura::MediaMn.selected.finalistas.where(categoria_id: c.id)
+    end	
 	
 	end
 	

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 	
 	# Limita la aplicacion a un usuario y contrasenia general
 	def authenticate
+    Rails.logger.info params.inspect
 		@juez = nil
 		if params['calificacion']['concurso'] == '2'
 			authenticate_mn

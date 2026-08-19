@@ -4,13 +4,12 @@ class MosaicoNatura::Devise::SessionsController < ::Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-		@registro = MosaicoNatura::UsuarioMn.where(user_id: resource.id).first
+    registro = MosaicoNatura::UsuarioMn.find_by(user_id: resource.id)
 
-		if @registro.present?
-			edit_user_mn_registration_path(@registro)
-		else  # Es nuevo usuario
+    if registro.present?
+      mosaico_natura_registro_path(registro)
+    else
       new_mosaico_natura_registro_path
-		end
+    end
   end
-
 end
