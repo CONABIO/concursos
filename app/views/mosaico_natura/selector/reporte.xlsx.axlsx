@@ -18,8 +18,19 @@ wb.add_worksheet(name: "Participantes") do |sheet|
     "Lugar de origen",
     "Lugar donde tomó la foto",
     "Categoría",
+
+    # Campos de media_metadatos
+    "ID Metadato",
+    "Media ID",
+    "Creado",
+    "Actualizado",
     "Título de la foto",
     "Descripción",
+    "Técnica",
+    "Compromiso",
+    "Marca",
+    "Otra marca",
+
     "Cómo se enteró"
   ], style: header
 
@@ -50,8 +61,19 @@ wb.add_worksheet(name: "Participantes") do |sheet|
       usuario.lugar_nacimiento,
       metadato&.localidad,
       media.categoria&.nombre_categoria,
+
+      # Campos de media_metadatos
+      metadato&.id,
+      metadato&.media_id,
+      metadato&.created_at,
+      metadato&.updated_at,
       metadato&.titulo,
       metadato&.descripcion,
+      metadato&.tecnica,
+      metadato&.compromiso,
+      metadato&.marca,
+      metadato&.otra_marca,
+
       medio
     ]
   end
